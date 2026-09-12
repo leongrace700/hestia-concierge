@@ -26,15 +26,15 @@
 </head>
 <body class="bg-hestia-cream text-hestia-dark min-h-screen flex flex-col font-sans antialiased">
 
-  <!-- 1. Header / Barra Superior de Navegación (Portal Web Completo) -->
-  <header class="w-full bg-hestia-dark border-b border-hestia-gold/40 sticky top-0 z-50 px-6 lg:px-16 py-4 flex items-center justify-between shadow-md">
-    <div class="flex items-center gap-4">
+  <!-- 1. Header / Barra Superior de Navegación -->
+  <header class="w-full bg-hestia-dark border-b border-hestia-gold/40 sticky top-0 z-50 px-6 lg:px-16 py-4 flex flex-wrap items-center justify-between gap-4 shadow-md">
+    <div class="flex items-center gap-4 cursor-pointer" onclick="switchTab('acceso')">
       <h1 class="text-xl md:text-2xl font-black tracking-[5px] text-white uppercase m-0">HESTIA</h1>
       <span class="hidden md:inline-block text-xs uppercase tracking-[2px] text-hestia-gold border-l border-white/20 pl-4">Luxury Concierge Portal</span>
     </div>
 
-    <!-- Navegación Principal del Portal -->
-    <nav class="flex items-center gap-2 sm:gap-6">
+    <!-- Navegación Principal -->
+    <nav class="flex items-center flex-wrap gap-2 sm:gap-4">
       <button 
         type="button"
         onclick="switchTab('acceso')" 
@@ -53,6 +53,14 @@
       </button>
       <button 
         type="button"
+        onclick="switchTab('invitados')" 
+        id="nav-invitados"
+        class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all"
+      >
+        INVITADOS & ACCESOS
+      </button>
+      <button 
+        type="button"
         onclick="switchTab('chat')" 
         id="nav-chat"
         class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all"
@@ -62,10 +70,10 @@
     </nav>
   </header>
 
-  <!-- 2. Contenedor Principal Adaptable (Full Width & Responsive) -->
+  <!-- 2. Contenedor Principal Adaptable -->
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 md:py-12">
 
-    <!-- SECCIÓN A: Acceso del Huésped (Diseño Desplegado) -->
+    <!-- SECCIÓN A: Acceso del Huésped -->
     <section id="portal-acceso" class="transition-opacity duration-300">
       <div class="text-center max-w-xl mx-auto mb-10">
         <h2 class="text-2xl md:text-3xl font-extrabold tracking-[3px] text-hestia-dark uppercase mb-2">PORTAL DEL HUÉSPED</h2>
@@ -73,7 +81,6 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
-        <!-- Tarjeta de Bienvenida y Experiencia -->
         <div class="bg-hestia-dark text-white rounded-3xl p-8 md:p-10 border border-hestia-gold shadow-xl flex flex-col justify-between">
           <div>
             <span class="inline-block px-3 py-1 bg-hestia-gold/20 text-hestia-gold rounded-full text-xs font-bold tracking-widest uppercase mb-4">Experiencia Exclusiva</span>
@@ -87,7 +94,6 @@
           </div>
         </div>
 
-        <!-- Formulario de Entrada -->
         <div class="bg-white rounded-3xl p-8 md:p-10 border border-hestia-border shadow-lg flex flex-col justify-center">
           <form id="portal-login-form" class="space-y-5">
             <div>
@@ -126,55 +132,192 @@
       </div>
     </section>
 
-    <!-- SECCIÓN B: Dashboard de Servicios & Room Service (Listo para recibir los ítems) -->
+    <!-- SECCIÓN B: Dashboard de Servicios & Room Service -->
     <section id="portal-servicios" class="hidden transition-opacity duration-300">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-hestia-gold/30">
         <div>
-          <h2 class="text-2xl font-extrabold tracking-[2px] text-hestia-dark uppercase">SERVICIOS & ROOM SERVICE</h2>
-          <p class="text-xs text-hestia-dark/70">Seleccione los platillos y amenidades para su habitación.</p>
+          <h2 class="text-2xl font-extrabold tracking-[2px] text-hestia-dark uppercase">CONCIERGE & SERVICIOS</h2>
+          <p class="text-xs text-hestia-dark/70">¿Cómo podemos hacer perfecta su estancia hoy?</p>
         </div>
-        <!-- Barra de Búsqueda -->
-        <div class="w-full md:w-72">
-          <input 
-            type="text" 
-            placeholder="Buscar platillo o amenidad..."
-            class="w-full h-10 bg-white border border-hestia-border rounded-full px-4 text-xs text-hestia-dark outline-none focus:border-hestia-gold"
-          />
+        <div class="flex items-center gap-3">
+          <button onclick="switchTab('invitados')" class="px-4 py-2 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-full border border-hestia-gold hover:bg-hestia-surface transition-all">
+            👥 Gestionar Invitados
+          </button>
         </div>
       </div>
 
-      <!-- Tarjetas de Ejemplo de Servicios -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl p-5 border border-hestia-border shadow-sm flex flex-col justify-between">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Tarjeta 1: Menú Room Service -->
+        <div class="bg-white rounded-2xl p-6 border border-hestia-border shadow-sm flex flex-col justify-between">
           <div>
+            <div class="w-10 h-10 bg-hestia-dark rounded-xl flex items-center justify-center text-xl mb-4">🍽️</div>
             <span class="text-xs text-hestia-gold font-bold uppercase tracking-wider">Gastronomía</span>
             <h4 class="text-lg font-bold text-hestia-dark mt-1">Room Service Menú</h4>
             <p class="text-xs text-hestia-dark/70 mt-2">Platillos gourmet de autor servidos directo en su suite en minutos.</p>
           </div>
-          <button class="mt-6 w-full py-2.5 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-lg hover:bg-hestia-surface">Ver Menú Completo</button>
+          <button onclick="alert('Abriendo menú digital...')" class="mt-6 w-full py-2.5 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-xl hover:bg-hestia-surface">Ver Menú Completo</button>
         </div>
 
-        <div class="bg-white rounded-2xl p-5 border border-hestia-border shadow-sm flex flex-col justify-between">
+        <!-- Tarjeta 2: Transporte Privado (del archivo de servicios) -->
+        <div class="bg-white rounded-2xl p-6 border border-hestia-border shadow-sm flex flex-col justify-between">
           <div>
-            <span class="text-xs text-hestia-gold font-bold uppercase tracking-wider">Bienestar</span>
-            <h4 class="text-lg font-bold text-hestia-dark mt-1">Spa & Relajación</h4>
-            <p class="text-xs text-hestia-dark/70 mt-2">Reserve sesiones de hidroterapia, masajes y tratamientos faciales.</p>
+            <div class="w-10 h-10 bg-hestia-dark rounded-xl flex items-center justify-center text-xl mb-4">🚗</div>
+            <span class="text-xs text-hestia-gold font-bold uppercase tracking-wider">Movilidad VIP</span>
+            <h4 class="text-lg font-bold text-hestia-dark mt-1">Transporte Privado</h4>
+            <p class="text-xs text-hestia-dark/70 mt-2">Airport transfer, chofer ejecutivo o vehículo privado con anticipación.</p>
           </div>
-          <button class="mt-6 w-full py-2.5 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-lg hover:bg-hestia-surface">Agendar Spa</button>
+          <button onclick="switchTab('chat')" class="mt-6 w-full py-2.5 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold uppercase rounded-xl hover:bg-hestia-gold/20 transition-all">Reservar Transporte ➔</button>
         </div>
 
-        <div class="bg-white rounded-2xl p-5 border border-hestia-border shadow-sm flex flex-col justify-between">
+        <!-- Tarjeta 3: Amenidades de Habitación (del archivo de servicios) -->
+        <div class="bg-white rounded-2xl p-6 border border-hestia-border shadow-sm flex flex-col justify-between">
           <div>
+            <div class="w-10 h-10 bg-hestia-dark rounded-xl flex items-center justify-center text-xl mb-4">🛏️</div>
             <span class="text-xs text-hestia-gold font-bold uppercase tracking-wider">Housekeeping</span>
-            <h4 class="text-lg font-bold text-hestia-dark mt-1">Amenidades & Limpieza</h4>
-            <p class="text-xs text-hestia-dark/70 mt-2">Solicite reposición de toallas, toallas extras o cambio de sábanas.</p>
+            <h4 class="text-lg font-bold text-hestia-dark mt-1">Amenidades de Habitación</h4>
+            <p class="text-xs text-hestia-dark/70 mt-2">Toallas adicionales, almohadas o kits de aseo directo a su suite sin costo extra.</p>
           </div>
-          <button class="mt-6 w-full py-2.5 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-lg hover:bg-hestia-surface">Solicitar Servicio</button>
+          <button onclick="switchTab('chat')" class="mt-6 w-full py-2.5 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold uppercase rounded-xl hover:bg-hestia-gold/20 transition-all">Solicitar Amenidades ➔</button>
+        </div>
+      </div>
+
+      <!-- Solicitudes Activas (del archivo de servicios) -->
+      <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm">
+        <h5 class="text-xs font-bold text-hestia-gold uppercase tracking-widest mb-4">Solicitudes Activas</h5>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-hestia-cream/60 border border-hestia-border">
+          <div>
+            <span class="text-sm font-bold text-hestia-dark block">Transfer al Aeropuerto</span>
+            <span class="text-xs text-hestia-dark/60">Mañana, 09:00 AM • Suite 405</span>
+          </div>
+          <span class="inline-block px-3 py-1 bg-hestia-dark text-hestia-gold text-xs font-bold rounded-lg self-start sm:self-center">En Proceso</span>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN C: Concierge Chat en Vivo -->
+    <!-- SECCIÓN NUEVA C: Registro y Control de Invitados (del código nuevo) -->
+    <section id="portal-invitados" class="hidden transition-opacity duration-300">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-hestia-gold/30">
+        <div>
+          <div class="flex items-center gap-3">
+            <h2 class="text-2xl font-extrabold tracking-[2px] text-hestia-dark uppercase">ACCESOS E INVITADOS</h2>
+            <span class="px-3 py-1 bg-hestia-gold/20 border border-hestia-gold text-hestia-gold text-xs font-bold rounded-full">Suite 405</span>
+          </div>
+          <p class="text-xs text-hestia-dark/70 mt-1">Control de Seguridad y Registro Oficial de la Suite</p>
+        </div>
+        <button onclick="switchTab('servicios')" class="text-xs text-hestia-dark font-bold hover:text-hestia-gold transition-colors self-start md:self-auto">
+          ◀ Volver a Servicios
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Columna Izquierda: Aforo y Formulario -->
+        <div class="lg:col-span-1 space-y-6">
+          <!-- Aforo Card -->
+          <div class="bg-white rounded-2xl border border-hestia-border p-5 shadow-sm flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold text-hestia-dark block">Aforo Autorizado</span>
+              <span class="text-[11px] text-hestia-dark/60">Capacidad máxima: 4 personas</span>
+            </div>
+            <span id="capacity-badge" class="text-sm font-bold text-hestia-gold bg-hestia-dark px-3 py-1.5 rounded-xl">
+              2 / 4
+            </span>
+          </div>
+
+          <!-- Formulario de Registro -->
+          <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm">
+            <span class="text-xs font-bold text-hestia-dark uppercase tracking-wider block mb-4">👤 Autorizar Nuevo Invitado</span>
+            
+            <form id="form-invitados" class="space-y-4">
+              <div>
+                <label class="block text-[11px] font-bold text-hestia-dark/80 mb-1">Nombre Completo</label>
+                <input 
+                  id="guest-name-input"
+                  type="text" 
+                  placeholder="Ej. Valentina Morales" 
+                  required
+                  class="w-full h-10 bg-hestia-cream border border-hestia-border rounded-xl px-3 text-xs text-hestia-dark outline-none focus:border-hestia-gold font-medium"
+                />
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-hestia-dark/80 mb-1">Tipo de Documento</label>
+                <select id="guest-doc-type" required class="w-full h-10 bg-hestia-cream border border-hestia-border rounded-xl px-3 text-xs text-hestia-dark outline-none focus:border-hestia-gold font-medium cursor-pointer">
+                  <option value="" disabled selected>Seleccione tipo de documento</option>
+                  <option value="CC">Cédula de Ciudadanía</option>
+                  <option value="CE">Cédula de Extranjería</option>
+                  <option value="PAS">Pasaporte</option>
+                  <option value="TI">Tarjeta de Identidad</option>
+                </select>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[11px] font-bold text-hestia-dark/80 mb-1">N° de Documento</label>
+                  <input 
+                    id="guest-doc-num"
+                    type="text" 
+                    placeholder="Documento" 
+                    required
+                    class="w-full h-10 bg-hestia-cream border border-hestia-border rounded-xl px-3 text-xs text-hestia-dark outline-none focus:border-hestia-gold font-medium"
+                  />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-hestia-dark/80 mb-1">Tipo de Pase</label>
+                  <select id="guest-pass-type" class="w-full h-10 bg-hestia-cream border border-hestia-border rounded-xl px-2 text-xs text-hestia-dark outline-none focus:border-hestia-gold font-medium cursor-pointer">
+                    <option value="Pase Día">Pase por Día</option>
+                    <option value="Estancia">Estancia Completa</option>
+                  </select>
+                </div>
+              </div>
+
+              <button 
+                type="submit"
+                class="w-full h-11 bg-hestia-dark text-hestia-gold border border-hestia-gold rounded-full text-xs font-bold tracking-wider uppercase hover:bg-hestia-surface transition-all mt-2 cursor-pointer shadow-md"
+              >
+                + Generar Pase de Acceso
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Lista de Invitados -->
+        <div class="lg:col-span-2">
+          <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm h-full flex flex-col">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold text-hestia-dark/60 uppercase tracking-widest">Invitados Autorizados en Suite</span>
+              <span class="text-[11px] text-hestia-gold font-bold">Registro en Tiempo Real</span>
+            </div>
+
+            <!-- Contenedor dinámico de invitados -->
+            <div id="guests-list" class="space-y-3 flex-grow overflow-y-auto">
+              <!-- Invitado Inicial 1 -->
+              <div class="guest-card bg-hestia-cream/50 border border-hestia-border rounded-xl p-4 flex items-center justify-between gap-4">
+                <div>
+                  <h6 class="text-sm font-bold text-hestia-dark m-0">Carlos Mendoza</h6>
+                  <p class="text-xs text-hestia-dark/60 m-0">CC •••• 8912 • Pase Día</p>
+                  <span class="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-green-100 text-green-800">● Dentro de la Suite</span>
+                </div>
+                <button onclick="revokeGuest(this)" class="px-3 py-1.5 border border-red-200 text-red-600 text-xs font-bold rounded-lg hover:bg-red-50 transition-colors">Revocar</button>
+              </div>
+
+              <!-- Invitado Inicial 2 -->
+              <div class="guest-card bg-hestia-cream/50 border border-hestia-border rounded-xl p-4 flex items-center justify-between gap-4">
+                <div>
+                  <h6 class="text-sm font-bold text-hestia-dark m-0">Mariana Gómez</h6>
+                  <p class="text-xs text-hestia-dark/60 m-0">CE •••• 4301 • Pase Día</p>
+                  <span class="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-800">● Acceso Pendiente</span>
+                </div>
+                <button onclick="revokeGuest(this)" class="px-3 py-1.5 border border-red-200 text-red-600 text-xs font-bold rounded-lg hover:bg-red-50 transition-colors">Revocar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN D: Concierge Chat en Vivo -->
     <section id="portal-chat" class="hidden transition-opacity duration-300">
       <div class="max-w-3xl mx-auto bg-white rounded-3xl border border-hestia-border shadow-lg overflow-hidden flex flex-col h-[520px]">
         <div class="bg-hestia-dark px-6 py-4 flex items-center justify-between border-b border-hestia-gold">
@@ -185,10 +328,9 @@
               <p class="text-[11px] text-hestia-gold m-0">En línea para atender su solicitud</p>
             </div>
           </div>
-          <span class="text-xs text-white/50">Habitación 402</span>
+          <span class="text-xs text-white/50">Habitación 405</span>
         </div>
 
-        <!-- Historial del Chat -->
         <div id="chat-messages" class="flex-grow p-6 overflow-y-auto space-y-4 bg-hestia-cream/50 text-xs">
           <div class="flex items-start gap-2">
             <div class="bg-white border border-hestia-border p-3 rounded-2xl max-w-sm shadow-sm">
@@ -198,7 +340,6 @@
           </div>
         </div>
 
-        <!-- Input del Chat -->
         <form id="chat-form" class="p-4 bg-white border-t border-hestia-border flex gap-3">
           <input 
             id="chat-input"
@@ -234,6 +375,7 @@
 
       document.getElementById('portal-acceso').classList.add('hidden');
       document.getElementById('portal-servicios').classList.add('hidden');
+      document.getElementById('portal-invitados').classList.add('hidden');
       document.getElementById('portal-chat').classList.add('hidden');
 
       const activeBtn = document.getElementById(`nav-${tab}`);
@@ -266,7 +408,6 @@
       const chatMessages = document.getElementById('chat-messages');
       const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-      // Mensaje huésped
       chatMessages.innerHTML += `
         <div class="flex items-start justify-end gap-2">
           <div class="bg-hestia-dark text-white p-3 rounded-2xl max-w-sm shadow-sm">
@@ -278,7 +419,6 @@
       input.value = '';
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      // Respuesta automática de cortesía
       setTimeout(() => {
         chatMessages.innerHTML += `
           <div class="flex items-start gap-2">
@@ -291,6 +431,60 @@
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }, 1000);
     });
+
+    // LÓGICA DE INVITADOS & AFORO
+    const formInvitados = document.getElementById('form-invitados');
+    const guestsList = document.getElementById('guests-list');
+    const capacityBadge = document.getElementById('capacity-badge');
+
+    function updateCapacity() {
+      const currentGuests = guestsList.querySelectorAll('.guest-card').length;
+      capacityBadge.innerText = `${currentGuests} / 4`;
+      if (currentGuests >= 4) {
+        capacityBadge.classList.replace('text-hestia-gold', 'text-red-400');
+      } else {
+        capacityBadge.classList.replace('text-red-400', 'text-hestia-gold');
+      }
+    }
+
+    formInvitados.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const currentCount = guestsList.querySelectorAll('.guest-card').length;
+      if (currentCount >= 4) {
+        alert('Se ha alcanzado el aforo máximo permitido para la Suite (4 personas).');
+        return;
+      }
+
+      const name = document.getElementById('guest-name-input').value.trim();
+      const docType = document.getElementById('guest-doc-type').value;
+      const docNum = document.getElementById('guest-doc-num').value.trim();
+      const passType = document.getElementById('guest-pass-type').value;
+
+      const maskedDoc = docNum.length > 4 ? `•••• ${docNum.slice(-4)}` : docNum;
+
+      const newCard = document.createElement('div');
+      newCard.className = 'guest-card bg-hestia-cream/50 border border-hestia-border rounded-xl p-4 flex items-center justify-between gap-4 transition-all';
+      newCard.innerHTML = `
+        <div>
+          <h6 class="text-sm font-bold text-hestia-dark m-0">${name}</h6>
+          <p class="text-xs text-hestia-dark/60 m-0">${docType} ${maskedDoc} • ${passType}</p>
+          <span class="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-800">● Acceso Pendiente</span>
+        </div>
+        <button onclick="revokeGuest(this)" class="px-3 py-1.5 border border-red-200 text-red-600 text-xs font-bold rounded-lg hover:bg-red-50 transition-colors">Revocar</button>
+      `;
+
+      guestsList.appendChild(newCard);
+      formInvitados.reset();
+      updateCapacity();
+    });
+
+    function revokeGuest(button) {
+      const card = button.closest('.guest-card');
+      if (card) {
+        card.remove();
+        updateCapacity();
+      }
+    }
   </script>
 </body>
 </html>
