@@ -7,7 +7,7 @@
 <!-- Tailwind Precompilado Robusto -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
 
-  <style>
+<style>
     :root {
       --hestia-cream: #F9F6F0;
       --hestia-gold: #D4B285;
@@ -24,6 +24,11 @@
     .text-hestia-gold { color: var(--hestia-gold) !important; }
     .border-hestia-gold { border-color: var(--hestia-gold) !important; }
     .border-hestia-border { border-color: var(--hestia-border) !important; }
+
+    /* Corrección de visibilidad de botones del menú */
+    .portal-nav-btn { color: rgba(255, 255, 255, 0.7) !important; }
+    .portal-nav-btn:hover { color: #ffffff !important; }
+    .portal-nav-btn.text-hestia-gold { color: var(--hestia-gold) !important; }
   </style>
 </head>
 <body class="bg-hestia-cream text-hestia-dark min-h-screen flex flex-col font-sans antialiased">
