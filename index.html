@@ -4,25 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hestia Concierge | Luxury Portal</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            hestia: {
-              cream: '#F9F6F0',
-              gold: '#D4B285',
-              dark: '#1A222D',
-              surface: '#232C3A',
-              border: '#E0E0E0'
-            }
-          }
-        }
-      }
+<!-- Tailwind Precompilado Robusto -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+
+  <style>
+    :root {
+      --hestia-cream: #F9F6F0;
+      --hestia-gold: #D4B285;
+      --hestia-dark: #1A222D;
+      --hestia-surface: #232C3A;
+      --hestia-border: #E0E0E0;
     }
-  </script>
+    .bg-hestia-cream { background-color: var(--hestia-cream) !important; }
+    .text-hestia-cream { color: var(--hestia-cream) !important; }
+    .bg-hestia-dark { background-color: var(--hestia-dark) !important; }
+    .text-hestia-dark { color: var(--hestia-dark) !important; }
+    .bg-hestia-surface { background-color: var(--hestia-surface) !important; }
+    .bg-hestia-gold { background-color: var(--hestia-gold) !important; }
+    .text-hestia-gold { color: var(--hestia-gold) !important; }
+    .border-hestia-gold { border-color: var(--hestia-gold) !important; }
+    .border-hestia-border { border-color: var(--hestia-border) !important; }
+  </style>
 </head>
 <body class="bg-hestia-cream text-hestia-dark min-h-screen flex flex-col font-sans antialiased">
 
