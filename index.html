@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hestia Concierge | Luxury Experience</title>
+  <title>Hestia Concierge | Luxury Portal</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -15,6 +15,7 @@
               cream: '#F9F6F0',
               gold: '#D4B285',
               dark: '#1A222D',
+              surface: '#232C3A',
               border: '#E0E0E0'
             }
           }
@@ -23,159 +24,273 @@
     }
   </script>
 </head>
-<body class="bg-[#12161A] min-h-screen flex items-center justify-center p-4 font-sans antialiased select-none">
+<body class="bg-hestia-cream text-hestia-dark min-h-screen flex flex-col font-sans antialiased">
 
-  <!-- Marco Móvil Proporción Figma (390px x 844px) -->
-  <div class="relative w-[390px] h-[844px] bg-hestia-cream rounded-[44px] overflow-hidden border border-hestia-gold shadow-[0_25px_50px_-12px_rgba(26,34,45,0.4)] flex flex-col justify-between box-border">
+  <!-- 1. Header / Barra Superior de Navegación (Portal Web Completo) -->
+  <header class="w-full bg-hestia-dark border-b border-hestia-gold/40 sticky top-0 z-50 px-6 lg:px-16 py-4 flex items-center justify-between shadow-md">
+    <div class="flex items-center gap-4">
+      <h1 class="text-xl md:text-2xl font-black tracking-[5px] text-white uppercase m-0">HESTIA</h1>
+      <span class="hidden md:inline-block text-xs uppercase tracking-[2px] text-hestia-gold border-l border-white/20 pl-4">Luxury Concierge Portal</span>
+    </div>
 
-    <!-- Header / Barra Superior -->
-    <header class="flex items-center justify-between pt-12 px-6 pb-4">
-      <button type="button" class="text-base text-hestia-dark font-bold hover:opacity-75 transition-opacity" title="Volver">◀</button>
-      <h2 class="text-base font-extrabold tracking-[4px] text-hestia-dark uppercase m-0">HESTIA</h2>
-      <div class="w-4"></div>
-    </header>
-
-    <!-- Vista 1: Login / Acceso -->
-    <main id="view-login" class="px-7 flex flex-col items-center flex-grow justify-center transition-all duration-300">
-      <h1 class="text-[22px] font-bold tracking-[3px] text-hestia-dark uppercase mb-6 text-center">BIENVENIDO</h1>
-
-      <!-- Tarjeta Suite -->
-      <div class="w-full h-[120px] bg-hestia-dark rounded-2xl flex flex-col justify-center items-center mb-8 border border-hestia-gold shadow-md box-border">
-        <p class="text-hestia-gold text-[15px] tracking-[1.5px] font-semibold m-0 uppercase">SUITE DELUXE</p>
-        <span class="text-white text-[11px] mt-1.5 opacity-80 tracking-wide">Experiencia Quiet Luxury</span>
-      </div>
-
-      <!-- Formulario de Entrada -->
-      <form id="login-form" class="w-full flex flex-col gap-4">
-        <div class="relative w-full">
-          <select id="doc-type" required class="w-full h-[50px] bg-white border border-hestia-border rounded-full px-5 text-[13px] text-hestia-dark outline-none appearance-none text-center font-medium focus:border-hestia-gold transition-colors cursor-pointer">
-            <option value="" disabled selected>Tipo de documento</option>
-            <option value="cc">Cédula de Ciudadanía</option>
-            <option value="ce">Cédula de Extranjería</option>
-            <option value="pasaporte">Pasaporte</option>
-          </select>
-          <span class="absolute right-5 top-1/2 -translate-y-1/2 text-[10px] text-hestia-dark pointer-events-none">▼</span>
-        </div>
-
-        <input 
-          id="doc-number" 
-          type="text" 
-          placeholder="Número de documento" 
-          required
-          class="w-full h-[50px] bg-white border border-hestia-border rounded-full px-5 text-[13px] text-hestia-dark outline-none text-center font-medium focus:border-hestia-gold transition-colors"
-        />
-
-        <button 
-          type="submit" 
-          id="btn-login"
-          class="w-full h-[50px] bg-hestia-dark text-hestia-gold rounded-full text-sm font-bold tracking-[1.5px] uppercase cursor-pointer mt-2 shadow-lg hover:bg-opacity-95 active:scale-[0.98] transition-all"
-        >
-          INGRESAR
-        </button>
-      </form>
-    </main>
-
-    <!-- Vista 2: Contenedor Dinámico de Servicios / Restaurante / Chat -->
-    <main id="view-placeholder" class="hidden px-7 flex flex-col items-center flex-grow justify-center text-center transition-all duration-300">
-      <div id="placeholder-icon" class="text-5xl mb-4">🍽️</div>
-      <h3 id="placeholder-title" class="text-lg font-bold tracking-[2px] text-hestia-dark uppercase mb-2">Sección</h3>
-      <p id="placeholder-desc" class="text-xs text-hestia-dark/70 max-w-[240px]">Conectando módulo con el backend...</p>
-    </main>
-
-    <!-- Bottom Navigation Bar -->
-    <nav class="h-[75px] bg-hestia-dark border-t border-hestia-gold flex justify-around items-center pb-3 pt-2 box-border z-10">
+    <!-- Navegación Principal del Portal -->
+    <nav class="flex items-center gap-2 sm:gap-6">
       <button 
         type="button"
-        onclick="switchTab('inicio')" 
-        id="tab-inicio" 
-        class="nav-tab flex flex-col items-center gap-1 w-1/3 text-hestia-gold transition-colors"
+        onclick="switchTab('acceso')" 
+        id="nav-acceso"
+        class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-hestia-gold bg-white/5 transition-all"
       >
-        <span class="text-xl">🏠</span>
-        <span class="text-[10px] font-bold">Inicio</span>
+        ACCESO
       </button>
-
       <button 
         type="button"
-        onclick="switchTab('restaurante')" 
-        id="tab-restaurante" 
-        class="nav-tab flex flex-col items-center gap-1 w-1/3 text-white/60 hover:text-hestia-gold transition-colors"
+        onclick="switchTab('servicios')" 
+        id="nav-servicios"
+        class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all"
       >
-        <span class="text-xl">🍽️</span>
-        <span class="text-[10px] font-medium">Restaurante</span>
+        SERVICIOS & MENÚ
       </button>
-
       <button 
         type="button"
         onclick="switchTab('chat')" 
-        id="tab-chat" 
-        class="nav-tab flex flex-col items-center gap-1 w-1/3 text-white/60 hover:text-hestia-gold transition-colors"
+        id="nav-chat"
+        class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all"
       >
-        <span class="text-xl">💬</span>
-        <span class="text-[10px] font-medium">Chat</span>
+        CONCIERGE CHAT
       </button>
     </nav>
+  </header>
 
-  </div>
+  <!-- 2. Contenedor Principal Adaptable (Full Width & Responsive) -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 md:py-12">
 
-  <!-- Lógica Interactiva -->
+    <!-- SECCIÓN A: Acceso del Huésped (Diseño Desplegado) -->
+    <section id="portal-acceso" class="transition-opacity duration-300">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-[3px] text-hestia-dark uppercase mb-2">PORTAL DEL HUÉSPED</h2>
+        <p class="text-sm text-hestia-dark/70 tracking-wide">Gestione su estancia, solicite amenidades y ordene directamente a su habitación.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
+        <!-- Tarjeta de Bienvenida y Experiencia -->
+        <div class="bg-hestia-dark text-white rounded-3xl p-8 md:p-10 border border-hestia-gold shadow-xl flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-3 py-1 bg-hestia-gold/20 text-hestia-gold rounded-full text-xs font-bold tracking-widest uppercase mb-4">Experiencia Exclusiva</span>
+            <h3 class="text-2xl font-bold tracking-wider text-hestia-gold uppercase mb-2">SUITE DELUXE</h3>
+            <p class="text-sm text-white/80 leading-relaxed">Bienvenido al ecosistema digital Quiet Luxury. Ingrese con sus datos de reserva para desbloquear los servicios directos de concierge.</p>
+          </div>
+          <div class="pt-8 border-t border-white/10 flex items-center justify-between text-xs text-white/60">
+            <span>Recepción 24/7</span>
+            <span>Room Service Express</span>
+            <span>Digital Key</span>
+          </div>
+        </div>
+
+        <!-- Formulario de Entrada -->
+        <div class="bg-white rounded-3xl p-8 md:p-10 border border-hestia-border shadow-lg flex flex-col justify-center">
+          <form id="portal-login-form" class="space-y-5">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-hestia-dark mb-2">Tipo de Documento</label>
+              <div class="relative">
+                <select id="doc-type" required class="w-full h-12 bg-hestia-cream border border-hestia-border rounded-xl px-4 text-sm text-hestia-dark outline-none appearance-none font-medium focus:border-hestia-gold transition-colors cursor-pointer">
+                  <option value="" disabled selected>Seleccione su tipo de documento</option>
+                  <option value="cc">Cédula de Ciudadanía</option>
+                  <option value="ce">Cédula de Extranjería</option>
+                  <option value="pasaporte">Pasaporte</option>
+                </select>
+                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-hestia-dark pointer-events-none">▼</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-hestia-dark mb-2">Número de Documento o Reserva</label>
+              <input 
+                id="doc-number" 
+                type="text" 
+                placeholder="Ej. 123456789" 
+                required
+                class="w-full h-12 bg-hestia-cream border border-hestia-border rounded-xl px-4 text-sm text-hestia-dark outline-none font-medium focus:border-hestia-gold transition-colors"
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              id="btn-portal-login"
+              class="w-full h-12 bg-hestia-dark text-hestia-gold rounded-xl text-sm font-bold tracking-[2px] uppercase cursor-pointer shadow-md hover:bg-hestia-surface transition-all active:scale-[0.99]"
+            >
+              INGRESAR AL PORTAL
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN B: Dashboard de Servicios & Room Service (Listo para recibir los ítems) -->
+    <section id="portal-servicios" class="hidden transition-opacity duration-300">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-hestia-gold/30">
+        <div>
+          <h2 class="text-2xl font-extrabold tracking-[2px] text-hestia-dark uppercase">SERVICIOS & ROOM SERVICE</h2>
+          <p class="text-xs text-hestia-dark/70">Seleccione los platillos y amenidades para su habitación.</p>
+        </div>
+        <!-- Barra de Búsqueda -->
+        <div class="w-full md:w-72">
+          <input 
+            type="text" 
+            placeholder="Buscar platillo o amenidad..."
+            class="w-full h-10 bg-white border border-hestia-border rounded-full px-4 text-xs text-hestia-dark outline-none focus:border-hestia-gold"
+          />
+        </div>
+      </div>
+
+      <!-- Tarjetas de Ejemplo de Servicios -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-5 border border-hestia-border shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-xs text-hestia-gold font-bold uppercase tracking-wider">Gastronomía</span>
+            <h4 class="text-lg font-bold text-hestia-dark mt-1">Room Service Menú</h4>
+            <p class="text-xs text-hestia-dark/70 mt-2">Platillos gourmet de autor servidos directo en su suite en minutos.</p>
+          </div>
+          <button class="mt-6 w-full py-2.5 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-lg hover:bg-hestia-surface">Ver Menú Completo</button>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-hestia-border shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-xs text-hestia-gold font-bold uppercase tracking-wider">Bienestar</span>
+            <h4 class="text-lg font-bold text-hestia-dark mt-1">Spa & Relajación</h4>
+            <p class="text-xs text-hestia-dark/70 mt-2">Reserve sesiones de hidroterapia, masajes y tratamientos faciales.</p>
+          </div>
+          <button class="mt-6 w-full py-2.5 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-lg hover:bg-hestia-surface">Agendar Spa</button>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-hestia-border shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-xs text-hestia-gold font-bold uppercase tracking-wider">Housekeeping</span>
+            <h4 class="text-lg font-bold text-hestia-dark mt-1">Amenidades & Limpieza</h4>
+            <p class="text-xs text-hestia-dark/70 mt-2">Solicite reposición de toallas, toallas extras o cambio de sábanas.</p>
+          </div>
+          <button class="mt-6 w-full py-2.5 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-lg hover:bg-hestia-surface">Solicitar Servicio</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN C: Concierge Chat en Vivo -->
+    <section id="portal-chat" class="hidden transition-opacity duration-300">
+      <div class="max-w-3xl mx-auto bg-white rounded-3xl border border-hestia-border shadow-lg overflow-hidden flex flex-col h-[520px]">
+        <div class="bg-hestia-dark px-6 py-4 flex items-center justify-between border-b border-hestia-gold">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🛎️</span>
+            <div>
+              <h3 class="text-sm font-bold text-white tracking-wider uppercase m-0">Recepción & Concierge</h3>
+              <p class="text-[11px] text-hestia-gold m-0">En línea para atender su solicitud</p>
+            </div>
+          </div>
+          <span class="text-xs text-white/50">Habitación 402</span>
+        </div>
+
+        <!-- Historial del Chat -->
+        <div id="chat-messages" class="flex-grow p-6 overflow-y-auto space-y-4 bg-hestia-cream/50 text-xs">
+          <div class="flex items-start gap-2">
+            <div class="bg-white border border-hestia-border p-3 rounded-2xl max-w-sm shadow-sm">
+              <p class="text-hestia-dark font-medium">Buenas tardes, Sr. Rivera. ¿En qué podemos asistirle el día de hoy?</p>
+              <span class="text-[9px] text-hestia-dark/50 mt-1 block text-right">Concierge • 14:02</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input del Chat -->
+        <form id="chat-form" class="p-4 bg-white border-t border-hestia-border flex gap-3">
+          <input 
+            id="chat-input"
+            type="text" 
+            placeholder="Escriba su solicitud a recepción..." 
+            required
+            class="flex-grow h-11 bg-hestia-cream border border-hestia-border rounded-xl px-4 text-xs text-hestia-dark outline-none focus:border-hestia-gold font-medium"
+          />
+          <button 
+            type="submit" 
+            class="px-6 h-11 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-xl hover:bg-hestia-surface transition-all"
+          >
+            Enviar
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 3. Footer del Portal -->
+  <footer class="w-full bg-hestia-dark text-white/60 text-xs py-6 border-t border-white/10 text-center px-4">
+    <p class="m-0 tracking-wider">HESTIA CONCIERGE &copy; 2026 — Placer & Confort en cada detalle.</p>
+  </footer>
+
+  <!-- Lógica de Navegación e Interactividad -->
   <script>
-    const form = document.getElementById('login-form');
-    const btnLogin = document.getElementById('btn-login');
-    const viewLogin = document.getElementById('view-login');
-    const viewPlaceholder = document.getElementById('view-placeholder');
-    const placeholderIcon = document.getElementById('placeholder-icon');
-    const placeholderTitle = document.getElementById('placeholder-title');
-    const placeholderDesc = document.getElementById('placeholder-desc');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const docType = document.getElementById('doc-type').value;
-      const docNumber = document.getElementById('doc-number').value.trim();
-
-      if (!docType || !docNumber) {
-        alert('Por favor seleccione tipo y número de documento.');
-        return;
-      }
-
-      btnLogin.innerText = 'VERIFICANDO...';
-      btnLogin.disabled = true;
-
-      setTimeout(() => {
-        btnLogin.innerText = 'INGRESAR';
-        btnLogin.disabled = false;
-        alert(`¡Bienvenido! Documento ${docNumber} verificado con éxito.`);
-      }, 700);
-    });
-
     function switchTab(tab) {
-      document.querySelectorAll('.nav-tab').forEach(el => {
-        el.classList.remove('text-hestia-gold');
-        el.classList.add('text-white/60');
+      document.querySelectorAll('.portal-nav-btn').forEach(btn => {
+        btn.classList.remove('text-hestia-gold', 'bg-white/5');
+        btn.classList.add('text-white/70');
       });
 
-      const activeTab = document.getElementById(`tab-${tab}`);
-      if (activeTab) {
-        activeTab.classList.add('text-hestia-gold');
-        activeTab.classList.remove('text-white/60');
+      document.getElementById('portal-acceso').classList.add('hidden');
+      document.getElementById('portal-servicios').classList.add('hidden');
+      document.getElementById('portal-chat').classList.add('hidden');
+
+      const activeBtn = document.getElementById(`nav-${tab}`);
+      if (activeBtn) {
+        activeBtn.classList.add('text-hestia-gold', 'bg-white/5');
+        activeBtn.classList.remove('text-white/70');
       }
 
-      if (tab === 'inicio') {
-        viewLogin.classList.remove('hidden');
-        viewPlaceholder.classList.add('hidden');
-      } else if (tab === 'restaurante') {
-        viewLogin.classList.add('hidden');
-        viewPlaceholder.classList.remove('hidden');
-        placeholderIcon.innerText = '🍽️';
-        placeholderTitle.innerText = 'ROOM SERVICE';
-        placeholderDesc.innerText = 'Catálogo de platillos y bebidas gourmet.';
-      } else if (tab === 'chat') {
-        viewLogin.classList.add('hidden');
-        viewPlaceholder.classList.remove('hidden');
-        placeholderIcon.innerText = '💬';
-        placeholderTitle.innerText = 'CONCIERGE CHAT';
-        placeholderDesc.innerText = 'Comunicación en directo con recepción.';
-      }
+      document.getElementById(`portal-${tab}`).classList.remove('hidden');
     }
+
+    // Login Form
+    document.getElementById('portal-login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('btn-portal-login');
+      btn.innerText = 'VALIDANDO RESERVA...';
+      setTimeout(() => {
+        btn.innerText = 'INGRESAR AL PORTAL';
+        switchTab('servicios');
+      }, 600);
+    });
+
+    // Chat Form
+    document.getElementById('chat-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const chatMessages = document.getElementById('chat-messages');
+      const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      // Mensaje huésped
+      chatMessages.innerHTML += `
+        <div class="flex items-start justify-end gap-2">
+          <div class="bg-hestia-dark text-white p-3 rounded-2xl max-w-sm shadow-sm">
+            <p class="font-medium">${text}</p>
+            <span class="text-[9px] text-hestia-gold/80 mt-1 block text-right">Usted • ${now}</span>
+          </div>
+        </div>
+      `;
+      input.value = '';
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // Respuesta automática de cortesía
+      setTimeout(() => {
+        chatMessages.innerHTML += `
+          <div class="flex items-start gap-2">
+            <div class="bg-white border border-hestia-border p-3 rounded-2xl max-w-sm shadow-sm">
+              <p class="text-hestia-dark font-medium">Recibido. Un miembro de nuestro equipo ya está gestionando su solicitud.</p>
+              <span class="text-[9px] text-hestia-dark/50 mt-1 block text-right">Concierge • Ahora</span>
+            </div>
+          </div>
+        `;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 1000);
+    });
   </script>
 </body>
 </html>
