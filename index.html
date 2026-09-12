@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hestia Concierge | Luxury Experience</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            hestia: {
+              cream: '#F9F6F0',
+              gold: '#D4B285',
+              dark: '#1A222D',
+              border: '#E0E0E0'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#12161A] min-h-screen flex items-center justify-center p-4 font-sans antialiased select-none">
+
+  <!-- Marco Móvil Proporción Figma (390px x 844px) -->
+  <div class="relative w-[390px] h-[844px] bg-hestia-cream rounded-[44px] overflow-hidden border border-hestia-gold shadow-[0_25px_50px_-12px_rgba(26,34,45,0.4)] flex flex-col justify-between box-border">
+
+    <!-- Header / Barra Superior -->
+    <header class="flex items-center justify-between pt-12 px-6 pb-4">
+      <button type="button" class="text-base text-hestia-dark font-bold hover:opacity-75 transition-opacity" title="Volver">◀</button>
+      <h2 class="text-base font-extrabold tracking-[4px] text-hestia-dark uppercase m-0">HESTIA</h2>
+      <div class="w-4"></div>
+    </header>
+
+    <!-- Vista 1: Login / Acceso -->
+    <main id="view-login" class="px-7 flex flex-col items-center flex-grow justify-center transition-all duration-300">
+      <h1 class="text-[22px] font-bold tracking-[3px] text-hestia-dark uppercase mb-6 text-center">BIENVENIDO</h1>
+
+      <!-- Tarjeta Suite -->
+      <div class="w-full h-[120px] bg-hestia-dark rounded-2xl flex flex-col justify-center items-center mb-8 border border-hestia-gold shadow-md box-border">
+        <p class="text-hestia-gold text-[15px] tracking-[1.5px] font-semibold m-0 uppercase">SUITE DELUXE</p>
+        <span class="text-white text-[11px] mt-1.5 opacity-80 tracking-wide">Experiencia Quiet Luxury</span>
+      </div>
+
+      <!-- Formulario de Entrada -->
+      <form id="login-form" class="w-full flex flex-col gap-4">
+        <div class="relative w-full">
+          <select id="doc-type" required class="w-full h-[50px] bg-white border border-hestia-border rounded-full px-5 text-[13px] text-hestia-dark outline-none appearance-none text-center font-medium focus:border-hestia-gold transition-colors cursor-pointer">
+            <option value="" disabled selected>Tipo de documento</option>
+            <option value="cc">Cédula de Ciudadanía</option>
+            <option value="ce">Cédula de Extranjería</option>
+            <option value="pasaporte">Pasaporte</option>
+          </select>
+          <span class="absolute right-5 top-1/2 -translate-y-1/2 text-[10px] text-hestia-dark pointer-events-none">▼</span>
+        </div>
+
+        <input 
+          id="doc-number" 
+          type="text" 
+          placeholder="Número de documento" 
+          required
+          class="w-full h-[50px] bg-white border border-hestia-border rounded-full px-5 text-[13px] text-hestia-dark outline-none text-center font-medium focus:border-hestia-gold transition-colors"
+        />
+
+        <button 
+          type="submit" 
+          id="btn-login"
+          class="w-full h-[50px] bg-hestia-dark text-hestia-gold rounded-full text-sm font-bold tracking-[1.5px] uppercase cursor-pointer mt-2 shadow-lg hover:bg-opacity-95 active:scale-[0.98] transition-all"
+        >
+          INGRESAR
+        </button>
+      </form>
+    </main>
+
+    <!-- Vista 2: Contenedor Dinámico de Servicios / Restaurante / Chat -->
+    <main id="view-placeholder" class="hidden px-7 flex flex-col items-center flex-grow justify-center text-center transition-all duration-300">
+      <div id="placeholder-icon" class="text-5xl mb-4">🍽️</div>
+      <h3 id="placeholder-title" class="text-lg font-bold tracking-[2px] text-hestia-dark uppercase mb-2">Sección</h3>
+      <p id="placeholder-desc" class="text-xs text-hestia-dark/70 max-w-[240px]">Conectando módulo con el backend...</p>
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="h-[75px] bg-hestia-dark border-t border-hestia-gold flex justify-around items-center pb-3 pt-2 box-border z-10">
+      <button 
+        type="button"
+        onclick="switchTab('inicio')" 
+        id="tab-inicio" 
+        class="nav-tab flex flex-col items-center gap-1 w-1/3 text-hestia-gold transition-colors"
+      >
+        <span class="text-xl">🏠</span>
+        <span class="text-[10px] font-bold">Inicio</span>
+      </button>
+
+      <button 
+        type="button"
+        onclick="switchTab('restaurante')" 
+        id="tab-restaurante" 
+        class="nav-tab flex flex-col items-center gap-1 w-1/3 text-white/60 hover:text-hestia-gold transition-colors"
+      >
+        <span class="text-xl">🍽️</span>
+        <span class="text-[10px] font-medium">Restaurante</span>
+      </button>
+
+      <button 
+        type="button"
+        onclick="switchTab('chat')" 
+        id="tab-chat" 
+        class="nav-tab flex flex-col items-center gap-1 w-1/3 text-white/60 hover:text-hestia-gold transition-colors"
+      >
+        <span class="text-xl">💬</span>
+        <span class="text-[10px] font-medium">Chat</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- Lógica Interactiva -->
+  <script>
+    const form = document.getElementById('login-form');
+    const btnLogin = document.getElementById('btn-login');
+    const viewLogin = document.getElementById('view-login');
+    const viewPlaceholder = document.getElementById('view-placeholder');
+    const placeholderIcon = document.getElementById('placeholder-icon');
+    const placeholderTitle = document.getElementById('placeholder-title');
+    const placeholderDesc = document.getElementById('placeholder-desc');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const docType = document.getElementById('doc-type').value;
+      const docNumber = document.getElementById('doc-number').value.trim();
+
+      if (!docType || !docNumber) {
+        alert('Por favor seleccione tipo y número de documento.');
+        return;
+      }
+
+      btnLogin.innerText = 'VERIFICANDO...';
+      btnLogin.disabled = true;
+
+      setTimeout(() => {
+        btnLogin.innerText = 'INGRESAR';
+        btnLogin.disabled = false;
+        alert(`¡Bienvenido! Documento ${docNumber} verificado con éxito.`);
+      }, 700);
+    });
+
+    function switchTab(tab) {
+      document.querySelectorAll('.nav-tab').forEach(el => {
+        el.classList.remove('text-hestia-gold');
+        el.classList.add('text-white/60');
+      });
+
+      const activeTab = document.getElementById(`tab-${tab}`);
+      if (activeTab) {
+        activeTab.classList.add('text-hestia-gold');
+        activeTab.classList.remove('text-white/60');
+      }
+
+      if (tab === 'inicio') {
+        viewLogin.classList.remove('hidden');
+        viewPlaceholder.classList.add('hidden');
+      } else if (tab === 'restaurante') {
+        viewLogin.classList.add('hidden');
+        viewPlaceholder.classList.remove('hidden');
+        placeholderIcon.innerText = '🍽️';
+        placeholderTitle.innerText = 'ROOM SERVICE';
+        placeholderDesc.innerText = 'Catálogo de platillos y bebidas gourmet.';
+      } else if (tab === 'chat') {
+        viewLogin.classList.add('hidden');
+        viewPlaceholder.classList.remove('hidden');
+        placeholderIcon.innerText = '💬';
+        placeholderTitle.innerText = 'CONCIERGE CHAT';
+        placeholderDesc.innerText = 'Comunicación en directo con recepción.';
+      }
+    }
+  </script>
+</body>
+</html>
