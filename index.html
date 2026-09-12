@@ -49,7 +49,15 @@
         id="nav-servicios"
         class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all"
       >
-        SERVICIOS & MENÚ
+        SERVICIOS GENERALES
+      </button>
+      <button 
+        type="button"
+        onclick="switchTab('roomservice')" 
+        id="nav-roomservice"
+        class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all"
+      >
+        ROOM SERVICE
       </button>
       <button 
         type="button"
@@ -132,7 +140,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN B: Dashboard de Servicios & Room Service -->
+    <!-- SECCIÓN B: Dashboard de Servicios Generales -->
     <section id="portal-servicios" class="hidden transition-opacity duration-300">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-hestia-gold/30">
         <div>
@@ -140,8 +148,11 @@
           <p class="text-xs text-hestia-dark/70">¿Cómo podemos hacer perfecta su estancia hoy?</p>
         </div>
         <div class="flex items-center gap-3">
-          <button onclick="switchTab('invitados')" class="px-4 py-2 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-full border border-hestia-gold hover:bg-hestia-surface transition-all">
-            👥 Gestionar Invitados
+          <button onclick="switchTab('roomservice')" class="px-4 py-2 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-full border border-hestia-gold hover:bg-hestia-surface transition-all">
+            🍽️ Ir al Menú Gourmet
+          </button>
+          <button onclick="switchTab('invitados')" class="px-4 py-2 bg-hestia-cream text-hestia-dark text-xs font-bold uppercase rounded-full border border-hestia-gold hover:bg-hestia-gold/20 transition-all">
+            👥 Invitados
           </button>
         </div>
       </div>
@@ -155,10 +166,12 @@
             <h4 class="text-lg font-bold text-hestia-dark mt-1">Room Service Menú</h4>
             <p class="text-xs text-hestia-dark/70 mt-2">Platillos gourmet de autor servidos directo en su suite en minutos.</p>
           </div>
-          <button onclick="alert('Abriendo menú digital...')" class="mt-6 w-full py-2.5 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-xl hover:bg-hestia-surface">Ver Menú Completo</button>
+          <button onclick="switchTab('roomservice')" class="mt-6 w-full py-2.5 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-xl hover:bg-hestia-surface transition-all">
+            Ver Menú Completo ➔
+          </button>
         </div>
 
-        <!-- Tarjeta 2: Transporte Privado (del archivo de servicios) -->
+        <!-- Tarjeta 2: Transporte Privado -->
         <div class="bg-white rounded-2xl p-6 border border-hestia-border shadow-sm flex flex-col justify-between">
           <div>
             <div class="w-10 h-10 bg-hestia-dark rounded-xl flex items-center justify-center text-xl mb-4">🚗</div>
@@ -166,10 +179,12 @@
             <h4 class="text-lg font-bold text-hestia-dark mt-1">Transporte Privado</h4>
             <p class="text-xs text-hestia-dark/70 mt-2">Airport transfer, chofer ejecutivo o vehículo privado con anticipación.</p>
           </div>
-          <button onclick="switchTab('chat')" class="mt-6 w-full py-2.5 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold uppercase rounded-xl hover:bg-hestia-gold/20 transition-all">Reservar Transporte ➔</button>
+          <button onclick="switchTab('chat')" class="mt-6 w-full py-2.5 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold uppercase rounded-xl hover:bg-hestia-gold/20 transition-all">
+            Reservar Transporte ➔
+          </button>
         </div>
 
-        <!-- Tarjeta 3: Amenidades de Habitación (del archivo de servicios) -->
+        <!-- Tarjeta 3: Amenidades de Habitación -->
         <div class="bg-white rounded-2xl p-6 border border-hestia-border shadow-sm flex flex-col justify-between">
           <div>
             <div class="w-10 h-10 bg-hestia-dark rounded-xl flex items-center justify-center text-xl mb-4">🛏️</div>
@@ -177,11 +192,13 @@
             <h4 class="text-lg font-bold text-hestia-dark mt-1">Amenidades de Habitación</h4>
             <p class="text-xs text-hestia-dark/70 mt-2">Toallas adicionales, almohadas o kits de aseo directo a su suite sin costo extra.</p>
           </div>
-          <button onclick="switchTab('chat')" class="mt-6 w-full py-2.5 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold uppercase rounded-xl hover:bg-hestia-gold/20 transition-all">Solicitar Amenidades ➔</button>
+          <button onclick="switchTab('chat')" class="mt-6 w-full py-2.5 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold uppercase rounded-xl hover:bg-hestia-gold/20 transition-all">
+            Solicitar Amenidades ➔
+          </button>
         </div>
       </div>
 
-      <!-- Solicitudes Activas (del archivo de servicios) -->
+      <!-- Solicitudes Activas -->
       <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm">
         <h5 class="text-xs font-bold text-hestia-gold uppercase tracking-widest mb-4">Solicitudes Activas</h5>
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-hestia-cream/60 border border-hestia-border">
@@ -194,7 +211,141 @@
       </div>
     </section>
 
-    <!-- SECCIÓN NUEVA C: Registro y Control de Invitados (del código nuevo) -->
+    <!-- SECCIÓN C: Room Service Interactivo y Desplegable -->
+    <section id="portal-roomservice" class="hidden transition-opacity duration-300">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-hestia-gold/30">
+        <div>
+          <div class="flex items-center gap-3">
+            <h2 class="text-2xl font-extrabold tracking-[2px] text-hestia-dark uppercase">ROOM SERVICE</h2>
+            <span class="px-3 py-1 bg-hestia-gold/20 border border-hestia-gold text-hestia-gold text-xs font-bold rounded-full">Servicio 24/7 • 25 min</span>
+          </div>
+          <p class="text-xs text-hestia-dark/70 mt-1">Seleccione sus platillos y disfrute de la cocina de autor en su suite.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span id="cart-counter-badge" class="text-xs font-bold text-hestia-gold bg-hestia-dark px-3 py-1.5 rounded-full border border-hestia-gold">
+            🛒 0 items
+          </span>
+          <button onclick="switchTab('servicios')" class="text-xs text-hestia-dark font-bold hover:text-hestia-gold transition-colors">
+            ◀ Volver a Servicios
+          </button>
+        </div>
+      </div>
+
+      <!-- Filtros de Categorías -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6">
+        <button onclick="filterCategory('todos')" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-hestia-dark text-hestia-gold border border-hestia-gold transition-all">Todos</button>
+        <button onclick="filterCategory('desayunos')" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍳 Desayunos</button>
+        <button onclick="filterCategory('fuertes')" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🥩 Platos Fuertes</button>
+        <button onclick="filterCategory('bebidas')" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍷 Bebidas VIP</button>
+        <button onclick="filterCategory('postres')" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍰 Postres</button>
+      </div>
+
+      <!-- Grid de Platillos y Carrito -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Lista de Platillos -->
+        <div class="lg:col-span-2 space-y-4" id="menu-items-grid">
+          
+          <!-- Platillo 1: Desayuno -->
+          <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 flex gap-4 items-center shadow-sm" data-category="desayunos">
+            <div class="w-16 h-16 bg-hestia-dark text-white rounded-xl border border-hestia-gold flex items-center justify-center text-3xl flex-shrink-0">
+              🥑
+            </div>
+            <div class="flex-grow">
+              <h4 class="text-sm font-bold text-hestia-dark">Toast Artesanal Hestia</h4>
+              <p class="text-xs text-hestia-dark/70 mb-2">Pan de masa madre, aguacate cremoso, huevo poché y semillas tostadas.</p>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-extrabold text-hestia-dark">$45.000 COP</span>
+                <button onclick="addToCart('Toast Artesanal Hestia', 45000)" class="px-3 py-1 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Agregar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Platillo 2: Desayuno -->
+          <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 flex gap-4 items-center shadow-sm" data-category="desayunos">
+            <div class="w-16 h-16 bg-hestia-dark text-white rounded-xl border border-hestia-gold flex items-center justify-center text-3xl flex-shrink-0">
+              🥐
+            </div>
+            <div class="flex-grow">
+              <h4 class="text-sm font-bold text-hestia-dark">Croissant de Mantequilla</h4>
+              <p class="text-xs text-hestia-dark/70 mb-2">Acompañado de mermelada de frutos rojos casera y mantequilla de avellana.</p>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-extrabold text-hestia-dark">$22.000 COP</span>
+                <button onclick="addToCart('Croissant de Mantequilla', 22000)" class="px-3 py-1 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Agregar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Platillo 3: Bebidas -->
+          <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 flex gap-4 items-center shadow-sm" data-category="bebidas">
+            <div class="w-16 h-16 bg-hestia-dark text-white rounded-xl border border-hestia-gold flex items-center justify-center text-3xl flex-shrink-0">
+              ☕
+            </div>
+            <div class="flex-grow">
+              <h4 class="text-sm font-bold text-hestia-dark">Café Especial de Origen</h4>
+              <p class="text-xs text-hestia-dark/70 mb-2">Café de especialidad colombiano (Prensa francesa o V60) a elección.</p>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-extrabold text-hestia-dark">$18.000 COP</span>
+                <button onclick="addToCart('Café Especial de Origen', 18000)" class="px-3 py-1 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Agregar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Platillo 4: Fuerte -->
+          <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 flex gap-4 items-center shadow-sm" data-category="fuertes">
+            <div class="w-16 h-16 bg-hestia-dark text-white rounded-xl border border-hestia-gold flex items-center justify-center text-3xl flex-shrink-0">
+              🥩
+            </div>
+            <div class="flex-grow">
+              <h4 class="text-sm font-bold text-hestia-dark">Filet Mignon con Reducción de Trufa</h4>
+              <p class="text-xs text-hestia-dark/70 mb-2">Corte fino bañado en salsa de vino tinto y trufas negras con puré rústico.</p>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-extrabold text-hestia-dark">$78.000 COP</span>
+                <button onclick="addToCart('Filet Mignon Trufa', 78000)" class="px-3 py-1 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Agregar</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Barra Lateral / Carrito de Compras -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm sticky top-24">
+            <h4 class="text-sm font-bold text-hestia-dark uppercase tracking-wider mb-4 pb-2 border-b border-hestia-border">
+              Resumen de Pedido
+            </h4>
+
+            <div id="cart-items-container" class="space-y-3 mb-6 min-h-[120px] max-h-[260px] overflow-y-auto">
+              <p id="empty-cart-msg" class="text-xs text-hestia-dark/50 text-center py-8">
+                No hay platillos seleccionados.
+              </p>
+            </div>
+
+            <!-- Resumen Total -->
+            <div class="bg-hestia-dark text-white rounded-2xl p-4 border border-hestia-gold shadow-md">
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-xs text-white/70">Platillos:</span>
+                <span id="summary-items-count" class="text-xs text-hestia-gold font-bold">0 seleccionados</span>
+              </div>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-sm font-bold">Total:</span>
+                <span id="summary-total-price" class="text-base font-extrabold text-hestia-gold">$0 COP</span>
+              </div>
+              <button 
+                onclick="checkoutOrder()" 
+                id="btn-checkout"
+                disabled
+                class="w-full py-3 bg-hestia-gold text-hestia-dark font-bold text-xs uppercase tracking-wider rounded-xl cursor-not-allowed opacity-50 transition-all hover:opacity-90"
+              >
+                Ordenar a Suite ➔
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN D: Registro y Control de Invitados -->
     <section id="portal-invitados" class="hidden transition-opacity duration-300">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-hestia-gold/30">
         <div>
@@ -210,10 +361,8 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <!-- Columna Izquierda: Aforo y Formulario -->
+        <!-- Aforo y Formulario -->
         <div class="lg:col-span-1 space-y-6">
-          <!-- Aforo Card -->
           <div class="bg-white rounded-2xl border border-hestia-border p-5 shadow-sm flex items-center justify-between">
             <div>
               <span class="text-xs font-bold text-hestia-dark block">Aforo Autorizado</span>
@@ -224,7 +373,6 @@
             </span>
           </div>
 
-          <!-- Formulario de Registro -->
           <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm">
             <span class="text-xs font-bold text-hestia-dark uppercase tracking-wider block mb-4">👤 Autorizar Nuevo Invitado</span>
             
@@ -281,7 +429,7 @@
           </div>
         </div>
 
-        <!-- Columna Derecha: Lista de Invitados -->
+        <!-- Lista de Invitados -->
         <div class="lg:col-span-2">
           <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm h-full flex flex-col">
             <div class="flex items-center justify-between mb-4">
@@ -289,9 +437,7 @@
               <span class="text-[11px] text-hestia-gold font-bold">Registro en Tiempo Real</span>
             </div>
 
-            <!-- Contenedor dinámico de invitados -->
             <div id="guests-list" class="space-y-3 flex-grow overflow-y-auto">
-              <!-- Invitado Inicial 1 -->
               <div class="guest-card bg-hestia-cream/50 border border-hestia-border rounded-xl p-4 flex items-center justify-between gap-4">
                 <div>
                   <h6 class="text-sm font-bold text-hestia-dark m-0">Carlos Mendoza</h6>
@@ -301,7 +447,6 @@
                 <button onclick="revokeGuest(this)" class="px-3 py-1.5 border border-red-200 text-red-600 text-xs font-bold rounded-lg hover:bg-red-50 transition-colors">Revocar</button>
               </div>
 
-              <!-- Invitado Inicial 2 -->
               <div class="guest-card bg-hestia-cream/50 border border-hestia-border rounded-xl p-4 flex items-center justify-between gap-4">
                 <div>
                   <h6 class="text-sm font-bold text-hestia-dark m-0">Mariana Gómez</h6>
@@ -317,7 +462,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN D: Concierge Chat en Vivo -->
+    <!-- SECCIÓN E: Concierge Chat en Vivo (Único y Centralizado) -->
     <section id="portal-chat" class="hidden transition-opacity duration-300">
       <div class="max-w-3xl mx-auto bg-white rounded-3xl border border-hestia-border shadow-lg overflow-hidden flex flex-col h-[520px]">
         <div class="bg-hestia-dark px-6 py-4 flex items-center justify-between border-b border-hestia-gold">
@@ -375,6 +520,7 @@
 
       document.getElementById('portal-acceso').classList.add('hidden');
       document.getElementById('portal-servicios').classList.add('hidden');
+      document.getElementById('portal-roomservice').classList.add('hidden');
       document.getElementById('portal-invitados').classList.add('hidden');
       document.getElementById('portal-chat').classList.add('hidden');
 
@@ -484,6 +630,86 @@
         card.remove();
         updateCapacity();
       }
+    }
+
+    // LÓGICA DE ROOM SERVICE & CARRITO
+    let cart = [];
+
+    function filterCategory(cat) {
+      document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-hestia-dark', 'text-hestia-gold', 'border-hestia-gold');
+        btn.classList.add('bg-white', 'text-hestia-dark', 'border-hestia-border');
+      });
+      event.target.classList.add('bg-hestia-dark', 'text-hestia-gold', 'border-hestia-gold');
+      event.target.classList.remove('bg-white', 'text-hestia-dark', 'border-hestia-border');
+
+      const items = document.querySelectorAll('.menu-card');
+      items.forEach(item => {
+        if (cat === 'todos' || item.getAttribute('data-category') === cat) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    function addToCart(title, price) {
+      cart.push({ title, price });
+      renderCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-items-container');
+      const counterBadge = document.getElementById('cart-counter-badge');
+      const summaryCount = document.getElementById('summary-items-count');
+      const summaryTotal = document.getElementById('summary-total-price');
+      const btnCheckout = document.getElementById('btn-checkout');
+
+      counterBadge.innerText = `🛒 ${cart.length} items`;
+      summaryCount.innerText = `${cart.length} seleccionados`;
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p id="empty-cart-msg" class="text-xs text-hestia-dark/50 text-center py-8">No hay platillos seleccionados.</p>';
+        summaryTotal.innerText = '$0 COP';
+        btnCheckout.disabled = true;
+        btnCheckout.classList.add('opacity-50', 'cursor-not-allowed');
+        return;
+      }
+
+      btnCheckout.disabled = false;
+      btnCheckout.classList.remove('opacity-50', 'cursor-not-allowed');
+
+      let total = 0;
+      container.innerHTML = '';
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between gap-2 p-2 rounded-lg bg-hestia-cream border border-hestia-border text-xs';
+        row.innerHTML = `
+          <div class="overflow-hidden">
+            <span class="font-bold text-hestia-dark truncate block">${item.title}</span>
+            <span class="text-[11px] text-hestia-dark/60">$${item.price.toLocaleString('es-CO')} COP</span>
+          </div>
+          <button onclick="removeFromCart(${index})" class="text-red-500 font-bold hover:opacity-80 px-2 py-1 text-xs">✕</button>
+        `;
+        container.appendChild(row);
+      });
+
+      summaryTotal.innerText = `$${total.toLocaleString('es-CO')} COP`;
+    }
+
+    function checkoutOrder() {
+      if (cart.length === 0) return;
+      const total = cart.reduce((acc, item) => acc + item.price, 0);
+      alert(`¡Orden enviada a cocina! Pedido confirmado para la Suite por valor de $${total.toLocaleString('es-CO')} COP. Tiempo estimado: 25 minutos.`);
+      cart = [];
+      renderCart();
     }
   </script>
 </body>
