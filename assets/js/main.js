@@ -9,27 +9,30 @@ function switchTab(tab) {
     btn.classList.add('text-white/70');
   });
 
-  // Ocultar todas las secciones del portal
+  // Identificadores de las secciones del portal
   const sections = ['acceso', 'servicios', 'roomservice', 'invitados', 'chat'];
   sections.forEach(s => {
     const el = document.getElementById(`portal-${s}`);
-    if (el) el.classList.add('hidden');
+    if (el) {
+      el.classList.add('hidden');
+    }
   });
 
-  // Activar botón y sección seleccionada
+  // Activar el botón presionado
   const activeBtn = document.getElementById(`nav-${tab}`);
   if (activeBtn) {
     activeBtn.classList.add('text-hestia-gold', 'bg-white/5');
     activeBtn.classList.remove('text-white/70');
   }
 
+  // Mostrar la sección correspondiente
   const activeSection = document.getElementById(`portal-${tab}`);
   if (activeSection) {
     activeSection.classList.remove('hidden');
   }
 }
 
-// Inicialización de Event Listeners cuando el DOM está listo
+// Inicialización de Event Listeners al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
   // Formulario de Login / Acceso
   const loginForm = document.getElementById('portal-login-form');
@@ -85,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Formulario de Invitados & Aforo
+  // Formulario de Invitados
   const formInvitados = document.getElementById('form-invitados');
   if (formInvitados) {
     formInvitados.addEventListener('submit', (e) => {
@@ -99,10 +102,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const name = document.getElementById('guest-name-input')?.value.trim() || '';
-      const docType = document.getElementById('guest-doc-type')?.value || '';
-      const docNum = document.getElementById('guest-doc-num')?.value.trim() || '';
-      const passType = document.getElementById('guest-pass-type')?.value || '';
+      const nameInput = document.getElementById('guest-name-input');
+      const docTypeInput = document.getElementById('guest-doc-type');
+      const docNumInput = document.getElementById('guest-doc-num');
+      const passTypeInput = document.getElementById('guest-pass-type');
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      const docType = docTypeInput ? docTypeInput.value : '';
+      const docNum = docNumInput ? docNumInput.value.trim() : '';
+      const passType = passTypeInput ? passTypeInput.value : '';
 
       const maskedDoc = docNum.length > 4 ? `•••• ${docNum.slice(-4)}` : docNum;
 
@@ -147,17 +155,17 @@ function revokeGuest(button) {
   }
 }
 
-// Lógica de Room Service y Carrito
-function filterCategory(cat) {
+// Filtro de categorías en Room Service
+function filterCategory(cat, event) {
   document.querySelectorAll('.cat-filter-btn').forEach(btn => {
     btn.classList.remove('bg-hestia-dark', 'text-hestia-gold', 'border-hestia-gold');
     btn.classList.add('bg-white', 'text-hestia-dark', 'border-hestia-border');
   });
 
-  if (window.event && window.event.target) {
-    const target = window.event.target;
-    target.classList.add('bg-hestia-dark', 'text-hestia-gold', 'border-hestia-gold');
-    target.classList.remove('bg-white', 'text-hestia-dark', 'border-hestia-border');
+  const targetBtn = event ? event.currentTarget : (window.event ? window.event.target : null);
+  if (targetBtn) {
+    targetBtn.classList.add('bg-hestia-dark', 'text-hestia-gold', 'border-hestia-gold');
+    targetBtn.classList.remove('bg-white', 'text-hestia-dark', 'border-hestia-border');
   }
 
   const items = document.querySelectorAll('.menu-card');
@@ -170,6 +178,7 @@ function filterCategory(cat) {
   });
 }
 
+// Métodos del Carrito
 function addToCart(title, price) {
   cart.push({ title, price });
   renderCart();
@@ -182,13 +191,13 @@ function removeFromCart(index) {
 
 function renderCart() {
   const container = document.getElementById('cart-items-container');
-  const counterBadge = document.getElementById('cart-badge-count') || document.getElementById('cart-counter-badge');
+  const counterBadge = document.getElementById('cart-counter-badge');
   const summaryCount = document.getElementById('summary-items-count');
   const summaryTotal = document.getElementById('summary-total-price');
   const btnCheckout = document.getElementById('btn-checkout');
 
-  if (counterBadge) counterBadge.innerText = cart.length;
-  if (summaryCount) summaryCount.innerText = `${cart.length} ítems seleccionados`;
+  if (counterBadge) counterBadge.innerText = `🛒 ${cart.length} items`;
+  if (summaryCount) summaryCount.innerText = `${cart.length} seleccionados`;
 
   if (cart.length === 0) {
     if (container) container.innerHTML = '<p id="empty-cart-msg" class="text-xs text-hestia-dark/50 text-center py-8">No hay platillos seleccionados.</p>';
