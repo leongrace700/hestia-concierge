@@ -1,402 +1,243 @@
-<script>
-
-    function switchTab(tab) {
-
-      document.querySelectorAll('.portal-nav-btn').forEach(btn => {
-
-        btn.classList.remove('text-hestia-gold', 'bg-white/5');
-
-        btn.classList.add('text-white/70');
-
-      });
-
-
-
-      document.getElementById('portal-acceso').classList.add('hidden');
-
-      document.getElementById('portal-servicios').classList.add('hidden');
-
-      document.getElementById('portal-roomservice').classList.add('hidden');
-
-      document.getElementById('portal-invitados').classList.add('hidden');
-
-      document.getElementById('portal-chat').classList.add('hidden');
-
-
-
-      const activeBtn = document.getElementById(`nav-${tab}`);
-
-      if (activeBtn) {
-
-        activeBtn.classList.add('text-hestia-gold', 'bg-white/5');
-
-        activeBtn.classList.remove('text-white/70');
-
-      }
-
-
-
-      document.getElementById(`portal-${tab}`).classList.remove('hidden');
-
-    }
-
-
-
-    // Login Form
-
-    document.getElementById('portal-login-form').addEventListener('submit', (e) => {
-
-      e.preventDefault();
-
-      const btn = document.getElementById('btn-portal-login');
-
-      btn.innerText = 'VALIDANDO RESERVA...';
-
-      setTimeout(() => {
-
-        btn.innerText = 'INGRESAR AL PORTAL';
-
-        switchTab('servicios');
-
-      }, 600);
-
-    });
-
-
-
-    // Chat Form
-
-    document.getElementById('chat-form').addEventListener('submit', (e) => {
-
-      e.preventDefault();
-
-      const input = document.getElementById('chat-input');
-
-      const text = input.value.trim();
-
-      if (!text) return;
-
-
-
-      const chatMessages = document.getElementById('chat-messages');
-
-      const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-
-
-      chatMessages.innerHTML += `
-
-        <div class="flex items-start justify-end gap-2">
-
-          <div class="bg-hestia-dark text-white p-3 rounded-2xl max-w-sm shadow-sm">
-
-            <p class="font-medium">${text}</p>
-
-            <span class="text-[9px] text-hestia-gold/80 mt-1 block text-right">Usted • ${now}</span>
-
-          </div>
-
-        </div>
-
-      `;
-
-      input.value = '';
-
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-
-
-
-      setTimeout(() => {
-
-        chatMessages.innerHTML += `
-
-          <div class="flex items-start gap-2">
-
-            <div class="bg-white border border-hestia-border p-3 rounded-2xl max-w-sm shadow-sm">
-
-              <p class="text-hestia-dark font-medium">Recibido. Un miembro de nuestro equipo ya está gestionando su solicitud.</p>
-
-              <span class="text-[9px] text-hestia-dark/50 mt-1 block text-right">Concierge • Ahora</span>
-
-            </div>
-
-          </div>
-
-        `;
-
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-
-      }, 1000);
-
-    });
-
-
-
-    // LÓGICA DE INVITADOS & AFORO
-
-    const formInvitados = document.getElementById('form-invitados');
-
-    const guestsList = document.getElementById('guests-list');
-
-    const capacityBadge = document.getElementById('capacity-badge');
-
-
-
-    function updateCapacity() {
-
-      const currentGuests = guestsList.querySelectorAll('.guest-card').length;
-
-      capacityBadge.innerText = `${currentGuests} / 4`;
-
-      if (currentGuests >= 4) {
-
-        capacityBadge.classList.replace('text-hestia-gold', 'text-red-400');
-
-      } else {
-
-        capacityBadge.classList.replace('text-red-400', 'text-hestia-gold');
-
-      }
-
-    }
-
-
-
-    formInvitados.addEventListener('submit', (e) => {
-
-      e.preventDefault();
-
-      const currentCount = guestsList.querySelectorAll('.guest-card').length;
-
-      if (currentCount >= 4) {
-
-        alert('Se ha alcanzado el aforo máximo permitido para la Suite (4 personas).');
-
-        return;
-
-      }
-
-
-
-      const name = document.getElementById('guest-name-input').value.trim();
-
-      const docType = document.getElementById('guest-doc-type').value;
-
-      const docNum = document.getElementById('guest-doc-num').value.trim();
-
-      const passType = document.getElementById('guest-pass-type').value;
-
-
-
-      const maskedDoc = docNum.length > 4 ? `•••• ${docNum.slice(-4)}` : docNum;
-
-
-
-      const newCard = document.createElement('div');
-
-      newCard.className = 'guest-card bg-hestia-cream/50 border border-hestia-border rounded-xl p-4 flex items-center justify-between gap-4 transition-all';
-
-      newCard.innerHTML = `
-
-        <div>
-
-          <h6 class="text-sm font-bold text-hestia-dark m-0">${name}</h6>
-
-          <p class="text-xs text-hestia-dark/60 m-0">${docType} ${maskedDoc} • ${passType}</p>
-
-          <span class="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-800">● Acceso Pendiente</span>
-
-        </div>
-
-        <button onclick="revokeGuest(this)" class="px-3 py-1.5 border border-red-200 text-red-600 text-xs font-bold rounded-lg hover:bg-red-50 transition-colors">Revocar</button>
-
-      `;
-
-
-
-      guestsList.appendChild(newCard);
-
-      formInvitados.reset();
-
-      updateCapacity();
-
-    });
-
-
-
-    function revokeGuest(button) {
-
-      const card = button.closest('.guest-card');
-
-      if (card) {
-
-        card.remove();
-
-        updateCapacity();
-
-      }
-
-    }
-
-
-
-    // LÓGICA DE ROOM SERVICE & CARRITO
-
-    let cart = [];
-
-
-
-    function filterCategory(cat) {
-
-      document.querySelectorAll('.cat-filter-btn').forEach(btn => {
-
-        btn.classList.remove('bg-hestia-dark', 'text-hestia-gold', 'border-hestia-gold');
-
-        btn.classList.add('bg-white', 'text-hestia-dark', 'border-hestia-border');
-
-      });
-
-      event.target.classList.add('bg-hestia-dark', 'text-hestia-gold', 'border-hestia-gold');
-
-      event.target.classList.remove('bg-white', 'text-hestia-dark', 'border-hestia-border');
-
-
-
-      const items = document.querySelectorAll('.menu-card');
-
-      items.forEach(item => {
-
-        if (cat === 'todos' || item.getAttribute('data-category') === cat) {
-
-          item.classList.remove('hidden');
-
-        } else {
-
-          item.classList.add('hidden');
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HESTIA - Luxury Concierge Portal</title>
+  <!-- Tailwind CSS por CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'hestia-dark': '#1A222D',
+            'hestia-gold': '#D4B285',
+            'hestia-cream': '#F9F6F0',
+            'hestia-border': '#E0E0E0',
+          }
         }
-
-      });
-
-    }
-
-
-
-    function addToCart(title, price) {
-
-      cart.push({ title, price });
-
-      renderCart();
-
-    }
-
-
-
-    function removeFromCart(index) {
-
-      cart.splice(index, 1);
-
-      renderCart();
-
-    }
-
-
-
-    function renderCart() {
-
-      const container = document.getElementById('cart-items-container');
-
-      const counterBadge = document.getElementById('cart-counter-badge');
-
-      const summaryCount = document.getElementById('summary-items-count');
-
-      const summaryTotal = document.getElementById('summary-total-price');
-
-      const btnCheckout = document.getElementById('btn-checkout');
-
-
-
-      counterBadge.innerText = `🛒 ${cart.length} items`;
-
-      summaryCount.innerText = `${cart.length} seleccionados`;
-
-
-
-      if (cart.length === 0) {
-
-        container.innerHTML = '<p id="empty-cart-msg" class="text-xs text-hestia-dark/50 text-center py-8">No hay platillos seleccionados.</p>';
-
-        summaryTotal.innerText = '$0 COP';
-
-        btnCheckout.disabled = true;
-
-        btnCheckout.classList.add('opacity-50', 'cursor-not-allowed');
-
-        return;
-
       }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body class="bg-hestia-cream text-hestia-dark min-h-screen flex flex-col font-sans antialiased">
 
+  <!-- 1. Header / Barra Superior de Navegación -->
+  <header class="w-full bg-hestia-dark border-b border-hestia-gold/40 sticky top-0 z-50 px-6 lg:px-16 py-4 flex flex-wrap items-center justify-between gap-4 shadow-md">
+    <div class="flex items-center gap-3">
+      <h1 class="text-xl font-bold tracking-widest text-white m-0">HESTIA</h1>
+      <span class="text-xs text-hestia-gold uppercase tracking-wider hidden sm:inline-block border-l border-hestia-gold/30 pl-3">Luxury Concierge Portal</span>
+    </div>
 
+    <!-- Navegación con eventos onclick explícitos -->
+    <nav class="flex items-center flex-wrap gap-2 sm:gap-4">
+      <button type="button" onclick="switchTab('acceso')" id="nav-acceso" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-hestia-gold bg-white/5 border-b-2 border-hestia-gold transition-all">ACCESO</button>
+      <button type="button" onclick="switchTab('servicios')" id="nav-servicios" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all">SERVICIOS GENERALES</button>
+      <button type="button" onclick="switchTab('roomservice')" id="nav-roomservice" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all">ROOM SERVICE</button>
+      <button type="button" onclick="switchTab('invitados')" id="nav-invitados" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all">INVITADOS & ACCESOS</button>
+      <button type="button" onclick="switchTab('chat')" id="nav-chat" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all">CONCIERGE CHAT</button>
+    </nav>
+  </header>
 
-      btnCheckout.disabled = false;
+  <!-- 2. Contenedor Principal Adaptable -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 md:py-12">
 
-      btnCheckout.classList.remove('opacity-50', 'cursor-not-allowed');
+    <!-- PESTAÑA 1: ACCESO / LOGIN -->
+    <section id="portal-acceso" class="block transition-opacity duration-300">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-hestia-dark mb-3">PORTAL DEL HUÉSPED</h2>
+        <p class="text-hestia-dark/70 text-sm md:text-base max-w-xl mx-auto">Gestione su estancia, solicite amenidades y ordene directamente a su habitación.</p>
+      </div>
 
-
-
-      let total = 0;
-
-      container.innerHTML = '';
-
-
-
-      cart.forEach((item, index) => {
-
-        total += item.price;
-
-        const row = document.createElement('div');
-
-        row.className = 'flex items-center justify-between gap-2 p-2 rounded-lg bg-hestia-cream border border-hestia-border text-xs';
-
-        row.innerHTML = `
-
-          <div class="overflow-hidden">
-
-            <span class="font-bold text-hestia-dark truncate block">${item.title}</span>
-
-            <span class="text-[11px] text-hestia-dark/60">$${item.price.toLocaleString('es-CO')} COP</span>
-
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
+        <div class="bg-hestia-dark text-white p-8 rounded-3xl flex flex-col justify-between shadow-xl">
+          <div>
+            <span class="text-xs font-bold text-hestia-gold tracking-widest uppercase">Experiencia Exclusiva</span>
+            <h3 class="text-2xl font-bold mt-2 mb-4">SUITE DELUXE</h3>
+            <p class="text-sm text-white/80 leading-relaxed">Bienvenido al ecosistema digital Quiet Luxury. Ingrese con sus datos de reserva para desbloquear los servicios directos de concierge.</p>
           </div>
+          <div class="pt-8 border-t border-white/10 flex justify-between text-xs text-white/60">
+            <span>Recepción 24/7</span>
+            <span>Room Service Express</span>
+            <span>Digital Key</span>
+          </div>
+        </div>
 
-          <button onclick="removeFromCart(${index})" class="text-red-500 font-bold hover:opacity-80 px-2 py-1 text-xs">✕</button>
+        <div class="bg-white border border-hestia-border p-8 rounded-3xl shadow-lg">
+          <form id="portal-login-form" class="space-y-5">
+            <div>
+              <label class="block text-xs font-bold tracking-wider uppercase mb-2 text-hestia-dark">Tipo de Documento</label>
+              <select id="login-doc-type" class="w-full p-3.5 bg-hestia-cream border border-hestia-border rounded-xl text-sm outline-none focus:border-hestia-gold transition-colors">
+                <option value="pasaporte">Pasaporte Internacional</option>
+                <option value="cedula">Cédula de Ciudadanía / DNI</option>
+                <option value="reserva">Código de Reserva Directa</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold tracking-wider uppercase mb-2 text-hestia-dark">Número de Documento o Reserva</label>
+              <input type="text" id="login-doc-num" required placeholder="Ej. 123456789" class="w-full p-3.5 bg-hestia-cream border border-hestia-border rounded-xl text-sm outline-none focus:border-hestia-gold transition-colors">
+            </div>
+            <button type="submit" id="btn-portal-login" class="w-full py-4 bg-hestia-dark text-hestia-gold font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-black transition-all shadow-md mt-2">
+              INGRESAR AL PORTAL
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
 
-        `;
+    <!-- PESTAÑA 2: SERVICIOS GENERALES -->
+    <section id="portal-servicios" class="hidden transition-opacity duration-300">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-hestia-dark">SERVICIOS DE SUITE</h2>
+        <p class="text-xs text-hestia-dark/70">Solicite atenciones especiales con un solo clic.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white border border-hestia-border p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+          <div class="text-2xl mb-2">🧹</div>
+          <h4 class="font-bold text-sm mb-1">Limpieza de Suite</h4>
+          <p class="text-xs text-hestia-dark/70 mb-4">Solicite retoque o cambio completo de lencería.</p>
+          <button onclick="alert('Solicitud de limpieza registrada.')" class="w-full py-2 bg-hestia-cream border border-hestia-border text-xs font-bold rounded-lg hover:bg-hestia-gold hover:border-hestia-gold transition-all">Solicitar</button>
+        </div>
+        <div class="bg-white border border-hestia-border p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+          <div class="text-2xl mb-2">🚗</div>
+          <h4 class="font-bold text-sm mb-1">Transporte Ejecutivo</h4>
+          <p class="text-xs text-hestia-dark/70 mb-4">Transfer al aeropuerto o recorrido privado.</p>
+          <button onclick="switchTab('chat')" class="w-full py-2 bg-hestia-cream border border-hestia-border text-xs font-bold rounded-lg hover:bg-hestia-gold hover:border-hestia-gold transition-all">Coordinar con Concierge</button>
+        </div>
+        <div class="bg-white border border-hestia-border p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+          <div class="text-2xl mb-2">💆</div>
+          <h4 class="font-bold text-sm mb-1">Spa & Wellness</h4>
+          <p class="text-xs text-hestia-dark/70 mb-4">Reserva de masajes y tratamientos en suite.</p>
+          <button onclick="switchTab('chat')" class="w-full py-2 bg-hestia-cream border border-hestia-border text-xs font-bold rounded-lg hover:bg-hestia-gold hover:border-hestia-gold transition-all">Consultar Disponibilidad</button>
+        </div>
+      </div>
+    </section>
 
-        container.appendChild(row);
+    <!-- PESTAÑA 3: ROOM SERVICE INTERACTIVO -->
+    <section id="portal-roomservice" class="hidden transition-opacity duration-300">
+      <div class="max-w-md mx-auto bg-hestia-cream p-5 rounded-[30px] shadow-xl border border-hestia-border">
+        
+        <div class="flex justify-between items-center mb-5">
+          <button onclick="switchTab('servicios')" class="text-xs font-bold text-hestia-dark hover:text-hestia-gold transition-colors flex items-center gap-1">
+            ⬅️ Volver
+          </button>
+          <h2 class="text-xs tracking-[2px] text-hestia-dark font-bold uppercase m-0">ROOM SERVICE</h2>
+          <div class="bg-hestia-dark text-hestia-gold px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 border border-hestia-gold">
+            🛒 <span id="cart-counter-badge">0</span>
+          </div>
+        </div>
 
-      });
+        <div class="bg-white border border-hestia-border rounded-xl px-3.5 py-2.5 mb-4 flex items-center shadow-sm">
+          <input type="text" id="search-menu-input" placeholder="🔍 Buscar platillos o bebidas..." class="w-full text-xs text-hestia-dark outline-none bg-transparent placeholder-hestia-dark/50" />
+        </div>
 
+        <div class="flex gap-2 mb-5 overflow-x-auto pb-1">
+          <button onclick="filterCategory('todos')" class="cat-filter-btn bg-hestia-dark text-hestia-gold border border-hestia-gold px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all">Todos</button>
+          <button onclick="filterCategory('desayunos')" class="cat-filter-btn bg-white text-hestia-dark border border-hestia-border px-4 py-2 rounded-full text-xs whitespace-nowrap hover:border-hestia-gold transition-all">🍳 Desayunos</button>
+          <button onclick="filterCategory('fuertes')" class="cat-filter-btn bg-white text-hestia-dark border border-hestia-border px-4 py-2 rounded-full text-xs whitespace-nowrap hover:border-hestia-gold transition-all">🍝 Fuertes</button>
+        </div>
 
+        <p class="text-[11px] font-bold text-hestia-gold tracking-wider mb-2 uppercase">Recomendación del Chef</p>
+        <div class="menu-card bg-white rounded-2xl border border-hestia-border p-3 mb-5 shadow-sm" data-category="fuertes">
+          <div class="w-full h-36 bg-hestia-dark rounded-xl mb-3 flex items-center justify-center text-hestia-gold text-xs border border-hestia-gold/30">
+            🖼️ [ Foto HD: Filete Mignon ]
+          </div>
+          <div class="flex justify-between items-start mb-1">
+            <h4 class="m-0 text-sm font-bold text-hestia-dark">Filete Mignon Trufado</h4>
+            <span class="text-xs font-bold text-hestia-dark">⭐ 4.9</span>
+          </div>
+          <p class="m-0 mb-3 text-xs text-hestia-dark/70">Con puré de papa rústico y espárragos frescos.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-hestia-dark">$42.000 COP</span>
+            <button onclick="addToCart('Filete Mignon Trufado', 42000)" class="bg-hestia-gold text-hestia-dark px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-white border border-hestia-gold transition-all">+ Añadir</button>
+          </div>
+        </div>
 
-      summaryTotal.innerText = `$${total.toLocaleString('es-CO')} COP`;
+        <p class="text-[11px] font-bold text-hestia-dark tracking-wider mb-2 uppercase">Menú General</p>
+        <div class="space-y-2.5 mb-5">
+          <div class="menu-card bg-white rounded-xl border border-hestia-border p-2.5 flex gap-3 items-center shadow-sm" data-category="fuertes">
+            <div class="w-14 h-14 bg-hestia-dark rounded-lg flex-shrink-0 flex items-center justify-center text-hestia-gold text-[10px]">🥗 Foto</div>
+            <div class="flex-grow">
+              <h5 class="m-0 text-xs font-bold text-hestia-dark">Ensalada César VIP</h5>
+              <span class="text-xs font-bold text-hestia-dark">$24.000 COP</span>
+            </div>
+            <button onclick="addToCart('Ensalada César VIP', 24000)" class="bg-hestia-cream border border-hestia-gold text-hestia-dark px-2.5 py-1.5 rounded-lg text-[11px] font-bold hover:bg-hestia-gold transition-all">+ Añadir</button>
+          </div>
+        </div>
 
-    }
+        <div id="cart-items-container" class="space-y-2 mb-4"></div>
 
+        <div class="bg-hestia-dark rounded-2xl p-3.5 flex justify-between items-center border border-hestia-gold shadow-lg sticky bottom-2">
+          <div>
+            <span id="summary-items-count" class="text-white text-xs block font-bold">0 seleccionados</span>
+            <span class="text-hestia-gold text-[11px]">Total: <strong id="summary-total-price">$0 COP</strong></span>
+          </div>
+          <button onclick="checkoutOrder()" id="btn-checkout" disabled class="bg-hestia-gold text-hestia-dark px-3.5 py-2 rounded-xl font-bold text-xs hover:bg-white transition-all opacity-50 cursor-not-allowed">
+            Ir a Pagar ➡️
+          </button>
+        </div>
 
+      </div>
+    </section>
 
-    function checkoutOrder() {
+    <!-- PESTAÑA 4: INVITADOS & ACCESOS -->
+    <section id="portal-invitados" class="hidden transition-opacity duration-300">
+      <div class="max-w-xl mx-auto bg-white border border-hestia-border p-6 rounded-3xl shadow-sm">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-lg font-bold text-hestia-dark">Registro de Aforo & Invitados</h3>
+          <span id="capacity-badge" class="bg-hestia-cream px-3 py-1 rounded-full text-xs font-bold text-hestia-gold border border-hestia-border">0 / 4</span>
+        </div>
+        <form id="form-invitados" class="space-y-4 mb-6">
+          <input type="text" id="guest-name-input" required placeholder="Nombre Completo del Invitado" class="w-full p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none focus:border-hestia-gold">
+          <div class="grid grid-cols-2 gap-2">
+            <select id="guest-doc-type" class="p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none">
+              <option value="DNI">DNI / Cédula</option>
+              <option value="PAS">Pasaporte</option>
+            </select>
+            <input type="text" id="guest-doc-num" required placeholder="N° Documento" class="p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none">
+          </div>
+          <select id="guest-pass-type" class="w-full p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none">
+            <option value="Acceso Día">Pase Diurno</option>
+            <option value="Cena/Evento">Acceso Nocturno</option>
+          </select>
+          <button type="submit" class="w-full py-3 bg-hestia-dark text-hestia-gold font-bold text-xs rounded-xl hover:bg-black transition-all">Autorizar Acceso</button>
+        </form>
+        <div id="guests-list" class="space-y-3"></div>
+      </div>
+    </section>
 
-      if (cart.length === 0) return;
+    <!-- PESTAÑA 5: CONCIERGE CHAT -->
+    <section id="portal-chat" class="hidden transition-opacity duration-300">
+      <div class="max-w-2xl mx-auto bg-white border border-hestia-border rounded-3xl shadow-sm flex flex-col h-[500px]">
+        <div class="p-4 border-b border-hestia-border bg-hestia-dark text-white rounded-t-3xl flex justify-between items-center">
+          <span class="text-xs font-bold tracking-wider text-hestia-gold">CONCIERGE DIRECTO 24/7</span>
+          <span class="text-[10px] bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-0.5 rounded-full">● En Línea</span>
+        </div>
+        <div id="chat-messages" class="flex-grow p-4 overflow-y-auto space-y-3 bg-hestia-cream/30">
+          <div class="flex items-start gap-2">
+            <div class="bg-white border border-hestia-border p-3 rounded-2xl max-w-sm shadow-sm">
+              <p class="text-xs text-hestia-dark">Buenas tardes. ¿En qué puedo asistirlo el día de hoy?</p>
+              <span class="text-[9px] text-hestia-dark/50 mt-1 block text-right">Concierge</span>
+            </div>
+          </div>
+        </div>
+        <form id="chat-form" class="p-3 border-t border-hestia-border flex gap-2 bg-white rounded-b-3xl">
+          <input type="text" id="chat-input" placeholder="Escriba su mensaje..." class="flex-grow p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none focus:border-hestia-gold">
+          <button type="submit" class="bg-hestia-dark text-hestia-gold font-bold px-5 rounded-xl text-xs hover:bg-black transition-all">Enviar</button>
+        </form>
+      </div>
+    </section>
 
-      const total = cart.reduce((acc, item) => acc + item.price, 0);
+  </main>
 
-      alert(`¡Orden enviada a cocina! Pedido confirmado para la Suite por valor de $${total.toLocaleString('es-CO')} COP. Tiempo estimado: 25 minutos.`);
+  <!-- 3. Footer del Portal -->
+  <footer class="w-full bg-hestia-dark text-white/60 text-xs py-6 border-t border-white/10 text-center px-4">
+    <p class="m-0">© 2026 HESTIA Luxury Concierge System. Todos los derechos reservados.</p>
+  </footer>
 
-      cart = [];
-
-      renderCart();
-
-    }
-
-  </script> 
-
+  <!-- Script Principal Vinculado -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
