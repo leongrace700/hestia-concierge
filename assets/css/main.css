@@ -50,8 +50,22 @@ body {
 .border-hestia-border { border-color: var(--hestia-border); }
 
 /* 4. CONTROLES VISUALES Y VISIBILIDAD (SOPORTE PARA switchTab) */
-.hidden { display: none !important; }
-.block { display: block !important; }
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+.block {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  height: auto !important;
+}
 .flex { display: flex !important; }
 .grid { display: grid !important; }
 
