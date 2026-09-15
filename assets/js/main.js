@@ -243,3 +243,17 @@ function checkoutOrder() {
   cart = [];
   renderCart();
 }
+// Buscador en tiempo real de platillos y bebidas
+function searchDishes(term) {
+  const query = term.toLowerCase().trim();
+  const items = document.querySelectorAll('.menu-card');
+  
+  items.forEach(card => {
+    const title = (card.getAttribute('data-title') || '').toLowerCase();
+    if (title.includes(query)) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}

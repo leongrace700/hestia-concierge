@@ -210,11 +210,11 @@
 
     <!-- SECCIÓN 3: ROOM SERVICE COMPLETO -->
     <section id="portal-roomservice" class="portal-view transition-opacity duration-300">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-hestia-gold/30">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-hestia-gold/30">
         <div>
           <div class="flex items-center gap-3">
             <h2 class="text-2xl font-extrabold tracking-[2px] text-hestia-dark uppercase">ROOM SERVICE</h2>
-            <span class="px-3 py-1 bg-hestia-gold/20 border border-hestia-gold text-hestia-gold text-xs font-bold rounded-full">Servicio 24/7 • 25 min</span>
+            <span class="px-3 py-1 bg-hestia-gold/20 border border-hestia-gold text-hestia-gold text-xs font-bold rounded-full">Servicio 24/7 • Hab. 405</span>
           </div>
           <p class="text-xs text-hestia-dark/70 mt-1">Seleccione sus platillos y disfrute de la cocina de autor en su suite.</p>
         </div>
@@ -228,73 +228,140 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6">
-        <button onclick="filterCategory('todos', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-hestia-dark text-hestia-gold border border-hestia-gold transition-all">Todos</button>
-        <button onclick="filterCategory('desayunos', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍳 Desayunos</button>
-        <button onclick="filterCategory('fuertes', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🥩 Platos Fuertes</button>
-        <button onclick="filterCategory('bebidas', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍷 Bebidas VIP</button>
-        <button onclick="filterCategory('postres', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍰 Postres</button>
+      <!-- Buscador y Categorías de Figma -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="md:col-span-1 bg-white border border-hestia-border rounded-xl px-3.5 py-2.5 flex items-center shadow-sm">
+          <input 
+            type="text" 
+            id="search-menu-input" 
+            placeholder="🔍 Buscar platillos o bebidas..." 
+            oninput="searchDishes(this.value)"
+            class="w-full text-xs text-hestia-dark outline-none bg-transparent placeholder-hestia-dark/50" 
+          />
+        </div>
+        <div class="md:col-span-2 flex items-center gap-2 overflow-x-auto pb-1">
+          <button onclick="filterCategory('todos', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-hestia-dark text-hestia-gold border border-hestia-gold transition-all">Todos</button>
+          <button onclick="filterCategory('desayunos', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍳 Desayunos</button>
+          <button onclick="filterCategory('fuertes', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍝 Fuertes</button>
+          <button onclick="filterCategory('bebidas', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍷 Bebidas</button>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-2 space-y-4" id="menu-items-grid">
+        
+        <!-- Columna de Platillos (Figma Integrado) -->
+        <div class="lg:col-span-2 space-y-6">
           
-          <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 flex gap-4 items-center shadow-sm" data-category="desayunos">
-            <div class="w-16 h-16 bg-hestia-dark text-white rounded-xl border border-hestia-gold flex items-center justify-center text-3xl flex-shrink-0">🥑</div>
-            <div class="flex-grow">
-              <h4 class="text-sm font-bold text-hestia-dark">Toast Artesanal Hestia</h4>
-              <p class="text-xs text-hestia-dark/70 mb-2">Pan de masa madre, aguacate cremoso, huevo poché y semillas tostadas.</p>
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-extrabold text-hestia-dark">$45.000 COP</span>
-                <button onclick="addToCart('Toast Artesanal Hestia', 45000)" class="px-3 py-1 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Agregar</button>
+          <!-- Recomendación del Chef -->
+          <div>
+            <p class="text-[11px] font-bold text-hestia-gold tracking-wider mb-2 uppercase">Recomendación del Chef</p>
+            <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 shadow-sm" data-category="fuertes" data-title="filete mignon trufado">
+              <div class="w-full h-44 bg-hestia-dark rounded-xl mb-3 flex flex-col items-center justify-center text-hestia-gold border border-hestia-gold/30">
+                <span class="text-4xl mb-1">🥩</span>
+                <span class="text-xs tracking-widest uppercase font-bold text-white/80">Filete Mignon Trufado</span>
+              </div>
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="m-0 text-base font-bold text-hestia-dark">Filete Mignon Trufado</h4>
+                <span class="text-xs font-bold text-hestia-dark bg-hestia-cream px-2 py-0.5 rounded-md border border-hestia-border">⭐ 4.9</span>
+              </div>
+              <p class="m-0 mb-3 text-xs text-hestia-dark/70">Con puré de papa rústico y espárragos frescos con reducción de vino tinto.</p>
+              <div class="flex flex-wrap justify-between items-center gap-2 pt-2 border-t border-hestia-border">
+                <div class="flex gap-2">
+                  <span class="text-[10px] text-hestia-dark bg-hestia-cream px-2.5 py-1 rounded-md border border-hestia-border font-medium">⏱️ 25 min</span>
+                  <span class="text-[10px] text-hestia-dark bg-hestia-cream px-2.5 py-1 rounded-md border border-hestia-border font-medium">🌱 Sin Gluten</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-sm font-extrabold text-hestia-dark">$42.000 COP</span>
+                  <button 
+                    onclick="addToCart('Filete Mignon Trufado', 42000)" 
+                    class="bg-hestia-gold text-hestia-dark px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-hestia-surface hover:text-hestia-gold transition-all shadow-sm"
+                  >
+                    + Añadir
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 flex gap-4 items-center shadow-sm" data-category="desayunos">
-            <div class="w-16 h-16 bg-hestia-dark text-white rounded-xl border border-hestia-gold flex items-center justify-center text-3xl flex-shrink-0">🥐</div>
-            <div class="flex-grow">
-              <h4 class="text-sm font-bold text-hestia-dark">Croissant de Mantequilla</h4>
-              <p class="text-xs text-hestia-dark/70 mb-2">Acompañado de mermelada de frutos rojos casera y mantequilla de avellana.</p>
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-extrabold text-hestia-dark">$22.000 COP</span>
-                <button onclick="addToCart('Croissant de Mantequilla', 22000)" class="px-3 py-1 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Agregar</button>
+          <!-- Menú General -->
+          <div>
+            <p class="text-[11px] font-bold text-hestia-dark tracking-wider mb-3 uppercase">Menú General</p>
+            <div class="space-y-3" id="menu-items-grid">
+              
+              <!-- Item 1: Ensalada César VIP -->
+              <div class="menu-card bg-white rounded-xl border border-hestia-border p-3 flex gap-4 items-center shadow-sm" data-category="fuertes" data-title="ensalada cesar vip">
+                <div class="w-14 h-14 bg-hestia-dark rounded-lg flex-shrink-0 flex items-center justify-center text-2xl border border-hestia-gold/30">
+                  🥗
+                </div>
+                <div class="flex-grow">
+                  <h5 class="m-0 text-xs font-bold text-hestia-dark">Ensalada César VIP</h5>
+                  <p class="m-0 text-[11px] text-hestia-dark/70">Lechuga romana, crotones de masa madre, láminas de parmesano y aderezo de autor.</p>
+                  <span class="text-xs font-extrabold text-hestia-dark mt-1 block">$24.000 COP</span>
+                </div>
+                <button 
+                  onclick="addToCart('Ensalada César VIP', 24000)" 
+                  class="bg-hestia-cream border border-hestia-gold text-hestia-dark px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-hestia-gold transition-all"
+                >
+                  + Añadir
+                </button>
               </div>
-            </div>
-          </div>
 
-          <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 flex gap-4 items-center shadow-sm" data-category="bebidas">
-            <div class="w-16 h-16 bg-hestia-dark text-white rounded-xl border border-hestia-gold flex items-center justify-center text-3xl flex-shrink-0">☕</div>
-            <div class="flex-grow">
-              <h4 class="text-sm font-bold text-hestia-dark">Café Especial de Origen</h4>
-              <p class="text-xs text-hestia-dark/70 mb-2">Café de especialidad colombiano (Prensa francesa o V60) a elección.</p>
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-extrabold text-hestia-dark">$18.000 COP</span>
-                <button onclick="addToCart('Café Especial de Origen', 18000)" class="px-3 py-1 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Agregar</button>
+              <!-- Item 2: Toast Artesanal -->
+              <div class="menu-card bg-white rounded-xl border border-hestia-border p-3 flex gap-4 items-center shadow-sm" data-category="desayunos" data-title="toast artesanal hestia">
+                <div class="w-14 h-14 bg-hestia-dark rounded-lg flex-shrink-0 flex items-center justify-center text-2xl border border-hestia-gold/30">
+                  🥑
+                </div>
+                <div class="flex-grow">
+                  <h5 class="m-0 text-xs font-bold text-hestia-dark">Toast Artesanal Hestia</h5>
+                  <p class="m-0 text-[11px] text-hestia-dark/70">Pan brioche artesanal, aguacate cremoso, huevo poché y semillas tostadas.</p>
+                  <span class="text-xs font-extrabold text-hestia-dark mt-1 block">$35.000 COP</span>
+                </div>
+                <button 
+                  onclick="addToCart('Toast Artesanal Hestia', 35000)" 
+                  class="bg-hestia-cream border border-hestia-gold text-hestia-dark px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-hestia-gold transition-all"
+                >
+                  + Añadir
+                </button>
               </div>
-            </div>
-          </div>
 
-          <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 flex gap-4 items-center shadow-sm" data-category="fuertes">
-            <div class="w-16 h-16 bg-hestia-dark text-white rounded-xl border border-hestia-gold flex items-center justify-center text-3xl flex-shrink-0">🥩</div>
-            <div class="flex-grow">
-              <h4 class="text-sm font-bold text-hestia-dark">Filete Mignon con Reducción de Trufa</h4>
-              <p class="text-xs text-hestia-dark/70 mb-2">Corte fino bañado en salsa de vino tinto y trufas negras con puré rústico.</p>
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-extrabold text-hestia-dark">$78.000 COP</span>
-                <button onclick="addToCart('Filete Mignon Trufa', 78000)" class="px-3 py-1 bg-hestia-cream border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Agregar</button>
+              <!-- Item 3: Café Especial de Origen -->
+              <div class="menu-card bg-white rounded-xl border border-hestia-border p-3 flex gap-4 items-center shadow-sm" data-category="bebidas" data-title="cafe especial de origen">
+                <div class="w-14 h-14 bg-hestia-dark rounded-lg flex-shrink-0 flex items-center justify-center text-2xl border border-hestia-gold/30">
+                  ☕
+                </div>
+                <div class="flex-grow">
+                  <h5 class="m-0 text-xs font-bold text-hestia-dark">Café Especial de Origen</h5>
+                  <p class="m-0 text-[11px] text-hestia-dark/70">Café de especialidad colombiano preparado en prensa francesa o V60.</p>
+                  <span class="text-xs font-extrabold text-hestia-dark mt-1 block">$18.000 COP</span>
+                </div>
+                <button 
+                  onclick="addToCart('Café Especial de Origen', 18000)" 
+                  class="bg-hestia-cream border border-hestia-gold text-hestia-dark px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-hestia-gold transition-all"
+                >
+                  + Añadir
+                </button>
               </div>
+
             </div>
           </div>
 
         </div>
 
+        <!-- Columna de Carrito & Checkout (Sticky Bar Integrada) -->
         <div class="lg:col-span-1">
           <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm sticky top-24">
-            <h4 class="text-sm font-bold text-hestia-dark uppercase tracking-wider mb-4 pb-2 border-b border-hestia-border">Resumen de Pedido</h4>
-            <div id="cart-items-container" class="space-y-3 mb-6 min-h-[120px] max-h-[260px] overflow-y-auto">
-              <p id="empty-cart-msg" class="text-xs text-hestia-dark/50 text-center py-8">No hay platillos seleccionados.</p>
+            <h4 class="text-sm font-bold text-hestia-dark uppercase tracking-wider mb-4 pb-2 border-b border-hestia-border flex justify-between items-center">
+              <span>Resumen de Pedido</span>
+              <span class="text-[10px] text-hestia-gold font-bold">Suite 405</span>
+            </h4>
+
+            <div id="cart-items-container" class="space-y-3 mb-6 min-h-[140px] max-h-[260px] overflow-y-auto">
+              <p id="empty-cart-msg" class="text-xs text-hestia-dark/50 text-center py-10">
+                No hay platillos seleccionados.
+              </p>
             </div>
+
+            <!-- Resumen Total -->
             <div class="bg-hestia-dark text-white rounded-2xl p-4 border border-hestia-gold shadow-md">
               <div class="flex justify-between items-center mb-1">
                 <span class="text-xs text-white/70">Platillos:</span>
@@ -304,12 +371,18 @@
                 <span class="text-sm font-bold">Total:</span>
                 <span id="summary-total-price" class="text-base font-extrabold text-hestia-gold">$0 COP</span>
               </div>
-              <button onclick="checkoutOrder()" id="btn-checkout" disabled class="w-full py-3 bg-hestia-gold text-hestia-dark font-bold text-xs uppercase tracking-wider rounded-xl cursor-not-allowed opacity-50 transition-all hover:opacity-90">
-                Ordenar a Suite ➔
+              <button 
+                onclick="checkoutOrder()" 
+                id="btn-checkout" 
+                disabled 
+                class="w-full py-3 bg-hestia-gold text-hestia-dark font-bold text-xs uppercase tracking-wider rounded-xl cursor-not-allowed opacity-50 transition-all hover:bg-white"
+              >
+                Ir a Pagar ➡️
               </button>
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
