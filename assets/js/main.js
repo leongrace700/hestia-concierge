@@ -257,3 +257,31 @@ function searchDishes(term) {
     }
   });
 }
+// LÓGICA DE AMENIDADES & HOUSEKEEPING
+let selectedCleaningTime = 'Ahora';
+
+function selectTimeSlot(btn, time) {
+  document.querySelectorAll('.time-slot-btn').forEach(b => {
+    b.classList.remove('bg-hestia-dark', 'text-hestia-gold', 'border-hestia-gold', 'font-bold');
+    b.classList.add('bg-hestia-cream', 'text-hestia-dark', 'border-hestia-border', 'font-medium');
+  });
+  btn.classList.add('bg-hestia-dark', 'text-hestia-gold', 'border-hestia-gold', 'font-bold');
+  btn.classList.remove('bg-hestia-cream', 'text-hestia-dark', 'border-hestia-border', 'font-medium');
+  selectedCleaningTime = time;
+}
+
+function requestCleaning() {
+  alert(`Solicitud confirmada: El equipo de Housekeeping acudirá a la Suite 405 en el horario: ${selectedCleaningTime}.`);
+}
+
+function requestAmenity(item) {
+  alert(`Solicitud recibida: Se ha enviado una orden para entregar "${item}" a la Suite 405. Tiempo estimado: 15 minutos.`);
+}
+
+function toggleDND(checkbox) {
+  if (checkbox.checked) {
+    alert('Modo Privacidad Activado: Recepción y el personal no perturbarán su suite.');
+  } else {
+    alert('Modo Privacidad Desactivado.');
+  }
+}
