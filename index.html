@@ -5,34 +5,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HESTIA - Luxury Concierge Portal</title>
   
-  <!-- Estilos Precompilados y CSS Modular Seguro -->
+  <!-- Tailwind CSS Precompilado Universal -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-  <link rel="stylesheet" href="./css/main.css" />
+
+  <style>
+    /* VARIABLES & PALETA QUIET LUXURY */
+    :root {
+      --hestia-dark: #1A222D;
+      --hestia-gold: #D4B285;
+      --hestia-cream: #F9F6F0;
+      --hestia-surface: #232C3A;
+      --hestia-border: #E0E0E0;
+    }
+
+    body {
+      background-color: var(--hestia-cream) !important;
+      color: var(--hestia-dark) !important;
+    }
+
+    .bg-hestia-dark { background-color: var(--hestia-dark) !important; }
+    .bg-hestia-gold { background-color: var(--hestia-gold) !important; }
+    .bg-hestia-cream { background-color: var(--hestia-cream) !important; }
+    .bg-hestia-surface { background-color: var(--hestia-surface) !important; }
+
+    .text-hestia-dark { color: var(--hestia-dark) !important; }
+    .text-hestia-gold { color: var(--hestia-gold) !important; }
+    .text-hestia-cream { color: var(--hestia-cream) !important; }
+
+    .border-hestia-dark { border-color: var(--hestia-dark) !important; }
+    .border-hestia-gold { border-color: var(--hestia-gold) !important; }
+    .border-hestia-border { border-color: var(--hestia-border) !important; }
+
+    /* BOTONES DEL MENÚ SUPERIOR */
+    .portal-nav-btn {
+      color: rgba(255, 255, 255, 0.7) !important;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      outline: none;
+    }
+    .portal-nav-btn:hover {
+      color: #ffffff !important;
+    }
+    .portal-nav-btn.active-tab {
+      color: var(--hestia-gold) !important;
+      background-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    /* CONTROL DE SECCIONES */
+    .portal-view {
+      display: none !important;
+    }
+    .portal-view.active-view {
+      display: block !important;
+    }
+  </style>
 </head>
 <body class="bg-hestia-cream text-hestia-dark min-h-screen flex flex-col font-sans antialiased">
 
-  <!-- 1. Header / Barra Superior de Navegación -->
+  <!-- 1. Header / Barra Superior -->
   <header class="w-full bg-hestia-dark border-b border-hestia-gold/40 sticky top-0 z-50 px-6 lg:px-16 py-4 flex flex-wrap items-center justify-between gap-4 shadow-md">
     <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('acceso')">
       <h1 class="text-xl font-bold tracking-widest text-white m-0">HESTIA</h1>
       <span class="text-xs text-hestia-gold uppercase tracking-wider hidden sm:inline-block border-l border-hestia-gold/30 pl-3">Luxury Concierge Portal</span>
     </div>
 
-    <!-- Navegación Principal -->
     <nav class="flex items-center flex-wrap gap-2 sm:gap-4">
-      <button type="button" onclick="switchTab('acceso')" id="nav-acceso" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-hestia-gold bg-white/5 transition-all">ACCESO</button>
-      <button type="button" onclick="switchTab('servicios')" id="nav-servicios" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all">SERVICIOS GENERALES</button>
-      <button type="button" onclick="switchTab('roomservice')" id="nav-roomservice" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all">ROOM SERVICE</button>
-      <button type="button" onclick="switchTab('invitados')" id="nav-invitados" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all">INVITADOS & ACCESOS</button>
-      <button type="button" onclick="switchTab('chat')" id="nav-chat" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all">CONCIERGE CHAT</button>
+      <button type="button" onclick="switchTab('acceso')" id="nav-acceso" class="portal-nav-btn active-tab px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">ACCESO</button>
+      <button type="button" onclick="switchTab('servicios')" id="nav-servicios" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">SERVICIOS GENERALES</button>
+      <button type="button" onclick="switchTab('roomservice')" id="nav-roomservice" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">ROOM SERVICE</button>
+      <button type="button" onclick="switchTab('invitados')" id="nav-invitados" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">INVITADOS & ACCESOS</button>
+      <button type="button" onclick="switchTab('chat')" id="nav-chat" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">CONCIERGE CHAT</button>
     </nav>
   </header>
 
-  <!-- 2. Contenedor Principal Adaptable (Pantalla Completa Responsive) -->
+  <!-- 2. Contenedor Principal Adaptable -->
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 md:py-12">
 
-    <!-- PESTAÑA 1: ACCESO / LOGIN -->
-    <section id="portal-acceso" class="transition-opacity duration-300">
+    <!-- SECCIÓN 1: ACCESO / LOGIN -->
+    <section id="portal-acceso" class="portal-view active-view transition-opacity duration-300">
       <div class="text-center mb-10">
         <h2 class="text-2xl md:text-3xl font-extrabold tracking-[3px] text-hestia-dark uppercase mb-2">PORTAL DEL HUÉSPED</h2>
         <p class="text-xs text-hestia-dark/70 tracking-wide max-w-xl mx-auto">Gestione su estancia, solicite amenidades y ordene directamente a su habitación.</p>
@@ -57,14 +108,13 @@
             <div>
               <label class="block text-xs font-bold uppercase tracking-wider text-hestia-dark mb-2">Tipo de Documento</label>
               <div class="relative">
-                <select id="login-doc-type" required class="w-full h-12 bg-hestia-cream border border-hestia-border rounded-xl px-4 text-sm text-hestia-dark outline-none appearance-none font-medium focus:border-hestia-gold transition-colors cursor-pointer">
+                <select id="login-doc-type" required class="w-full h-12 bg-hestia-cream border border-hestia-border rounded-xl px-4 text-sm text-hestia-dark outline-none font-medium focus:border-hestia-gold transition-colors cursor-pointer">
                   <option value="" disabled selected>Seleccione su tipo de documento</option>
                   <option value="cc">Cédula de Ciudadanía</option>
                   <option value="ce">Cédula de Extranjería</option>
                   <option value="pasaporte">Pasaporte Internacional</option>
                   <option value="reserva">Código de Reserva Directa</option>
                 </select>
-                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-hestia-dark pointer-events-none">▼</span>
               </div>
             </div>
 
@@ -91,8 +141,8 @@
       </div>
     </section>
 
-    <!-- PESTAÑA 2: SERVICIOS GENERALES -->
-    <section id="portal-servicios" class="hidden transition-opacity duration-300">
+    <!-- SECCIÓN 2: SERVICIOS GENERALES -->
+    <section id="portal-servicios" class="portal-view transition-opacity duration-300">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-hestia-gold/30">
         <div>
           <h2 class="text-2xl font-extrabold tracking-[2px] text-hestia-dark uppercase">CONCIERGE & SERVICIOS</h2>
@@ -158,8 +208,8 @@
       </div>
     </section>
 
-    <!-- PESTAÑA 3: ROOM SERVICE INTERACTIVO (RESTAURADO EN FORMATO PORTAL) -->
-    <section id="portal-roomservice" class="hidden transition-opacity duration-300">
+    <!-- SECCIÓN 3: ROOM SERVICE COMPLETO -->
+    <section id="portal-roomservice" class="portal-view transition-opacity duration-300">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-hestia-gold/30">
         <div>
           <div class="flex items-center gap-3">
@@ -178,7 +228,6 @@
         </div>
       </div>
 
-      <!-- Filtros de Categorías -->
       <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6">
         <button onclick="filterCategory('todos', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-hestia-dark text-hestia-gold border border-hestia-gold transition-all">Todos</button>
         <button onclick="filterCategory('desayunos', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍳 Desayunos</button>
@@ -187,7 +236,6 @@
         <button onclick="filterCategory('postres', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍰 Postres</button>
       </div>
 
-      <!-- Grid de Platillos y Columna de Carrito -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div class="lg:col-span-2 space-y-4" id="menu-items-grid">
           
@@ -241,7 +289,6 @@
 
         </div>
 
-        <!-- Carrito Lateral Completo -->
         <div class="lg:col-span-1">
           <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm sticky top-24">
             <h4 class="text-sm font-bold text-hestia-dark uppercase tracking-wider mb-4 pb-2 border-b border-hestia-border">Resumen de Pedido</h4>
@@ -266,8 +313,8 @@
       </div>
     </section>
 
-    <!-- PESTAÑA 4: INVITADOS & ACCESOS -->
-    <section id="portal-invitados" class="hidden transition-opacity duration-300">
+    <!-- SECCIÓN 4: INVITADOS & ACCESOS -->
+    <section id="portal-invitados" class="portal-view transition-opacity duration-300">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-hestia-gold/30">
         <div>
           <div class="flex items-center gap-3">
@@ -356,8 +403,8 @@
       </div>
     </section>
 
-    <!-- PESTAÑA 5: CONCIERGE CHAT -->
-    <section id="portal-chat" class="hidden transition-opacity duration-300">
+    <!-- SECCIÓN 5: CONCIERGE CHAT -->
+    <section id="portal-chat" class="portal-view transition-opacity duration-300">
       <div class="max-w-3xl mx-auto bg-white rounded-3xl border border-hestia-border shadow-lg overflow-hidden flex flex-col h-[520px]">
         <div class="bg-hestia-dark px-6 py-4 flex items-center justify-between border-b border-hestia-gold">
           <div class="flex items-center gap-3">
@@ -393,7 +440,235 @@
     <p class="m-0 tracking-wider">HESTIA CONCIERGE &copy; 2026 — Placer & Confort en cada detalle.</p>
   </footer>
 
-  <!-- Script Principal Modular (Ruta Corregida) -->
-  <script src="./js/main.js"></script>
+  <!-- JAVASCRIPT DIRECTO INTEGRADO (CERO FALLAS DE RUTA) -->
+  <script>
+    // Navegación fluida garantizada
+    function switchTab(tab) {
+      document.querySelectorAll('.portal-nav-btn').forEach(btn => {
+        btn.classList.remove('active-tab');
+      });
+
+      document.querySelectorAll('.portal-view').forEach(view => {
+        view.classList.remove('active-view');
+      });
+
+      const activeBtn = document.getElementById(`nav-${tab}`);
+      if (activeBtn) {
+        activeBtn.classList.add('active-tab');
+      }
+
+      const activeView = document.getElementById(`portal-${tab}`);
+      if (activeView) {
+        activeView.classList.add('active-view');
+      }
+    }
+
+    // Inicialización de Eventos
+    document.addEventListener('DOMContentLoaded', () => {
+      // Login Form
+      const loginForm = document.getElementById('portal-login-form');
+      if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const btn = document.getElementById('btn-portal-login');
+          if (btn) btn.innerText = 'VALIDANDO RESERVA...';
+          setTimeout(() => {
+            if (btn) btn.innerText = 'INGRESAR AL PORTAL';
+            switchTab('servicios');
+          }, 600);
+        });
+      }
+
+      // Chat Form
+      const chatForm = document.getElementById('chat-form');
+      if (chatForm) {
+        chatForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const input = document.getElementById('chat-input');
+          if (!input) return;
+          const text = input.value.trim();
+          if (!text) return;
+
+          const chatMessages = document.getElementById('chat-messages');
+          if (!chatMessages) return;
+
+          const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+          chatMessages.innerHTML += `
+            <div class="flex items-start justify-end gap-2">
+              <div class="bg-hestia-dark text-white p-3 rounded-2xl max-w-sm shadow-sm">
+                <p class="font-medium">${text}</p>
+                <span class="text-[9px] text-hestia-gold/80 mt-1 block text-right">Usted • ${now}</span>
+              </div>
+            </div>
+          `;
+          input.value = '';
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+
+          setTimeout(() => {
+            chatMessages.innerHTML += `
+              <div class="flex items-start gap-2">
+                <div class="bg-white border border-hestia-border p-3 rounded-2xl max-w-sm shadow-sm">
+                  <p class="text-hestia-dark font-medium">Recibido. Un miembro de nuestro equipo ya está gestionando su solicitud.</p>
+                  <span class="text-[9px] text-hestia-dark/50 mt-1 block text-right">Concierge • Ahora</span>
+                </div>
+              </div>
+            `;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }, 1000);
+        });
+      }
+
+      // Invitados Form
+      const formInvitados = document.getElementById('form-invitados');
+      if (formInvitados) {
+        formInvitados.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const guestsList = document.getElementById('guests-list');
+          if (!guestsList) return;
+
+          const currentCount = guestsList.querySelectorAll('.guest-card').length;
+          if (currentCount >= 4) {
+            alert('Se ha alcanzado el aforo máximo permitido para la Suite (4 personas).');
+            return;
+          }
+
+          const name = document.getElementById('guest-name-input').value.trim();
+          const docType = document.getElementById('guest-doc-type').value;
+          const docNum = document.getElementById('guest-doc-num').value.trim();
+          const passType = document.getElementById('guest-pass-type').value;
+          const maskedDoc = docNum.length > 4 ? `•••• ${docNum.slice(-4)}` : docNum;
+
+          const newCard = document.createElement('div');
+          newCard.className = 'guest-card bg-hestia-cream/50 border border-hestia-border rounded-xl p-4 flex items-center justify-between gap-4 transition-all';
+          newCard.innerHTML = `
+            <div>
+              <h6 class="text-sm font-bold text-hestia-dark m-0">${name}</h6>
+              <p class="text-xs text-hestia-dark/60 m-0">${docType} ${maskedDoc} • ${passType}</p>
+              <span class="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-800">● Acceso Pendiente</span>
+            </div>
+            <button onclick="revokeGuest(this)" class="px-3 py-1.5 border border-red-200 text-red-600 text-xs font-bold rounded-lg hover:bg-red-50 transition-colors">Revocar</button>
+          `;
+
+          guestsList.appendChild(newCard);
+          formInvitados.reset();
+          updateCapacity();
+        });
+      }
+    });
+
+    // Control de Aforo
+    function updateCapacity() {
+      const guestsList = document.getElementById('guests-list');
+      const capacityBadge = document.getElementById('capacity-badge');
+      if (!guestsList || !capacityBadge) return;
+
+      const currentGuests = guestsList.querySelectorAll('.guest-card').length;
+      capacityBadge.innerText = `${currentGuests} / 4`;
+      if (currentGuests >= 4) {
+        capacityBadge.classList.replace('text-hestia-gold', 'text-red-400');
+      } else {
+        capacityBadge.classList.replace('text-red-400', 'text-hestia-gold');
+      }
+    }
+
+    function revokeGuest(button) {
+      const card = button.closest('.guest-card');
+      if (card) {
+        card.remove();
+        updateCapacity();
+      }
+    }
+
+    // Room Service & Carrito
+    let cart = [];
+
+    function filterCategory(cat, event) {
+      document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-hestia-dark', 'text-hestia-gold', 'border-hestia-gold');
+        btn.classList.add('bg-white', 'text-hestia-dark', 'border-hestia-border');
+      });
+
+      const targetBtn = event ? event.currentTarget : (window.event ? window.event.target : null);
+      if (targetBtn) {
+        targetBtn.classList.add('bg-hestia-dark', 'text-hestia-gold', 'border-hestia-gold');
+        targetBtn.classList.remove('bg-white', 'text-hestia-dark', 'border-hestia-border');
+      }
+
+      const items = document.querySelectorAll('.menu-card');
+      items.forEach(item => {
+        if (cat === 'todos' || item.getAttribute('data-category') === cat) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    function addToCart(title, price) {
+      cart.push({ title, price });
+      renderCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-items-container');
+      const counterBadge = document.getElementById('cart-counter-badge');
+      const summaryCount = document.getElementById('summary-items-count');
+      const summaryTotal = document.getElementById('summary-total-price');
+      const btnCheckout = document.getElementById('btn-checkout');
+
+      if (counterBadge) counterBadge.innerText = `🛒 ${cart.length} items`;
+      if (summaryCount) summaryCount.innerText = `${cart.length} seleccionados`;
+
+      if (cart.length === 0) {
+        if (container) container.innerHTML = '<p id="empty-cart-msg" class="text-xs text-hestia-dark/50 text-center py-8">No hay platillos seleccionados.</p>';
+        if (summaryTotal) summaryTotal.innerText = '$0 COP';
+        if (btnCheckout) {
+          btnCheckout.disabled = true;
+          btnCheckout.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+        return;
+      }
+
+      if (btnCheckout) {
+        btnCheckout.disabled = false;
+        btnCheckout.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+
+      let total = 0;
+      if (container) container.innerHTML = '';
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        if (container) {
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between gap-2 p-2 rounded-lg bg-hestia-cream border border-hestia-border text-xs';
+          row.innerHTML = `
+            <div class="overflow-hidden">
+              <span class="font-bold text-hestia-dark truncate block">${item.title}</span>
+              <span class="text-[11px] text-hestia-dark/60">$${item.price.toLocaleString('es-CO')} COP</span>
+            </div>
+            <button onclick="removeFromCart(${index})" class="text-red-500 font-bold hover:opacity-80 px-2 py-1 text-xs cursor-pointer">✕</button>
+          `;
+          container.appendChild(row);
+        }
+      });
+
+      if (summaryTotal) summaryTotal.innerText = `$${total.toLocaleString('es-CO')} COP`;
+    }
+
+    function checkoutOrder() {
+      if (cart.length === 0) return;
+      const total = cart.reduce((acc, item) => acc + item.price, 0);
+      alert(`¡Orden enviada a cocina! Pedido confirmado para la Suite por valor de $${total.toLocaleString('es-CO')} COP. Tiempo estimado: 25 minutos.`);
+      cart = [];
+      renderCart();
+    }
+  </script>
 </body>
 </html>
