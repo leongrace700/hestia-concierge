@@ -75,6 +75,7 @@
       <button type="button" onclick="switchTab('servicios')" id="nav-servicios" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">SERVICIOS GENERALES</button>
       <button type="button" onclick="switchTab('roomservice')" id="nav-roomservice" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">ROOM SERVICE</button>
       <button type="button" onclick="switchTab('invitados')" id="nav-invitados" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">INVITADOS & ACCESOS</button>
+      <button type="button" onclick="switchTab('amenidades')" id="nav-amenidades" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">AMENIDADES</button>
       <button type="button" onclick="switchTab('chat')" id="nav-chat" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">CONCIERGE CHAT</button>
     </nav>
   </header>
@@ -503,6 +504,112 @@
           <input id="chat-input" type="text" placeholder="Escriba su solicitud a recepción..." required class="flex-grow h-11 bg-hestia-cream border border-hestia-border rounded-xl px-4 text-xs text-hestia-dark outline-none focus:border-hestia-gold font-medium" />
           <button type="submit" class="px-6 h-11 bg-hestia-dark text-hestia-gold text-xs font-bold uppercase rounded-xl hover:bg-hestia-surface transition-all">Enviar</button>
         </form>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: AMENIDADES & HOUSEKEEPING -->
+    <section id="portal-amenidades" class="portal-view transition-opacity duration-300">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-hestia-gold/30">
+        <div>
+          <div class="flex items-center gap-3">
+            <h2 class="text-2xl font-extrabold tracking-[2px] text-hestia-dark uppercase">AMENIDADES & SERVICIOS</h2>
+            <span class="px-3 py-1 bg-hestia-gold/20 border border-hestia-gold text-hestia-gold text-xs font-bold rounded-full">Suite 405 • Housekeeping</span>
+          </div>
+          <p class="text-xs text-hestia-dark/70 mt-1">Atención personalizada y confort inmediato en su suite.</p>
+        </div>
+        <button onclick="switchTab('servicios')" class="text-xs text-hestia-dark font-bold hover:text-hestia-gold transition-colors">
+          ◀ Volver a Servicios
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Columna Izquierda: Privacidad & Programar Limpieza -->
+        <div class="lg:col-span-1 space-y-6">
+          
+          <!-- Banner No Molestar -->
+          <div class="bg-hestia-dark rounded-2xl border border-hestia-gold p-5 flex justify-between items-center shadow-lg text-white">
+            <div>
+              <span class="text-sm font-bold block text-white">Modo Privacidad</span>
+              <span class="text-[11px] text-hestia-gold block mt-0.5">Activar "No Molestar" en recepción</span>
+            </div>
+            <label class="relative inline-block w-11 h-6 cursor-pointer">
+              <input type="checkbox" id="dnd-toggle" onchange="toggleDND(this)" class="sr-only peer">
+              <div class="w-11 h-6 bg-hestia-surface border border-hestia-gold rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-hestia-dark peer-checked:bg-hestia-gold after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-hestia-gold peer-checked:after:bg-hestia-dark after:border-hestia-gold after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+            </label>
+          </div>
+
+          <!-- Programar Limpieza -->
+          <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm">
+            <span class="text-xs font-bold text-hestia-dark uppercase tracking-wider block mb-4">🧹 Programar Limpieza de Suite</span>
+            <div class="flex gap-2 mb-4">
+              <button onclick="selectTimeSlot(this, 'Ahora')" class="time-slot-btn flex-1 py-2.5 text-xs font-bold rounded-xl border border-hestia-gold bg-hestia-dark text-hestia-gold transition-all">Ahora</button>
+              <button onclick="selectTimeSlot(this, '11:00 AM')" class="time-slot-btn flex-1 py-2.5 text-xs font-medium rounded-xl border border-hestia-border bg-hestia-cream text-hestia-dark hover:border-hestia-gold transition-all">11:00 AM</button>
+              <button onclick="selectTimeSlot(this, '02:00 PM')" class="time-slot-btn flex-1 py-2.5 text-xs font-medium rounded-xl border border-hestia-border bg-hestia-cream text-hestia-dark hover:border-hestia-gold transition-all">02:00 PM</button>
+            </div>
+            <button onclick="requestCleaning()" class="w-full h-11 bg-hestia-dark text-hestia-gold border border-hestia-gold rounded-full text-xs font-bold tracking-wider uppercase hover:bg-hestia-surface transition-all shadow-md">
+              Confirmar Solicitud
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Columna Derecha: Reposición de Amenidades Grid -->
+        <div class="lg:col-span-2">
+          <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm h-full flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold text-hestia-dark/60 uppercase tracking-widest">Solicitar Reposición Inmediata</span>
+                <span class="text-[11px] text-hestia-gold font-bold">Sin costo adicional</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Amenity 1 -->
+                <div class="bg-hestia-cream/50 border border-hestia-border rounded-xl p-4 flex flex-col justify-between h-28 shadow-sm">
+                  <div class="flex justify-between items-center">
+                    <span class="text-2xl">🧺</span>
+                    <button onclick="requestAmenity('Juego de Toallas')" class="px-3 py-1 bg-white border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Pedir</button>
+                  </div>
+                  <span class="text-xs font-bold text-hestia-dark">Juego de Toallas</span>
+                </div>
+
+                <!-- Amenity 2 -->
+                <div class="bg-hestia-cream/50 border border-hestia-border rounded-xl p-4 flex flex-col justify-between h-28 shadow-sm">
+                  <div class="flex justify-between items-center">
+                    <span class="text-2xl">🛏️</span>
+                    <button onclick="requestAmenity('Almohadas Extra')" class="px-3 py-1 bg-white border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Pedir</button>
+                  </div>
+                  <span class="text-xs font-bold text-hestia-dark">Almohadas Extra</span>
+                </div>
+
+                <!-- Amenity 3 -->
+                <div class="bg-hestia-cream/50 border border-hestia-border rounded-xl p-4 flex flex-col justify-between h-28 shadow-sm">
+                  <div class="flex justify-between items-center">
+                    <span class="text-2xl">🧴</span>
+                    <button onclick="requestAmenity('Kit de Aseo Premium')" class="px-3 py-1 bg-white border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Pedir</button>
+                  </div>
+                  <span class="text-xs font-bold text-hestia-dark">Kit de Aseo Premium</span>
+                </div>
+
+                <!-- Amenity 4 -->
+                <div class="bg-hestia-cream/50 border border-hestia-border rounded-xl p-4 flex flex-col justify-between h-28 shadow-sm">
+                  <div class="flex justify-between items-center">
+                    <span class="text-2xl">☕</span>
+                    <button onclick="requestAmenity('Set de Café & Té')" class="px-3 py-1 bg-white border border-hestia-gold text-hestia-dark text-xs font-bold rounded-lg hover:bg-hestia-gold hover:text-white transition-all">+ Pedir</button>
+                  </div>
+                  <span class="text-xs font-bold text-hestia-dark">Set de Café & Té</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card informativa inferior -->
+            <div class="mt-6 pt-4 border-t border-hestia-border flex items-center justify-between text-xs text-hestia-dark/60">
+              <span>Tiempo de entrega estimado: 15 minutos</span>
+              <span>Atención Housekeeping 24/7</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
