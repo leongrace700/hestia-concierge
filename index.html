@@ -4,10 +4,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HESTIA - Luxury Concierge Portal</title>
-  <!-- CSS Local compilado sin dependencia de CDN exterior -->
-  <link rel="stylesheet" href="./css/main.css">
+  <style>
+    /* Estilos base para reemplazar la dependencia de CSS externo */
+    :root {
+      --hestia-cream: #f9f6f0;
+      --hestia-dark: #1a1a1a;
+      --hestia-gold: #c5a059;
+      --hestia-border: #e5e0d8;
+    }
+    body {
+      background-color: var(--hestia-cream);
+      color: var(--hestia-dark);
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: var(--hestia-dark);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--hestia-gold);
+    }
+    nav button {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid transparent;
+      color: var(--hestia-gold);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--hestia-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .btn-gold {
+      background-color: var(--hestia-gold);
+      color: var(--hestia-dark);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body class="bg-hestia-cream text-hestia-dark min-h-screen flex flex-col font-sans antialiased">
+<body>
+  <!-- Contenido del Portal -->
+</body>
+</html>
 
   <!-- 1. Header / Barra Superior de Navegacion -->
   <header class="w-full bg-hestia-dark border-b border-hestia-gold/40 sticky top-0 z-50 px-6 lg:px-16 py-4 flex flex-wrap items-center justify-between gap-4 shadow-md">
