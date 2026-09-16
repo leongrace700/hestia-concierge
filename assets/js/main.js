@@ -285,3 +285,20 @@ function toggleDND(checkbox) {
     alert('Modo Privacidad Desactivado.');
   }
 }
+let isDndActive = false;
+
+function toggleDoNotDisturb() {
+  isDndActive = !isDndActive;
+  const btnDnd = document.getElementById('btn-dnd');
+  const dndStatusText = document.getElementById('dnd-status-text');
+
+  if (isDndActive) {
+    dndStatusText.textContent = "Modo 'No Molestar' Activado";
+    btnDnd.textContent = "🔔 Desactivar 'No Molestar'";
+    btnDnd.className = "w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-bold border border-red-400 bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-all shadow-sm";
+  } else {
+    dndStatusText.textContent = "Servicio de Habitacion Activo";
+    btnDnd.textContent = "🚫 Activar 'No Molestar'";
+    btnDnd.className = "w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-bold border border-hestia-gold bg-hestia-gold text-hestia-dark hover:bg-white transition-all shadow-sm";
+  }
+}
