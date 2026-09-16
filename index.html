@@ -4,36 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HESTIA - Luxury Concierge Portal</title>
-  <!-- Tailwind CSS por CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'hestia-dark': '#1A222D',
-            'hestia-gold': '#D4B285',
-            'hestia-cream': '#F9F6F0',
-            'hestia-border': '#E0E0E0',
-          }
-        }
-      }
-    }
-  </script>
-  <link rel="stylesheet" href="assets/css/main.css">
+  <!-- CSS Local compilado sin dependencia de CDN exterior -->
+  <link rel="stylesheet" href="./css/main.css">
 </head>
 <body class="bg-hestia-cream text-hestia-dark min-h-screen flex flex-col font-sans antialiased">
 
-  <!-- 1. Header / Barra Superior de Navegación -->
+  <!-- 1. Header / Barra Superior de Navegacion -->
   <header class="w-full bg-hestia-dark border-b border-hestia-gold/40 sticky top-0 z-50 px-6 lg:px-16 py-4 flex flex-wrap items-center justify-between gap-4 shadow-md">
     <div class="flex items-center gap-3">
       <h1 class="text-xl font-bold tracking-widest text-white m-0">HESTIA</h1>
       <span class="text-xs text-hestia-gold uppercase tracking-wider hidden sm:inline-block border-l border-hestia-gold/30 pl-3">Luxury Concierge Portal</span>
     </div>
 
-    <!-- Navegación con eventos onclick explícitos -->
+    <!-- Navegacion con eventos onclick explicitos e integracion limpia de Bienvenida -->
     <nav class="flex items-center flex-wrap gap-2 sm:gap-4">
-      <button type="button" onclick="switchTab('acceso')" id="nav-acceso" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-hestia-gold bg-white/5 border-b-2 border-hestia-gold transition-all">ACCESO</button>
+      <button type="button" onclick="switchTab('bienvenida')" id="nav-bienvenida" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-hestia-gold bg-white/5 border-b-2 border-hestia-gold transition-all">INICIO</button>
       <button type="button" onclick="switchTab('servicios')" id="nav-servicios" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all">SERVICIOS GENERALES</button>
       <button type="button" onclick="switchTab('roomservice')" id="nav-roomservice" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all">ROOM SERVICE</button>
       <button type="button" onclick="switchTab('invitados')" id="nav-invitados" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider text-white/70 hover:text-white transition-all">INVITADOS & ACCESOS</button>
@@ -44,15 +29,15 @@
   <!-- 2. Contenedor Principal Adaptable -->
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 md:py-12">
 
-   <!-- PESTANA: BIENVENIDA / DASHBOARD -->
-    <section id="portal-bienvenida" class="hidden transition-opacity duration-300">
+    <!-- PESTANA 1: BIENVENIDA / DASHBOARD (Activa por defecto) -->
+    <section id="portal-bienvenida" class="transition-opacity duration-300">
       <div class="max-w-4xl mx-auto space-y-6">
         
-        <!-- Header -->
+        <!-- Header interno -->
         <div class="flex justify-between items-center pb-4 border-b border-hestia-border">
           <span class="text-lg">🔔</span>
           <h2 class="m-0 text-xs font-bold uppercase tracking-[2px] text-hestia-dark">HESTIA</h2>
-          <button onclick="switchTab('perfil')" class="text-xs font-bold text-hestia-dark hover:text-hestia-gold transition-colors">
+          <button onclick="switchTab('chat')" class="text-xs font-bold text-hestia-dark hover:text-hestia-gold transition-colors">
             👤 Perfil
           </button>
         </div>
@@ -86,7 +71,7 @@
               <span class="text-xs font-bold text-hestia-gold">Ver Menu ➡️</span>
             </div>
 
-            <div onclick="switchTab('spa')" class="bg-white p-4 rounded-2xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all">
+            <div onclick="switchTab('servicios')" class="bg-white p-4 rounded-2xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all">
               <span class="text-xl">💆</span>
               <p class="font-bold my-2 text-sm text-hestia-dark">Spa & Wellness</p>
               <span class="text-xs font-bold text-hestia-gold">Reservar ➡️</span>
@@ -98,7 +83,7 @@
       </div>
     </section>
 
-    <!-- PESTAÑA 2: SERVICIOS GENERALES -->
+    <!-- PESTANA 2: SERVICIOS GENERALES -->
     <section id="portal-servicios" class="hidden transition-opacity duration-300">
       <div class="text-center mb-8">
         <h2 class="text-2xl font-bold text-hestia-dark">SERVICIOS DE SUITE</h2>
@@ -108,7 +93,7 @@
         <div class="bg-white border border-hestia-border p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
           <div class="text-2xl mb-2">🧹</div>
           <h4 class="font-bold text-sm mb-1">Limpieza de Suite</h4>
-          <p class="text-xs text-hestia-dark/70 mb-4">Solicite retoque o cambio completo de lencería.</p>
+          <p class="text-xs text-hestia-dark/70 mb-4">Solicite retoque o cambio completo de lenceria.</p>
           <button onclick="alert('Solicitud de limpieza registrada.')" class="w-full py-2 bg-hestia-cream border border-hestia-border text-xs font-bold rounded-lg hover:bg-hestia-gold hover:border-hestia-gold transition-all">Solicitar</button>
         </div>
         <div class="bg-white border border-hestia-border p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
@@ -126,13 +111,13 @@
       </div>
     </section>
 
- <!-- PESTANA 3: ROOM SERVICE INTERACTIVO -->
+    <!-- PESTANA 3: ROOM SERVICE INTERACTIVO -->
     <section id="portal-roomservice" class="hidden transition-opacity duration-300">
       <div class="max-w-4xl mx-auto space-y-6">
         
         <!-- Encabezado de la pestana -->
         <div class="flex justify-between items-center pb-4 border-b border-hestia-border">
-          <button onclick="switchTab('servicios')" class="flex items-center gap-1 text-xs font-bold text-hestia-dark hover:text-hestia-gold transition-colors">
+          <button onclick="switchTab('bienvenida')" class="flex items-center gap-1 text-xs font-bold text-hestia-dark hover:text-hestia-gold transition-colors">
             Volver
           </button>
           <h2 class="m-0 text-xs font-bold uppercase tracking-[2px] text-hestia-dark">ROOM SERVICE</h2>
@@ -153,7 +138,7 @@
           <button onclick="filterCategory('fuertes')" class="cat-filter-btn px-4 py-2 rounded-full border border-hestia-border bg-white text-xs text-hestia-dark whitespace-nowrap hover:border-hestia-gold transition-all">Fuertes</button>
         </div>
 
-        <!-- Layout Grid: Catalogo Movil/PC y Lateral -->
+        <!-- Layout Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           
           <!-- Columna Izquierda: Menu / Platillos -->
@@ -236,7 +221,7 @@
       </div>
     </section>
 
-    <!-- PESTAÑA 4: INVITADOS & ACCESOS -->
+    <!-- PESTANA 4: INVITADOS & ACCESOS -->
     <section id="portal-invitados" class="hidden transition-opacity duration-300">
       <div class="max-w-xl mx-auto bg-white border border-hestia-border p-6 rounded-3xl shadow-sm">
         <div class="flex justify-between items-center mb-6">
@@ -247,13 +232,13 @@
           <input type="text" id="guest-name-input" required placeholder="Nombre Completo del Invitado" class="w-full p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none focus:border-hestia-gold">
           <div class="grid grid-cols-2 gap-2">
             <select id="guest-doc-type" class="p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none">
-              <option value="DNI">DNI / Cédula</option>
+              <option value="DNI">DNI / Cedula</option>
               <option value="PAS">Pasaporte</option>
             </select>
             <input type="text" id="guest-doc-num" required placeholder="N° Documento" class="p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none">
           </div>
           <select id="guest-pass-type" class="w-full p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none">
-            <option value="Acceso Día">Pase Diurno</option>
+            <option value="Acceso Dia">Pase Diurno</option>
             <option value="Cena/Evento">Acceso Nocturno</option>
           </select>
           <button type="submit" class="w-full py-3 bg-hestia-dark text-hestia-gold font-bold text-xs rounded-xl hover:bg-black transition-all">Autorizar Acceso</button>
@@ -262,17 +247,17 @@
       </div>
     </section>
 
-    <!-- PESTAÑA 5: CONCIERGE CHAT -->
+    <!-- PESTANA 5: CONCIERGE CHAT -->
     <section id="portal-chat" class="hidden transition-opacity duration-300">
       <div class="max-w-2xl mx-auto bg-white border border-hestia-border rounded-3xl shadow-sm flex flex-col h-[500px]">
         <div class="p-4 border-b border-hestia-border bg-hestia-dark text-white rounded-t-3xl flex justify-between items-center">
           <span class="text-xs font-bold tracking-wider text-hestia-gold">CONCIERGE DIRECTO 24/7</span>
-          <span class="text-[10px] bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-0.5 rounded-full">● En Línea</span>
+          <span class="text-[10px] bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-0.5 rounded-full">● En Linea</span>
         </div>
         <div id="chat-messages" class="flex-grow p-4 overflow-y-auto space-y-3 bg-hestia-cream/30">
           <div class="flex items-start gap-2">
             <div class="bg-white border border-hestia-border p-3 rounded-2xl max-w-sm shadow-sm">
-              <p class="text-xs text-hestia-dark">Buenas tardes. ¿En qué puedo asistirlo el día de hoy?</p>
+              <p class="text-xs text-hestia-dark">Buenas tardes. ¿En que puedo asistirlo el dia de hoy?</p>
               <span class="text-[9px] text-hestia-dark/50 mt-1 block text-right">Concierge</span>
             </div>
           </div>
@@ -291,7 +276,7 @@
     <p class="m-0">© 2026 HESTIA Luxury Concierge System. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- Script Principal Vinculado -->
-  <script src="assets/js/main.js"></script>
+  <!-- Script Principal Vinculado a la ruta real -->
+  <script src="./js/main.js"></script>
 </body>
 </html>
