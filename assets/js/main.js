@@ -3,14 +3,14 @@ let cart = [];
 
 // Cambiar de pestana en el portal
 function switchTab(tab) {
-  // Desmarcar todos los botones de la barra de navegacion
+  // Desmarcar botones superiores
   document.querySelectorAll('.portal-nav-btn').forEach(btn => {
     btn.classList.remove('text-hestia-gold', 'bg-white/5');
     btn.classList.add('text-white/70');
   });
 
-  // Identificadores de las secciones del portal
-  const sections = ['bienvenida', 'acceso', 'servicios', 'roomservice', 'invitados', 'chat'];
+  // Ocultar solo las secciones que existen en tu HTML
+  const sections = ['acceso', 'bienvenida', 'servicios', 'roomservice', 'invitados', 'chat'];
   sections.forEach(s => {
     const el = document.getElementById(`portal-${s}`);
     if (el) {
@@ -18,14 +18,14 @@ function switchTab(tab) {
     }
   });
 
-  // Activar el boton presionado
+  // Activar botón presionado si existe
   const activeBtn = document.getElementById(`nav-${tab}`);
   if (activeBtn) {
     activeBtn.classList.add('text-hestia-gold', 'bg-white/5');
     activeBtn.classList.remove('text-white/70');
   }
 
-  // Mostrar la seccion correspondiente
+  // Mostrar la sección seleccionada
   const activeSection = document.getElementById(`portal-${tab}`);
   if (activeSection) {
     activeSection.classList.remove('hidden');
