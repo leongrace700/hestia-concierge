@@ -44,59 +44,59 @@
   <!-- 2. Contenedor Principal Adaptable -->
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 md:py-12">
 
-    <!-- PESTANA: BIENVENIDA / DASHBOARD -->
-<section id="portal-bienvenida" class="transition-opacity duration-300">
-  <div class="max-w-4xl mx-auto space-y-6">
-    
-    <!-- Header -->
-    <div class="flex justify-between items-center pb-4 border-b border-hestia-border">
-      <span class="text-lg">🔔</span>
-      <h2 class="m-0 text-xs font-bold uppercase tracking-[2px] text-hestia-dark">HESTIA</h2>
-      <button onclick="switchTab('perfil')" class="text-xs font-bold text-hestia-dark hover:text-hestia-gold transition-colors">
-        👤 Perfil
-      </button>
-    </div>
-
-    <!-- Saludo -->
-    <div>
-      <h3 class="m-0 text-lg font-bold text-hestia-dark">Hola, Sr. Garcia</h3>
-      <p class="mt-1 text-xs text-hestia-dark/70 mb-0">Habitacion 405 • Suite Deluxe</p>
-    </div>
-
-    <!-- Card No Molestar (DND Interactivo) -->
-    <div class="bg-hestia-dark rounded-2xl p-5 text-white border border-hestia-border shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4">
-      <div>
-        <p class="m-0 text-xs font-bold text-hestia-gold uppercase tracking-wider">Estado de Privacidad</p>
-        <h4 id="dnd-status-text" class="m-0 text-sm font-bold text-white mt-1">Servicio de Habitacion Activo</h4>
-        <p class="m-0 text-[11px] text-white/60 mt-0.5">Permite el acceso del personal e ინdica que la habitacion esta lista.</p>
-      </div>
-      <button id="btn-dnd" onclick="toggleDoNotDisturb()" class="w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-bold border border-hestia-gold bg-hestia-gold text-hestia-dark hover:bg-white transition-all shadow-sm">
-        🚫 Activar "No Molestar"
-      </button>
-    </div>
-
-    <!-- Grid Servicios Rapidos -->
-    <div>
-      <p class="text-xs font-bold text-hestia-dark uppercase tracking-wider mb-3">Servicios Rapidos</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+   <!-- PESTANA: BIENVENIDA / DASHBOARD -->
+    <section id="portal-bienvenida" class="hidden transition-opacity duration-300">
+      <div class="max-w-4xl mx-auto space-y-6">
         
-        <div onclick="switchTab('roomservice')" class="bg-white p-4 rounded-2xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all">
-          <span class="text-xl">🍽️</span>
-          <p class="font-bold my-2 text-sm text-hestia-dark">Room Service</p>
-          <span class="text-xs font-bold text-hestia-gold">Ver Menu ➡️</span>
+        <!-- Header -->
+        <div class="flex justify-between items-center pb-4 border-b border-hestia-border">
+          <span class="text-lg">🔔</span>
+          <h2 class="m-0 text-xs font-bold uppercase tracking-[2px] text-hestia-dark">HESTIA</h2>
+          <button onclick="switchTab('perfil')" class="text-xs font-bold text-hestia-dark hover:text-hestia-gold transition-colors">
+            👤 Perfil
+          </button>
         </div>
 
-        <div onclick="switchTab('spa')" class="bg-white p-4 rounded-2xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all">
-          <span class="text-xl">💆</span>
-          <p class="font-bold my-2 text-sm text-hestia-dark">Spa & Wellness</p>
-          <span class="text-xs font-bold text-hestia-gold">Reservar ➡️</span>
+        <!-- Saludo -->
+        <div>
+          <h3 class="m-0 text-lg font-bold text-hestia-dark">Hola, Sr. Garcia</h3>
+          <p class="mt-1 text-xs text-hestia-dark/70 mb-0">Habitacion 405 • Suite Deluxe</p>
+        </div>
+
+        <!-- Card No Molestar (DND Interactivo) -->
+        <div class="bg-hestia-dark rounded-2xl p-5 text-white border border-hestia-border shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div>
+            <p class="m-0 text-xs font-bold text-hestia-gold uppercase tracking-wider">Estado de Privacidad</p>
+            <h4 id="dnd-status-text" class="m-0 text-sm font-bold text-white mt-1">Servicio de Habitacion Activo</h4>
+            <p class="m-0 text-[11px] text-white/60 mt-0.5">Permite el acceso del personal e indica que la habitacion esta lista.</p>
+          </div>
+          <button id="btn-dnd" onclick="toggleDoNotDisturb()" class="w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-bold border border-hestia-gold bg-hestia-gold text-hestia-dark hover:bg-white transition-all shadow-sm">
+            🚫 Activar 'No Molestar'
+          </button>
+        </div>
+
+        <!-- Grid Servicios Rapidos -->
+        <div>
+          <p class="text-xs font-bold text-hestia-dark uppercase tracking-wider mb-3">Servicios Rapidos</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <div onclick="switchTab('roomservice')" class="bg-white p-4 rounded-2xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all">
+              <span class="text-xl">🍽️</span>
+              <p class="font-bold my-2 text-sm text-hestia-dark">Room Service</p>
+              <span class="text-xs font-bold text-hestia-gold">Ver Menu ➡️</span>
+            </div>
+
+            <div onclick="switchTab('spa')" class="bg-white p-4 rounded-2xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all">
+              <span class="text-xl">💆</span>
+              <p class="font-bold my-2 text-sm text-hestia-dark">Spa & Wellness</p>
+              <span class="text-xs font-bold text-hestia-gold">Reservar ➡️</span>
+            </div>
+
+          </div>
         </div>
 
       </div>
-    </div>
-
-  </div>
-</section>
+    </section>
 
     <!-- PESTAÑA 2: SERVICIOS GENERALES -->
     <section id="portal-servicios" class="hidden transition-opacity duration-300">

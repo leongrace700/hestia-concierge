@@ -1,16 +1,16 @@
 // Variable global del carrito
 let cart = [];
 
-// Cambiar de pestaña en el portal
+// Cambiar de pestana en el portal
 function switchTab(tab) {
-  // Desmarcar todos los botones de la barra de navegación
+  // Desmarcar todos los botones de la barra de navegacion
   document.querySelectorAll('.portal-nav-btn').forEach(btn => {
     btn.classList.remove('text-hestia-gold', 'bg-white/5');
     btn.classList.add('text-white/70');
   });
 
   // Identificadores de las secciones del portal
-  const sections = ['acceso', 'servicios', 'roomservice', 'invitados', 'chat'];
+  const sections = ['bienvenida', 'acceso', 'servicios', 'roomservice', 'invitados', 'chat'];
   sections.forEach(s => {
     const el = document.getElementById(`portal-${s}`);
     if (el) {
@@ -18,14 +18,14 @@ function switchTab(tab) {
     }
   });
 
-  // Activar el botón presionado
+  // Activar el boton presionado
   const activeBtn = document.getElementById(`nav-${tab}`);
   if (activeBtn) {
     activeBtn.classList.add('text-hestia-gold', 'bg-white/5');
     activeBtn.classList.remove('text-white/70');
   }
 
-  // Mostrar la sección correspondiente
+  // Mostrar la seccion correspondiente
   const activeSection = document.getElementById(`portal-${tab}`);
   if (activeSection) {
     activeSection.classList.remove('hidden');
