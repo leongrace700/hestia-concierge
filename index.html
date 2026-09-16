@@ -67,14 +67,14 @@
 
   <!-- 1. Header / Barra Superior de Navegación -->
   <header class="w-full bg-hestia-dark border-b border-hestia-gold/40 sticky top-0 z-50 px-6 lg:px-16 py-4 flex flex-wrap items-center justify-between gap-4 shadow-md">
-    <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('bienvenida')">
+    <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('acceso')"
       <h1 class="text-xl font-bold tracking-widest text-white m-0">HESTIA</h1>
       <span class="text-xs text-hestia-gold uppercase tracking-wider hidden sm:inline-block border-l border-hestia-gold/30 pl-3">Luxury Concierge Portal</span>
     </div>
 
     <!-- Navegación con eventos onclick -->
     <nav class="flex items-center flex-wrap gap-2 sm:gap-4">
-      <button type="button" onclick="switchTab('bienvenida')" id="nav-bienvenida" class="portal-nav-btn active-tab px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">INICIO</button>
+      <button type="button" onclick="switchTab('acceso')" id="nav-acceso" class="portal-nav-btn active-tab px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">ACCESO</button>
       <button type="button" onclick="switchTab('servicios')" id="nav-servicios" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">SERVICIOS GENERALES</button>
       <button type="button" onclick="switchTab('amenidades')" id="nav-amenidades" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">AMENIDADES</button>
       <button type="button" onclick="switchTab('roomservice')" id="nav-roomservice" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">ROOM SERVICE</button>
