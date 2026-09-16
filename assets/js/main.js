@@ -9,7 +9,7 @@ function switchTab(tab) {
   });
 
   // Ocultar todas las secciones del portal
-  const sections = ['bienvenida', 'servicios', 'amenidades', 'roomservice', 'invitados', 'chat'];
+  const sections = ['acceso', 'servicios', 'amenidades', 'roomservice', 'invitados', 'chat'];
   sections.forEach(s => {
     const el = document.getElementById(`portal-${s}`);
     if (el) {
