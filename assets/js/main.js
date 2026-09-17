@@ -9,7 +9,7 @@ function switchTab(tab) {
   });
 
   // Ocultar todas las secciones del portal
-  const sections = ['acceso', 'servicios', 'amenidades', 'roomservice', 'invitados', 'chat'];
+  const sections = ['acceso', 'lobby', 'servicios', 'amenidades', 'roomservice', 'invitados', 'chat'];
   sections.forEach(s => {
     const el = document.getElementById(`portal-${s}`);
     if (el) {
@@ -34,6 +34,20 @@ function switchTab(tab) {
 
 // Inicialización de eventos al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
+  // Formulario de Login / Acceso
+  const loginForm = document.getElementById('portal-login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('btn-portal-login');
+      if (btn) btn.innerText = 'VALIDANDO RESERVA...';
+
+      setTimeout(() => {
+        if (btn) btn.innerText = 'INGRESAR AL PORTAL';
+        switchTab('lobby');
+      }, 600);
+    });
+  }
   // Chat Form
   const chatForm = document.getElementById('chat-form');
   if (chatForm) {
@@ -290,4 +304,23 @@ function confirmCleaningRequest() {
 
 function orderAmenity(amenity) {
   alert(`Solicitud recibida: Enviaremos "${amenity}" a su suite en aproximadamente 15 minutos.`);
+}
+
+function unlockDoor() {
+  const btn = document.getElementById('btn-digital-key');
+  if (!btn) return;
+
+  btn.innerText = '🔓 DESBLOQUEANDO PUERTA...';
+  btn.classList.replace('bg-hestia-gold', 'bg-white');
+
+  setTimeout(() => {
+    btn.innerText = '✅ PUERTA ABIERTA (SUITE 405)';
+    btn.classList.add('text-green-800', 'bg-green-100');
+    
+    setTimeout(() => {
+      btn.innerText = '🔑 PRESIONAR PARA DESBLOQUEAR';
+      btn.classList.remove('text-green-800', 'bg-green-100');
+      btn.classList.replace('bg-white', 'bg-hestia-gold');
+    }, 3000);
+  }, 900);
 }

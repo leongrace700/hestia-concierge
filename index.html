@@ -75,6 +75,7 @@
     <!-- Navegación con eventos onclick -->
     <nav class="flex items-center flex-wrap gap-2 sm:gap-4">
       <button type="button" onclick="switchTab('acceso')" id="nav-acceso" class="portal-nav-btn active-tab px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">ACCESO</button>
+      <button type="button" onclick="switchTab('lobby')" id="nav-lobby" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">LOBBY</button>
       <button type="button" onclick="switchTab('servicios')" id="nav-servicios" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">SERVICIOS GENERALES</button>
       <button type="button" onclick="switchTab('amenidades')" id="nav-amenidades" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">AMENIDADES</button>
       <button type="button" onclick="switchTab('roomservice')" id="nav-roomservice" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">ROOM SERVICE</button>
@@ -144,6 +145,81 @@
             </button>
           </form>
         </div>
+      </div>
+    </section>
+    <!-- SECCIÓN: LOBBY / DASHBOARD POST-REGISTRO -->
+    <section id="portal-lobby" class="portal-view transition-opacity duration-300">
+      <div class="max-w-4xl mx-auto space-y-8">
+        
+        <!-- Barra de Bienvenida Superior -->
+        <div class="flex justify-between items-center pb-4 border-b border-hestia-border">
+          <div class="flex items-center gap-2">
+            <span class="text-lg">🔔</span>
+            <span class="text-xs font-bold uppercase tracking-[2px] text-hestia-dark">Hestia Guest Portal</span>
+          </div>
+          <button onclick="switchTab('chat')" class="text-xs font-bold text-hestia-dark hover:text-hestia-gold transition-colors flex items-center gap-1">
+            👤 Perfil & Asistencia
+          </button>
+        </div>
+
+        <!-- Encabezado Huésped -->
+        <div>
+          <h2 class="m-0 text-2xl md:text-3xl font-bold text-hestia-dark">Hola, Sr. García</h2>
+          <p class="mt-1 text-xs md:text-sm text-hestia-dark/70 mb-0">Habitación 405 • Suite Deluxe</p>
+        </div>
+
+        <!-- Card Llave Digital Interactiva -->
+        <div class="bg-hestia-dark rounded-3xl p-6 md:p-8 text-white border border-hestia-gold shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="text-center md:text-left space-y-1">
+            <span class="text-xs font-bold text-hestia-gold tracking-widest uppercase block">🔒 Tu Llave Digital Activa</span>
+            <h3 class="text-lg font-bold text-white m-0">Cerradura Inteligente Suite 405</h3>
+            <p class="text-xs text-white/60 m-0">Acerque su dispositivo o presione para desbloquear la puerta principal.</p>
+          </div>
+          <button 
+            type="button" 
+            id="btn-digital-key" 
+            onclick="unlockDoor()" 
+            class="w-full md:w-auto px-8 py-4 bg-hestia-gold text-hestia-dark rounded-2xl font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-md active:scale-95"
+          >
+            🔑 PRESIONAR PARA DESBLOQUEAR
+          </button>
+        </div>
+
+        <!-- Servicios Rápidos -->
+        <div>
+          <p class="text-xs font-bold text-hestia-dark uppercase tracking-wider mb-4">Servicios Rápidos</p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            
+            <div onclick="switchTab('roomservice')" class="bg-white p-5 rounded-2xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between">
+              <div>
+                <span class="text-2xl block mb-2">🍽️</span>
+                <h4 class="font-bold text-sm text-hestia-dark m-0">Room Service</h4>
+                <p class="text-xs text-hestia-dark/60 mt-1 mb-3">Platillos de autor directos a la suite.</p>
+              </div>
+              <span class="text-xs font-bold text-hestia-gold">Ver Menú ➡️</span>
+            </div>
+
+            <div onclick="switchTab('amenidades')" class="bg-white p-5 rounded-2xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between">
+              <div>
+                <span class="text-2xl block mb-2">🧹</span>
+                <h4 class="font-bold text-sm text-hestia-dark m-0">Housekeeping</h4>
+                <p class="text-xs text-hestia-dark/60 mt-1 mb-3">Limpieza programada y amenidades.</p>
+              </div>
+              <span class="text-xs font-bold text-hestia-gold">Solicitar ➡️</span>
+            </div>
+
+            <div onclick="switchTab('servicios')" class="bg-white p-5 rounded-2xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between">
+              <div>
+                <span class="text-2xl block mb-2">💆</span>
+                <h4 class="font-bold text-sm text-hestia-dark m-0">Spa & Wellness</h4>
+                <p class="text-xs text-hestia-dark/60 mt-1 mb-3">Tratamientos relajantes y masajes.</p>
+              </div>
+              <span class="text-xs font-bold text-hestia-gold">Reservar ➡️</span>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </section>
 
