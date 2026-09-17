@@ -9,7 +9,7 @@ function switchTab(tab) {
   });
 
   // Ocultar todas las secciones del portal
-  const sections = ['acceso', 'lobby', 'servicios', 'amenidades', 'roomservice', 'invitados', 'chat'];
+ const sections = ['acceso', 'lobby', 'servicios', 'amenidades', 'roomservice', 'invitados', 'paseqr', 'chat'];
   sections.forEach(s => {
     const el = document.getElementById(`portal-${s}`);
     if (el) {
@@ -34,6 +34,35 @@ function switchTab(tab) {
 
 // Inicialización de eventos al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
+  // Generador de Pase QR y Redirección
+  const qrGenerateForm = document.getElementById('qrGenerateForm');
+  if (qrGenerateForm) {
+    qrGenerateForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('inputName').value.trim();
+      const docType = document.getElementById('inputDocType').value;
+      const docNum = document.getElementById('inputDocNum').value.trim();
+      const passType = document.getElementById('inputPassType').value;
+
+      // Calcular iniciales para el avatar
+      const initials = name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase() || 'GT';
+      const maskedDoc = docNum.length > 4 ? `•••• ${docNum.slice(-4)}` : docNum;
+
+      // Actualizar tarjeta del pase QR
+      document.getElementById('displayGuestAvatar').innerText = initials;
+      document.getElementById('displayGuestName').innerText = name;
+      document.getElementById('displayGuestDoc').innerText = `${docType} ${maskedDoc}`;
+      document.getElementById('displayPassType').innerText = passType;
+
+      // Generar código QR dinámico mediante la API pública
+      const qrData = encodeURIComponent(`HESTIA-PASS|SUITE405|${name}|${docType}|${docNum}|${passType}`);
+      document.getElementById('userQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${qrData}`;
+
+      // Redirigir a la pestaña del Pase QR con feedback
+      switchTab('paseqr');
+    });
+  }
   // Formulario de Login / Acceso
   const loginForm = document.getElementById('portal-login-form');
   if (loginForm) {
@@ -323,4 +352,9 @@ function unlockDoor() {
       btn.classList.replace('bg-white', 'bg-hestia-gold');
     }, 3000);
   }, 900);
+}
+function sharePassWhatsApp() {
+  const name = document.getElementById('displayGuestName').innerText;
+  const message = encodeURIComponent(`Hola ${name}, aquí tienes tu pase de acceso digital con código QR para la Suite 405 en Hestia Concierge.`);
+  window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
 }

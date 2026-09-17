@@ -80,6 +80,7 @@
       <button type="button" onclick="switchTab('amenidades')" id="nav-amenidades" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">AMENIDADES</button>
       <button type="button" onclick="switchTab('roomservice')" id="nav-roomservice" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">ROOM SERVICE</button>
       <button type="button" onclick="switchTab('invitados')" id="nav-invitados" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">INVITADOS & ACCESOS</button>
+      <button type="button" onclick="switchTab('paseqr')" id="nav-paseqr" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">PASE QR</button>
       <button type="button" onclick="switchTab('chat')" id="nav-chat" class="portal-nav-btn px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all">CONCIERGE CHAT</button>
     </nav>
   </header>
@@ -554,34 +555,136 @@
 
       </div>
     </section>
-    <!-- PESTAÑA 5: INVITADOS & ACCESOS -->
+    <!-- SECCIÓN: INVITADOS & CONFIGURACIÓN DE PASE -->
     <section id="portal-invitados" class="portal-view transition-opacity duration-300">
-      <div class="max-w-xl mx-auto bg-white border border-hestia-border p-6 rounded-3xl shadow-sm">
-        <div class="flex justify-between items-center mb-6">
+      <div class="max-w-xl mx-auto space-y-6">
+        
+        <div class="flex justify-between items-center pb-4 border-b border-hestia-border">
           <div>
-            <h3 class="text-lg font-bold text-hestia-dark">Registro de Aforo & Invitados</h3>
-            <span class="text-xs text-hestia-dark/60">Máximo permitido: 4 personas</span>
+            <h2 class="text-xl font-bold text-hestia-dark uppercase tracking-wider m-0">ACCESOS E INVITADOS</h2>
+            <p class="text-xs text-hestia-dark/60 mt-0.5 m-0">Configuración de pases de ingreso a suite</p>
           </div>
-          <span id="capacity-badge" class="bg-hestia-cream px-3 py-1 rounded-full text-xs font-bold text-hestia-gold border border-hestia-border">0 / 4</span>
+          <span class="px-3 py-1 bg-hestia-gold/20 border border-hestia-gold text-hestia-gold text-xs font-bold rounded-full">Suite 405</span>
         </div>
-        <form id="form-invitados" class="space-y-4 mb-6">
-          <input type="text" id="guest-name-input" required placeholder="Nombre Completo del Invitado" class="w-full p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none focus:border-hestia-gold font-medium">
-          <div class="grid grid-cols-2 gap-2">
-            <select id="guest-doc-type" class="p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none font-medium cursor-pointer">
-              <option value="DNI">DNI / Cédula</option>
-              <option value="PAS">Pasaporte</option>
-            </select>
-            <input type="text" id="guest-doc-num" required placeholder="N° Documento" class="p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none font-medium">
+
+        <!-- Tarjeta de Aforo Autorizado -->
+        <div class="bg-white border border-hestia-border rounded-2xl p-5 shadow-sm flex justify-between items-center">
+          <div>
+            <span class="text-sm font-bold text-hestia-dark block">Aforo Autorizado</span>
+            <span class="text-xs text-hestia-dark/60">Capacidad máxima: 4 personas</span>
           </div>
-          <select id="guest-pass-type" class="w-full p-3 bg-hestia-cream border border-hestia-border rounded-xl text-xs outline-none font-medium cursor-pointer">
-            <option value="Acceso Día">Pase Diurno</option>
-            <option value="Cena/Evento">Acceso Nocturno</option>
-          </select>
-          <button type="submit" class="w-full py-3 bg-hestia-dark text-hestia-gold font-bold text-xs rounded-xl hover:bg-black transition-all shadow-md">
-            + Autorizar Acceso
+          <span id="capacity-badge" class="text-sm font-bold text-hestia-gold bg-hestia-dark px-4 py-1.5 rounded-xl border border-hestia-gold">1 / 4</span>
+        </div>
+
+        <!-- Formulario de Configuración de Pase -->
+        <form id="qrGenerateForm" class="bg-white border border-hestia-border rounded-3xl p-6 shadow-sm space-y-4">
+          <span class="text-xs font-bold text-hestia-dark uppercase tracking-wider block">⚙️ Configurar Pase de Invitado</span>
+          
+          <div>
+            <label class="block text-[11px] font-bold text-hestia-dark mb-1">Nombre Completo</label>
+            <input type="text" id="inputName" required placeholder="Nombre completo del invitado" value="Alejandro Restrepo" class="w-full h-11 bg-hestia-cream border border-hestia-border rounded-xl px-3.5 text-xs text-hestia-dark outline-none font-medium focus:border-hestia-gold transition-colors">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-hestia-dark mb-1">Tipo de Documento</label>
+              <select id="inputDocType" required class="w-full h-11 bg-hestia-cream border border-hestia-border rounded-xl px-3 text-xs text-hestia-dark outline-none font-medium focus:border-hestia-gold transition-colors cursor-pointer">
+                <option value="Cédula de Ciudadanía" selected>Cédula de Ciudadanía</option>
+                <option value="Pasaporte">Pasaporte</option>
+                <option value="Cédula de Extranjería">Cédula de Extranjería</option>
+                <option value="Documento Extranjero">Documento Extranjero</option>
+                <option value="PPT">PPT</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-hestia-dark mb-1">N° de Documento</label>
+              <input type="text" id="inputDocNum" required placeholder="Número de Documento" value="1037648291" class="w-full h-11 bg-hestia-cream border border-hestia-border rounded-xl px-3.5 text-xs text-hestia-dark outline-none font-medium focus:border-hestia-gold transition-colors">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-hestia-dark mb-1">Tipo de Acceso</label>
+            <select id="inputPassType" class="w-full h-11 bg-hestia-cream border border-hestia-border rounded-xl px-3 text-xs text-hestia-dark outline-none font-medium focus:border-hestia-gold transition-colors cursor-pointer">
+              <option value="Pase por Día" selected>Pase por Día (Vigencia Hoy)</option>
+              <option value="Acceso Nocturno">Acceso Nocturno / Cena</option>
+              <option value="Pase Completo 24H">Estancia Completa (24 Horas)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="w-full h-12 bg-hestia-dark text-hestia-gold border border-hestia-gold rounded-full font-bold text-xs uppercase tracking-wider hover:bg-hestia-surface transition-all shadow-md active:scale-95 mt-2">
+            📱 Generar y Ver Pase QR ➔
           </button>
         </form>
+
         <div id="guests-list" class="space-y-3"></div>
+
+      </div>
+    </section>
+    <!-- SECCIÓN: MI PASE QR AUTORIZADO -->
+    <section id="portal-paseqr" class="portal-view transition-opacity duration-300">
+      <div class="max-w-md mx-auto space-y-6">
+        
+        <!-- Header interno -->
+        <div class="flex justify-between items-center pb-4 border-b border-hestia-border">
+          <div>
+            <h2 class="text-xl font-bold text-hestia-dark uppercase tracking-wider m-0">MI PASE DE ACCESO</h2>
+            <p class="text-xs text-hestia-dark/60 mt-0.5 m-0">Presente este QR en Recepción para ingresar</p>
+          </div>
+          <button onclick="switchTab('invitados')" class="text-xs font-bold text-hestia-dark hover:text-hestia-gold transition-colors">
+            ◀ Volver a Registro
+          </button>
+        </div>
+
+        <!-- Tarjeta del Pase Digital -->
+        <div class="bg-white border border-hestia-gold rounded-3xl p-6 md:p-8 shadow-xl relative flex flex-col items-center text-center">
+          
+          <span class="absolute top-4 right-4 bg-green-100 text-green-800 border border-green-300 text-[10px] font-bold px-3 py-1 rounded-full">
+            ● ACTIVO
+          </span>
+
+          <!-- Avatar -->
+          <div id="displayGuestAvatar" class="w-14 h-14 bg-hestia-dark text-hestia-gold rounded-full flex items-center justify-center font-bold text-lg border border-hestia-gold mb-3 shadow-md">
+            AR
+          </div>
+
+          <h3 id="displayGuestName" class="text-lg font-bold text-hestia-dark m-0">Alejandro Restrepo</h3>
+          <span id="displayGuestDoc" class="text-xs text-hestia-dark/60 mt-1 block">Cédula de Ciudadanía •••• 8291</span>
+
+          <!-- Contenedor del QR -->
+          <div class="my-6 p-4 bg-white border-2 border-dashed border-hestia-gold rounded-2xl flex flex-col items-center gap-2 shadow-inner">
+            <img id="userQrCode" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=HESTIA-PASS-SUITE405-ALEJANDRO-RESTREPO-CC-1037648291" alt="Código QR de Acceso" class="w-44 h-44 block" />
+            <span class="text-[9px] font-bold text-hestia-dark/60 tracking-wider uppercase">Escanee para verificar ingreso</span>
+          </div>
+
+          <!-- Parámetros de Seguridad -->
+          <div class="w-full border-t border-hestia-border pt-4 space-y-2 text-xs">
+            <div class="flex justify-between items-center">
+              <span class="text-hestia-dark/60">Tipo de Pase:</span>
+              <span id="displayPassType" class="font-bold text-hestia-dark">Pase por Día</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-hestia-dark/60">Zonas Autorizadas:</span>
+              <span class="font-bold text-hestia-gold">Suite 405 • Rooftop • Pool</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-hestia-dark/60">Vigencia:</span>
+              <span class="font-bold text-hestia-dark">Hoy, 23:59 hrs</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="space-y-3">
+          <button onclick="sharePassWhatsApp()" class="w-full h-12 bg-green-600 text-white rounded-2xl font-bold text-xs uppercase tracking-wider hover:bg-green-700 transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer">
+            <span>📲 Enviar por WhatsApp al Invitado</span>
+          </button>
+          
+          <button onclick="alert('Pase guardado en Galería y Wallet del dispositivo.')" class="w-full h-11 bg-hestia-dark text-hestia-gold border border-hestia-gold rounded-2xl font-bold text-xs uppercase tracking-wider hover:bg-hestia-surface transition-all shadow-sm cursor-pointer">
+            💾 Guardar en Dispositivo
+          </button>
+        </div>
+
       </div>
     </section>
 
