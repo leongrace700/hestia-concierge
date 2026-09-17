@@ -350,26 +350,29 @@
     </section>
 
     <!-- PESTAÑA 4: ROOM SERVICE INTERACTIVO -->
+    <!-- SECCIÓN: ROOM SERVICE GOURMET -->
     <section id="portal-roomservice" class="portal-view transition-opacity duration-300">
+      
+      <!-- Encabezado de Sección -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-hestia-gold/30">
         <div>
           <div class="flex items-center gap-3">
             <h2 class="text-2xl font-extrabold tracking-[2px] text-hestia-dark uppercase">ROOM SERVICE</h2>
-            <span class="px-3 py-1 bg-hestia-gold/20 border border-hestia-gold text-hestia-gold text-xs font-bold rounded-full">Servicio 24/7 • Hab. 405</span>
+            <span class="px-3 py-1 bg-hestia-gold/20 border border-hestia-gold text-hestia-gold text-xs font-bold rounded-full">Suite 405 • Cocina de Autor</span>
           </div>
-          <p class="text-xs text-hestia-dark/70 mt-1">Seleccione sus platillos y disfrute de la cocina de autor en su suite.</p>
+          <p class="text-xs text-hestia-dark/70 mt-1">Platillos elaborados al momento con ingredientes seleccionados.</p>
         </div>
         <div class="flex items-center gap-3">
-          <span id="cart-counter-badge" class="text-xs font-bold text-hestia-gold bg-hestia-dark px-3 py-1.5 rounded-full border border-hestia-gold">
-            🛒 0 items
+          <span id="cart-counter-badge" class="text-xs font-bold text-hestia-gold bg-hestia-dark px-3 py-1.5 rounded-full border border-hestia-gold shadow-sm">
+            🛒 0 ítems
           </span>
-          <button onclick="switchTab('bienvenida')" class="text-xs text-hestia-dark font-bold hover:text-hestia-gold transition-colors">
-            ◀ Volver al Inicio
+          <button onclick="switchTab('lobby')" class="text-xs text-hestia-dark font-bold hover:text-hestia-gold transition-colors">
+            ◀ Volver al Lobby
           </button>
         </div>
       </div>
 
-      <!-- Buscador y Categorías -->
+      <!-- Buscador y Filtros -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div class="md:col-span-1 bg-white border border-hestia-border rounded-xl px-3.5 py-2.5 flex items-center shadow-sm">
           <input 
@@ -383,33 +386,46 @@
         <div class="md:col-span-2 flex items-center gap-2 overflow-x-auto pb-1">
           <button onclick="filterCategory('todos', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-hestia-dark text-hestia-gold border border-hestia-gold transition-all">Todos</button>
           <button onclick="filterCategory('desayunos', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🍳 Desayunos</button>
-          <button onclick="filterCategory('fuertes', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🥩 Platos Fuertes</button>
+          <button onclick="filterCategory('fuertes', event)" class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-hestia-dark border border-hestia-border hover:border-hestia-gold transition-all">🥩 Fuertes</button>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        
+        <!-- Columna Izquierda / Centro: Catálogo de Platillos -->
         <div class="lg:col-span-2 space-y-6">
+          
           <!-- Recomendación del Chef -->
           <div>
             <p class="text-[11px] font-bold text-hestia-gold tracking-wider mb-2 uppercase">Recomendación del Chef</p>
-            <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 shadow-sm" data-category="fuertes" data-title="filete mignon trufado">
-              <div class="w-full h-40 bg-hestia-dark rounded-xl mb-3 flex flex-col items-center justify-center text-hestia-gold border border-hestia-gold/30">
-                <span class="text-4xl mb-1">🥩</span>
-                <span class="text-xs tracking-widest uppercase font-bold text-white/80">Filete Mignon Trufado</span>
+            <div class="menu-card bg-white rounded-2xl border border-hestia-border overflow-hidden shadow-sm hover:shadow-md transition-all" data-category="fuertes" data-title="filete mignon trufado">
+              <div class="w-full h-52 relative overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80" 
+                  alt="Filete Mignon Trufado" 
+                  class="w-full h-full object-cover"
+                />
+                <span class="absolute top-3 right-3 bg-hestia-dark/90 text-hestia-gold border border-hestia-gold text-xs font-bold px-3 py-1 rounded-full">
+                  ⭐ 4.9
+                </span>
               </div>
-              <div class="flex justify-between items-start mb-1">
-                <h4 class="m-0 text-base font-bold text-hestia-dark">Filete Mignon Trufado</h4>
-                <span class="text-xs font-bold text-hestia-dark bg-hestia-cream px-2 py-0.5 rounded-md border border-hestia-border">⭐ 4.9</span>
-              </div>
-              <p class="m-0 mb-3 text-xs text-hestia-dark/70">Con puré de papa rústico y espárragos frescos con reducción de vino tinto.</p>
-              <div class="flex flex-wrap justify-between items-center gap-2 pt-2 border-t border-hestia-border">
-                <div class="flex gap-2">
-                  <span class="text-[10px] text-hestia-dark bg-hestia-cream px-2.5 py-1 rounded-md border border-hestia-border font-medium">⏱️ 25 min</span>
-                  <span class="text-[10px] text-hestia-dark bg-hestia-cream px-2.5 py-1 rounded-md border border-hestia-border font-medium">🌱 Sin Gluten</span>
+              <div class="p-5">
+                <div class="flex justify-between items-start mb-1">
+                  <h4 class="m-0 text-lg font-bold text-hestia-dark">Filete Mignon Trufado</h4>
+                  <span class="text-base font-extrabold text-hestia-dark">$42.000 COP</span>
                 </div>
-                <div class="flex items-center gap-3">
-                  <span class="text-sm font-extrabold text-hestia-dark">$42.000 COP</span>
-                  <button onclick="addToCart('Filete Mignon Trufado', 42000)" class="bg-hestia-gold text-hestia-dark px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-hestia-surface hover:text-hestia-gold transition-all shadow-sm">+ Añadir</button>
+                <p class="text-xs text-hestia-dark/70 mb-4">Medallón de lomo envuelto en tocino ahumado, reducción de vino tinto y trufas negras, acompañado de puré rústico.</p>
+                <div class="flex flex-wrap justify-between items-center gap-3 pt-3 border-t border-hestia-border">
+                  <div class="flex gap-2">
+                    <span class="text-[11px] text-hestia-dark bg-hestia-cream px-2.5 py-1 rounded-md border border-hestia-border font-medium">⏱️ 25 min</span>
+                    <span class="text-[11px] text-hestia-dark bg-hestia-cream px-2.5 py-1 rounded-md border border-hestia-border font-medium">🌱 Sin Gluten</span>
+                  </div>
+                  <button 
+                    onclick="addToCart('Filete Mignon Trufado', 42000)" 
+                    class="bg-hestia-gold text-hestia-dark px-5 py-2 rounded-xl text-xs font-bold hover:bg-hestia-dark hover:text-hestia-gold transition-all shadow-sm active:scale-95"
+                  >
+                    + Añadir a Orden
+                  </button>
                 </div>
               </div>
             </div>
@@ -418,58 +434,126 @@
           <!-- Menú General -->
           <div>
             <p class="text-[11px] font-bold text-hestia-dark tracking-wider mb-3 uppercase">Menú General</p>
-            <div class="space-y-3" id="menu-items-grid">
-              <div class="menu-card bg-white rounded-xl border border-hestia-border p-3 flex gap-4 items-center shadow-sm" data-category="fuertes" data-title="ensalada cesar vip">
-                <div class="w-14 h-14 bg-hestia-dark rounded-lg flex-shrink-0 flex items-center justify-center text-2xl border border-hestia-gold/30">🥗</div>
-                <div class="flex-grow">
-                  <h5 class="m-0 text-xs font-bold text-hestia-dark">Ensalada César VIP</h5>
-                  <p class="m-0 text-[11px] text-hestia-dark/70">Lechuga romana, crotones de masa madre y láminas de parmesano.</p>
-                  <span class="text-xs font-extrabold text-hestia-dark mt-1 block">$24.000 COP</span>
+            <div class="space-y-4" id="menu-items-grid">
+              
+              <!-- Item 1: Ensalada César -->
+              <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 flex flex-col sm:flex-row gap-4 items-center shadow-sm hover:border-hestia-gold transition-all" data-category="fuertes" data-title="ensalada cesar vip">
+                <div class="w-full sm:w-28 h-28 rounded-xl overflow-hidden flex-shrink-0">
+                  <img 
+                    src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=400&q=80" 
+                    alt="Ensalada César VIP" 
+                    class="w-full h-full object-cover"
+                  />
                 </div>
-                <button onclick="addToCart('Ensalada César VIP', 24000)" class="bg-hestia-cream border border-hestia-gold text-hestia-dark px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-hestia-gold transition-all">+ Añadir</button>
+                <div class="flex-grow text-center sm:text-left">
+                  <div class="flex justify-between items-center mb-1">
+                    <h5 class="m-0 text-sm font-bold text-hestia-dark">Ensalada César VIP</h5>
+                    <span class="text-xs font-bold text-hestia-gold">⭐ 4.8</span>
+                  </div>
+                  <p class="m-0 text-xs text-hestia-dark/70 mb-2">Corazones de lechuga romana orgánica, crotones de masa madre dorados en mantequilla clarificada y láminas de parmesano Reggiano.</p>
+                  <span class="text-sm font-extrabold text-hestia-dark block">$24.000 COP</span>
+                </div>
+                <button 
+                  onclick="addToCart('Ensalada César VIP', 24000)" 
+                  class="w-full sm:w-auto px-4 py-2 bg-hestia-cream border border-hestia-gold text-hestia-dark rounded-xl text-xs font-bold hover:bg-hestia-gold transition-all flex-shrink-0"
+                >
+                  + Añadir
+                </button>
               </div>
 
-              <div class="menu-card bg-white rounded-xl border border-hestia-border p-3 flex gap-4 items-center shadow-sm" data-category="desayunos" data-title="huevos benedictinos">
-                <div class="w-14 h-14 bg-hestia-dark rounded-lg flex-shrink-0 flex items-center justify-center text-2xl border border-hestia-gold/30">🍳</div>
-                <div class="flex-grow">
-                  <h5 class="m-0 text-xs font-bold text-hestia-dark">Huevos Benedictinos</h5>
-                  <p class="m-0 text-[11px] text-hestia-dark/70">Pan brioche tostado, huevo poché y salsa holandesa artesanal.</p>
-                  <span class="text-xs font-extrabold text-hestia-dark mt-1 block">$28.000 COP</span>
+              <!-- Item 2: Huevos Benedictinos -->
+              <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 flex flex-col sm:flex-row gap-4 items-center shadow-sm hover:border-hestia-gold transition-all" data-category="desayunos" data-title="huevos benedictinos">
+                <div class="w-full sm:w-28 h-28 rounded-xl overflow-hidden flex-shrink-0">
+                  <img 
+                    src="https://images.unsplash.com/photo-1608039829572-78524f79c4c7?auto=format&fit=crop&w=400&q=80" 
+                    alt="Huevos Benedictinos" 
+                    class="w-full h-full object-cover"
+                  />
                 </div>
-                <button onclick="addToCart('Huevos Benedictinos', 28000)" class="bg-hestia-cream border border-hestia-gold text-hestia-dark px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-hestia-gold transition-all">+ Añadir</button>
+                <div class="flex-grow text-center sm:text-left">
+                  <div class="flex justify-between items-center mb-1">
+                    <h5 class="m-0 text-sm font-bold text-hestia-dark">Huevos Benedictinos</h5>
+                    <span class="text-xs font-bold text-hestia-gold">⭐ 4.9</span>
+                  </div>
+                  <p class="m-0 text-xs text-hestia-dark/70 mb-2">Huevos pochados de campo sobre tostadas de pan brioche artesanal, lomo embuchado y bañados en salsa holandesa tibia.</p>
+                  <span class="text-sm font-extrabold text-hestia-dark block">$28.000 COP</span>
+                </div>
+                <button 
+                  onclick="addToCart('Huevos Benedictinos', 28000)" 
+                  class="w-full sm:w-auto px-4 py-2 bg-hestia-cream border border-hestia-gold text-hestia-dark rounded-xl text-xs font-bold hover:bg-hestia-gold transition-all flex-shrink-0"
+                >
+                  + Añadir
+                </button>
               </div>
+
+              <!-- Item 3: Salmón Glaseado -->
+              <div class="menu-card bg-white rounded-2xl border border-hestia-border p-4 flex flex-col sm:flex-row gap-4 items-center shadow-sm hover:border-hestia-gold transition-all" data-category="fuertes" data-title="salmon glaseado con miel y mostaza">
+                <div class="w-full sm:w-28 h-28 rounded-xl overflow-hidden flex-shrink-0">
+                  <img 
+                    src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=80" 
+                    alt="Salmón Glaseado" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="flex-grow text-center sm:text-left">
+                  <div class="flex justify-between items-center mb-1">
+                    <h5 class="m-0 text-sm font-bold text-hestia-dark">Salmón Silvestre Glaseado</h5>
+                    <span class="text-xs font-bold text-hestia-gold">⭐ 5.0</span>
+                  </div>
+                  <p class="m-0 text-xs text-hestia-dark/70 mb-2">Filete a la parrilla sobre cama de espárragos tiernos, glaseado con miel de acacia y mostaza dijon en grano.</p>
+                  <span class="text-sm font-extrabold text-hestia-dark block">$38.000 COP</span>
+                </div>
+                <button 
+                  onclick="addToCart('Salmón Silvestre Glaseado', 38000)" 
+                  class="w-full sm:w-auto px-4 py-2 bg-hestia-cream border border-hestia-gold text-hestia-dark rounded-xl text-xs font-bold hover:bg-hestia-gold transition-all flex-shrink-0"
+                >
+                  + Añadir
+                </button>
+              </div>
+
             </div>
           </div>
+
         </div>
 
-        <!-- Carrito Lateral Completo -->
+        <!-- Columna Derecha: Resumen de Orden y Pago -->
         <div class="lg:col-span-1">
-          <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm sticky top-24">
-            <h4 class="text-sm font-bold text-hestia-dark uppercase tracking-wider mb-4 pb-2 border-b border-hestia-border flex justify-between items-center">
-              <span>Detalle de la Orden</span>
-              <span class="text-[10px] text-hestia-gold font-bold">Suite 405</span>
-            </h4>
-            <div id="cart-items-container" class="space-y-3 mb-6 min-h-[140px] max-h-[260px] overflow-y-auto">
+          <div class="bg-white rounded-2xl border border-hestia-border p-6 shadow-sm sticky top-24 space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-hestia-border">
+              <h4 class="text-sm font-bold text-hestia-dark uppercase tracking-wider m-0">Detalle de la Orden</h4>
+              <span class="text-[10px] text-hestia-gold font-bold px-2 py-0.5 bg-hestia-dark rounded-full">Suite 405</span>
+            </div>
+
+            <!-- Lista de items del carrito -->
+            <div id="cart-items-container" class="space-y-2.5 min-h-[120px] max-h-[260px] overflow-y-auto">
               <p id="empty-cart-msg" class="text-xs text-hestia-dark/50 text-center py-10">No hay platillos seleccionados.</p>
             </div>
-            <div class="bg-hestia-dark text-white rounded-2xl p-4 border border-hestia-gold shadow-md">
-              <div class="flex justify-between items-center mb-1">
-                <span class="text-xs text-white/70">Platillos:</span>
-                <span id="summary-items-count" class="text-xs text-hestia-gold font-bold">0 seleccionados</span>
+
+            <!-- Resumen Total y Pago -->
+            <div class="bg-hestia-dark text-white rounded-2xl p-5 border border-hestia-gold shadow-md space-y-3">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-white/70">Platillos:</span>
+                <span id="summary-items-count" class="text-hestia-gold font-bold">0 seleccionados</span>
               </div>
-              <div class="flex justify-between items-center mb-4">
-                <span class="text-sm font-bold">Total:</span>
-                <span id="summary-total-price" class="text-base font-extrabold text-hestia-gold">$0 COP</span>
+              <div class="flex justify-between items-center pb-2 border-b border-white/10">
+                <span class="text-sm font-bold">Total a Pagar:</span>
+                <span id="summary-total-price" class="text-lg font-extrabold text-hestia-gold">$0 COP</span>
               </div>
-              <button onclick="checkoutOrder()" id="btn-checkout" disabled class="w-full py-3 bg-hestia-gold text-hestia-dark font-bold text-xs uppercase tracking-wider rounded-xl cursor-not-allowed opacity-50 transition-all hover:bg-white">
-                Ordenar a Suite ➔
+              <button 
+                onclick="checkoutOrder()" 
+                id="btn-checkout" 
+                disabled 
+                class="w-full py-3.5 bg-hestia-gold text-hestia-dark font-bold text-xs uppercase tracking-wider rounded-xl cursor-not-allowed opacity-50 transition-all hover:bg-white shadow-md"
+              >
+                Ir a Pagar ➔
               </button>
+              <span class="block text-[10px] text-center text-white/50">Cargo directo a cuenta de suite al recibir.</span>
             </div>
           </div>
         </div>
+
       </div>
     </section>
-
     <!-- PESTAÑA 5: INVITADOS & ACCESOS -->
     <section id="portal-invitados" class="portal-view transition-opacity duration-300">
       <div class="max-w-xl mx-auto bg-white border border-hestia-border p-6 rounded-3xl shadow-sm">

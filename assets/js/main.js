@@ -249,7 +249,7 @@ function renderCart() {
 function checkoutOrder() {
   if (cart.length === 0) return;
   const total = cart.reduce((acc, item) => acc + item.price, 0);
-  alert(`¡Orden confirmada! El pedido fue enviado a cocina para la Suite 405 por valor de $${total.toLocaleString('es-CO')} COP.`);
+  alert(`¡Orden confirmada! El pedido fue enviado a cocina para la Suite 405 por valor de $${total.toLocaleString('es-CO')} COP. Tiempo estimado: 25 minutos.`);
   cart = [];
   renderCart();
 }
