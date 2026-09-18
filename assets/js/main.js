@@ -284,34 +284,29 @@ function checkoutOrder() {
 }
 
 // LÓGICA UNIFICADA: MODO PRIVACIDAD / NO MOLESTAR
-let isDndActive = false;
+// Control sincronizado del Modo No Molestar (Lobby y Amenidades)
+function toggleDoNotDisturb(source = 'lobby') {
+  const toggleLobby = document.getElementById('dnd-toggle-lobby');
+  const toggleAmenities = document.getElementById('dnd-toggle-amenities');
+  const pillBadge = document.getElementById('dnd-pill-badge');
 
-function toggleDoNotDisturb() {
-  isDndActive = !isDndActive;
-  const btnDnd = document.getElementById('btn-dnd');
-  const dndStatusText = document.getElementById('dnd-status-text');
-  const toggleCheck = document.getElementById('dnd-toggle-amenities');
-  const amenitiesLabel = document.getElementById('dnd-amenities-label');
+  const isActive = source === 'lobby' 
+    ? (toggleLobby ? toggleLobby.checked : false) 
+    : (toggleAmenities ? toggleAmenities.checked : false);
 
-  if (isDndActive) {
-    if (dndStatusText) dndStatusText.textContent = "Modo 'No Molestar' Activado";
-    if (btnDnd) {
-      btnDnd.textContent = "🔔 Desactivar 'No Molestar'";
-      btnDnd.className = "w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-bold border border-red-400 bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-all shadow-sm";
+  if (toggleLobby) toggleLobby.checked = isActive;
+  if (toggleAmenities) toggleAmenities.checked = isActive;
+
+  if (pillBadge) {
+    if (isActive) {
+      pillBadge.innerText = '● Activo';
+      pillBadge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-green-500/20 text-green-400 border border-green-500/30';
+    } else {
+      pillBadge.innerText = 'Desactivado';
+      pillBadge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/10 text-white/70 border border-white/20';
     }
-    if (amenitiesLabel) amenitiesLabel.textContent = "Privacidad ACTIVA en recepción";
-    if (toggleCheck) toggleCheck.checked = true;
-    alert("Modo Privacidad Activado: Recepción y el personal no perturbarán su suite.");
-  } else {
-    if (dndStatusText) dndStatusText.textContent = "Servicio de Habitación Activo";
-    if (btnDnd) {
-      btnDnd.textContent = "🚫 Activar 'No Molestar'";
-      btnDnd.className = "w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-bold border border-hestia-gold bg-hestia-gold text-hestia-dark hover:bg-white transition-all shadow-sm";
-    }
-    if (amenitiesLabel) amenitiesLabel.textContent = 'Activar "No Molestar"';
-    if (toggleCheck) toggleCheck.checked = false;
-    alert("Modo Privacidad Desactivado.");
   }
+}
 }
 
 // LÓGICA DE AMENIDADES & HOUSEKEEPING

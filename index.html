@@ -169,21 +169,22 @@
           <p class="mt-1 text-xs md:text-sm text-hestia-dark/70 mb-0">Habitación 405 • Suite Deluxe</p>
         </div>
 
-        <!-- Card Llave Digital Interactiva -->
-        <div class="bg-hestia-dark rounded-3xl p-6 md:p-8 text-white border border-hestia-gold shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div class="text-center md:text-left space-y-1">
-            <span class="text-xs font-bold text-hestia-gold tracking-widest uppercase block">🔒 Tu Llave Digital Activa</span>
-            <h3 class="text-lg font-bold text-white m-0">Cerradura Inteligente Suite 405</h3>
-            <p class="text-xs text-white/60 m-0">Acerque su dispositivo o presione para desbloquear la puerta principal.</p>
+        <!-- Modo Privacidad / Switch Deslizante -->
+        <div class="bg-hestia-dark rounded-3xl p-6 md:p-8 text-white border border-hestia-gold shadow-xl flex items-center justify-between gap-6">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-hestia-gold tracking-widest uppercase block">Modo Privacidad</span>
+              <span id="dnd-pill-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/10 text-white/70 border border-white/20">Desactivado</span>
+            </div>
+            <h3 class="text-lg font-bold text-white m-0">Privacidad en Suite 405</h3>
+            <p class="text-xs text-white/60 m-0">Notifica en tiempo real a recepción para pausar visitas y servicios.</p>
           </div>
-          <button 
-            type="button" 
-            id="btn-digital-key" 
-            onclick="unlockDoor()" 
-            class="w-full md:w-auto px-8 py-4 bg-hestia-gold text-hestia-dark rounded-2xl font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-md active:scale-95"
-          >
-            🔑 PRESIONAR PARA DESBLOQUEAR
-          </button>
+
+          <label class="relative inline-block w-14 h-7 cursor-pointer flex-shrink-0">
+            <input type="checkbox" id="dnd-toggle-lobby" onchange="toggleDoNotDisturb('lobby')" class="sr-only peer">
+            <div class="w-14 h-7 bg-hestia-surface border border-hestia-gold rounded-full peer peer-checked:bg-hestia-gold transition-colors"></div>
+            <div class="absolute top-1 left-1 bg-hestia-gold peer-checked:bg-hestia-dark w-5 h-5 rounded-full transition-transform peer-checked:translate-x-7"></div>
+          </label>
         </div>
 
         <!-- Servicios Rápidos -->
