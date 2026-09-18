@@ -374,3 +374,8 @@ function filterServiceList(query) {
 function showAmenityInfo(title, description) {
   alert(`📍 ${title.toUpperCase()}\n\n${description}\n\nPara reservas exclusivas o consultas, comunícate con Concierge.`);
 }
+// Asegurar visibilidad global del botón flotante en todas las vistas
+  const fabChat = document.getElementById('fab-concierge-chat');
+  if (fabChat) {
+    fabChat.style.display = 'flex';
+  }
