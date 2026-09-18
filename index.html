@@ -186,6 +186,66 @@
             <div class="absolute top-1 left-1 bg-hestia-gold peer-checked:bg-hestia-dark w-5 h-5 rounded-full transition-transform peer-checked:translate-x-7"></div>
           </label>
         </div>
+        <!-- Tarjeta: Mis Solicitudes Activas -->
+        <div class="bg-hestia-dark rounded-3xl p-6 md:p-8 text-white border border-hestia-gold shadow-xl space-y-4">
+          
+          <!-- Cabecera de la Tarjeta -->
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold text-hestia-gold tracking-widest uppercase block">Mis Solicitudes</span>
+              <p class="text-xs text-white/70 font-serif italic mt-0.5 m-0">2 activas • 1 completada</p>
+            </div>
+            <div class="border border-hestia-gold/60 rounded-full px-3 py-1 flex items-center justify-center bg-white/5">
+              <span class="text-sm">📋</span>
+            </div>
+          </div>
+
+          <!-- Lista de Estados en Tiempo Real -->
+          <div class="space-y-3 pt-1">
+            
+            <div class="flex justify-between items-center py-1 border-b border-white/5">
+              <span class="text-sm font-semibold text-white/90">Room Service</span>
+              <span class="px-3 py-1 text-[11px] font-bold rounded-full bg-yellow-500/10 text-yellow-300 border border-yellow-500/20">
+                En camino
+              </span>
+            </div>
+
+            <div class="flex justify-between items-center py-1 border-b border-white/5">
+              <span class="text-sm font-semibold text-white/90">Spa 5:00 PM</span>
+              <span class="px-3 py-1 text-[11px] font-bold rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                Confirmado
+              </span>
+            </div>
+
+            <div class="flex justify-between items-center py-1">
+              <span class="text-sm font-semibold text-white/60">Limpieza matutina</span>
+              <span class="px-3 py-1 text-[11px] font-bold rounded-full bg-white/10 text-white/50 border border-white/10">
+                Completada
+              </span>
+            </div>
+
+          </div>
+
+          <!-- Botones de Acción Inferiores -->
+          <div class="grid grid-cols-2 gap-3 pt-3">
+            <button 
+              type="button" 
+              onclick="switchTab('servicios')" 
+              class="w-full py-3 bg-hestia-gold text-hestia-dark font-bold text-xs rounded-2xl hover:bg-white transition-all shadow-md active:scale-95 flex items-center justify-center gap-1"
+            >
+              + Agregar
+            </button>
+            
+            <button 
+              type="button" 
+              onclick="switchTab('amenidades')" 
+              class="w-full py-3 bg-transparent text-white border border-hestia-gold font-bold text-xs rounded-2xl hover:bg-white/10 transition-all active:scale-95 flex items-center justify-center"
+            >
+              Ver todas
+            </button>
+          </div>
+
+        </div>
 
         <!-- Servicios Rápidos -->
         <div>
