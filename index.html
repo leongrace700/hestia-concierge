@@ -10,6 +10,14 @@
 
   <style>
     /* VARIABLES & PALETA QUIET LUXURY */
+    /* Ocultar barra de desplazamiento manteniendo el scroll funcional */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
     :root {
       --hestia-dark: #1A222D;
       --hestia-gold: #D4B285;
