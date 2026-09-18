@@ -379,3 +379,12 @@ function showAmenityInfo(title, description) {
   if (fabChat) {
     fabChat.style.display = 'flex';
   }
+  /* Ocultar barra de desplazamiento manteniendo el scroll funcional */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
