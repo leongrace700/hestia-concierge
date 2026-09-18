@@ -388,3 +388,81 @@ function showAmenityInfo(title, description) {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+// GESTIÓN DEL MÓDULO DE MANTENIMIENTO
+let maintState = {
+  category: 'ac',
+  urgency: 'normal',
+  access: 'ahora',
+  photoAttached: false
+};
+
+// Selección de Categoría
+document.addEventListener('DOMContentLoaded', () => {
+  setupMaintInteractions();
+});
+
+function setupMaintInteractions() {
+  // Categorías
+  document.querySelectorAll('.maint-category').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.maint-category').forEach(c => {
+        c.className = 'maint-category border border-hestia-border bg-white text-hestia-dark p-3 rounded-2xl cursor-pointer flex flex-col gap-1 transition-all';
+      });
+      card.className = 'maint-category border border-hestia-dark bg-hestia-dark text-white p-3 rounded-2xl cursor-pointer flex flex-col gap-1 transition-all';
+      maintState.category = card.dataset.category;
+    });
+  });
+
+  // Urgencias
+  document.querySelectorAll('.maint-urgency').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.maint-urgency').forEach(c => {
+        c.className = 'maint-urgency border border-hestia-border bg-white text-hestia-dark p-3 rounded-2xl cursor-pointer flex flex-col items-center justify-center transition-all';
+        c.querySelector('.text-xs').className = 'text-xs font-bold';
+      });
+      chip.className = 'maint-urgency border border-hestia-dark bg-hestia-dark text-white p-3 rounded-2xl cursor-pointer flex flex-col items-center justify-center transition-all';
+      chip.querySelector('.text-xs').className = 'text-xs font-bold text-hestia-gold';
+      maintState.urgency = chip.dataset.urgency;
+    });
+  });
+
+  // Accesos
+  document.querySelectorAll('.maint-access').forEach(row => {
+    row.addEventListener('click', () => {
+      document.querySelectorAll('.maint-access').forEach(r => {
+        r.className = 'maint-access border border-hestia-border bg-white p-3 rounded-2xl cursor-pointer flex items-center gap-3 transition-all';
+        const radioDot = r.querySelector('div > div');
+        if (radioDot) radioDot.className = 'w-2 h-2 rounded-full bg-transparent';
+      });
+      row.className = 'maint-access border border-hestia-gold bg-hestia-gold/10 p-3 rounded-2xl cursor-pointer flex items-center gap-3 transition-all';
+      const activeDot = row.querySelector('div > div');
+      if (activeDot) activeDot.className = 'w-2 h-2 rounded-full bg-hestia-dark';
+      maintState.access = row.dataset.access;
+    });
+  });
+}
+
+function handleMaintPhoto() {
+  maintState.photoAttached = true;
+  const preview = document.getElementById('maintPhotoPreview');
+  const btn = document.getElementById('maintPhotoBtn');
+  if (preview) preview.classList.remove('hidden'), preview.classList.add('flex');
+  if (btn) btn.textContent = '📷 Cambiar foto adjunta';
+}
+
+function submitMaintRequest() {
+  const desc = document.getElementById('maintDescTextarea')?.value || 'Sin descripción detallada';
+  const submitBtn = document.getElementById('maintSubmitBtn');
+
+  if (submitBtn) {
+    submitBtn.textContent = '✓ Solicitud enviada al equipo técnico';
+    submitBtn.disabled = true;
+    submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+  }
+
+  alert(`Solicitud de Mantenimiento enviada para la Suite 405:\n- Categoría: ${maintState.category.toUpperCase()}\n- Urgencia: ${maintState.urgency.toUpperCase()}\n- Acceso: ${maintState.access}`);
+
+  setTimeout(() => {
+    switchTab('lobby');
+  }, 1200);
+}
