@@ -370,3 +370,7 @@ function filterServiceList(query) {
     item.style.display = text.includes(cleanQuery) ? 'flex' : 'none';
   });
 }
+// Modal o notificación rápida para áreas de "Descubrir más"
+function showAmenityInfo(title, description) {
+  alert(`📍 ${title.toUpperCase()}\n\n${description}\n\nPara reservas exclusivas o consultas, comunícate con Concierge.`);
+}
