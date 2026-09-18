@@ -247,24 +247,7 @@
 
         </div>
 
-        <!-- Servicios Rápidos -->
-        <div>
-          <p class="text-xs font-bold text-hestia-dark uppercase tracking-wider mb-4">Servicios Rápidos</p>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            
-            <div onclick="switchTab('roomservice')" class="bg-white p-5 rounded-2xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between">
-              <div>
-                <span class="text-2xl block mb-2">🍽️</span>
-                <h4 class="font-bold text-sm text-hestia-dark m-0">Room Service</h4>
-                <p class="text-xs text-hestia-dark/60 mt-1 mb-3">Platillos de autor directos a la suite.</p>
-              </div>
-              <span class="text-xs font-bold text-hestia-gold">Ver Menú ➡️</span>
-            </div>
-
-            <div onclick="switchTab('amenidades')" class="bg-white p-5 rounded-2xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between">
-              <div>
-                <span class="text-2xl block mb-2">🧹</span>
-                <h4 class="font-bold text-sm text-hestia-dark m-0">Housekeeping</h4>
+        ark m-0">Housekeeping</h4>
                 <p class="text-xs text-hestia-dark/60 mt-1 mb-3">Limpieza programada y amenidades.</p>
               </div>
               <span class="text-xs font-bold text-hestia-gold">Solicitar ➡️</span>
@@ -280,36 +263,189 @@
             </div>
 
           </div>
+        </div><!-- Servicios Rápidos: Carrusel Deslizable -->
+        <div>
+          <div class="flex justify-between items-center mb-3">
+            <p class="text-xs font-bold text-hestia-dark uppercase tracking-wider m-0">Servicios Disponibles</p>
+            <span class="text-[11px] text-hestia-gold font-bold">Desliza para ver más ➔</span>
+          </div>
+
+          <!-- Contenedor con Scroll Horizontal (Carrusel) -->
+          <div class="flex gap-4 overflow-x-auto pb-4 pt-1 no-scrollbar select-none" style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
+            
+            <!-- Room Service -->
+            <div onclick="switchTab('roomservice')" class="min-w-[140px] w-[140px] bg-white p-4 rounded-3xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between flex-shrink-0" style="scroll-snap-align: start;">
+              <div class="text-2xl mb-4">🍽️ ☕</div>
+              <div>
+                <h4 class="font-bold text-xs text-hestia-dark m-0 leading-tight">Room<br>Service</h4>
+                <span class="text-[11px] font-bold text-hestia-gold mt-3 block">Ver Menú ➔</span>
+              </div>
+            </div>
+
+            <!-- Housekeeping -->
+            <div onclick="switchTab('amenidades')" class="min-w-[140px] w-[140px] bg-white p-4 rounded-3xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between flex-shrink-0" style="scroll-snap-align: start;">
+              <div class="text-2xl mb-4">🧺</div>
+              <div>
+                <h4 class="font-bold text-xs text-hestia-dark m-0 leading-tight">House<br>keeping</h4>
+                <span class="text-[11px] font-bold text-hestia-gold mt-3 block">Solicitar ➔</span>
+              </div>
+            </div>
+
+            <!-- Spa & Wellness -->
+            <div onclick="openServiceDetail('Spa & Wellness')" class="min-w-[140px] w-[140px] bg-white p-4 rounded-3xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between flex-shrink-0" style="scroll-snap-align: start;">
+              <div class="text-2xl mb-4">🧖‍♀️ ✨</div>
+              <div>
+                <h4 class="font-bold text-xs text-hestia-dark m-0 leading-tight">Spa &<br>Wellness</h4>
+                <span class="text-[11px] font-bold text-hestia-gold mt-3 block">Reservar ➔</span>
+              </div>
+            </div>
+
+            <!-- Traslados -->
+            <div onclick="openServiceDetail('Traslados Privados')" class="min-w-[140px] w-[140px] bg-white p-4 rounded-3xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between flex-shrink-0" style="scroll-snap-align: start;">
+              <div class="text-2xl mb-4">🚗</div>
+              <div>
+                <h4 class="font-bold text-xs text-hestia-dark m-0 leading-tight">Traslados</h4>
+                <span class="text-[11px] font-bold text-hestia-gold mt-3 block">Solicitar ➔</span>
+              </div>
+            </div>
+
+            <!-- Restaurante -->
+            <div onclick="switchTab('roomservice')" class="min-w-[140px] w-[140px] bg-white p-4 rounded-3xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between flex-shrink-0" style="scroll-snap-align: start;">
+              <div class="text-2xl mb-4">🍷</div>
+              <div>
+                <h4 class="font-bold text-xs text-hestia-dark m-0 leading-tight">Restaura<br>nte</h4>
+                <span class="text-[11px] font-bold text-hestia-gold mt-3 block">Reservar ➔</span>
+              </div>
+            </div>
+
+            <!-- Lavandería -->
+            <div onclick="openServiceDetail('Lavandería y Planchado')" class="min-w-[140px] w-[140px] bg-white p-4 rounded-3xl border border-hestia-border shadow-sm hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between flex-shrink-0" style="scroll-snap-align: start;">
+              <div class="text-2xl mb-4">👔</div>
+              <div>
+                <h4 class="font-bold text-xs text-hestia-dark m-0 leading-tight">Lavande<br>ría</h4>
+                <span class="text-[11px] font-bold text-hestia-gold mt-3 block">Solicitar ➔</span>
+              </div>
+            </div>
+
+            <!-- Botón Especial: Más Servicios (Conecta con la vista completa) -->
+            <div onclick="switchTab('servicios')" class="min-w-[140px] w-[140px] bg-hestia-cream/50 p-4 rounded-3xl border-2 border-dashed border-hestia-gold/80 hover:bg-white hover:border-hestia-gold cursor-pointer transition-all flex flex-col justify-between flex-shrink-0 shadow-sm" style="scroll-snap-align: start;">
+              <div class="text-2xl font-bold text-hestia-dark mb-4">➕</div>
+              <div>
+                <h4 class="font-bold text-xs text-hestia-dark m-0 leading-tight">Más servicios</h4>
+                <span class="text-[11px] font-bold text-hestia-dark mt-3 block">Ver todos ➔</span>
+              </div>
+            </div>
+
+          </div>
         </div>
+        </section>
 
-      </div>
-    </section>
-
-    <!-- PESTAÑA 2: SERVICIOS GENERALES -->
+    <!-- SECCIÓN: CATÁLOGO COMPLETO DE SERVICIOS -->
     <section id="portal-servicios" class="portal-view transition-opacity duration-300">
-      <div class="text-center mb-8">
-        <h2 class="text-2xl font-bold text-hestia-dark uppercase tracking-wider">SERVICIOS DE SUITE</h2>
-        <p class="text-xs text-hestia-dark/70">Solicite atenciones especiales con un solo clic.</p>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white border border-hestia-border p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-          <div class="text-3xl mb-2">🧹</div>
-          <h4 class="font-bold text-sm mb-1">Limpieza de Suite</h4>
-          <p class="text-xs text-hestia-dark/70 mb-4">Solicite retoque o cambio completo de lencería.</p>
-          <button onclick="switchTab('amenidades')" class="w-full py-2.5 bg-hestia-cream border border-hestia-gold text-xs font-bold rounded-xl hover:bg-hestia-gold transition-all">Gestionar Limpieza ➔</button>
+      <div class="max-w-xl mx-auto space-y-6">
+        
+        <!-- Header con botón Volver al Lobby -->
+        <div class="flex items-center justify-between pb-3 border-b border-hestia-border">
+          <div class="flex items-center gap-3">
+            <button onclick="switchTab('lobby')" class="w-9 h-9 rounded-full bg-white border border-hestia-border flex items-center justify-center text-hestia-dark hover:border-hestia-gold transition-colors font-bold text-sm shadow-sm">
+              ←
+            </button>
+            <h2 class="text-xl font-bold text-hestia-dark m-0">Servicios</h2>
+          </div>
+          <span class="text-xs font-bold text-hestia-gold bg-hestia-dark px-3 py-1 rounded-full border border-hestia-gold">Suite 405</span>
         </div>
-        <div class="bg-white border border-hestia-border p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-          <div class="text-3xl mb-2">🚗</div>
-          <h4 class="font-bold text-sm mb-1">Transporte Ejecutivo</h4>
-          <p class="text-xs text-hestia-dark/70 mb-4">Transfer al aeropuerto o recorrido privado con chofer.</p>
-          <button onclick="switchTab('chat')" class="w-full py-2.5 bg-hestia-cream border border-hestia-border text-xs font-bold rounded-xl hover:bg-hestia-gold transition-all">Coordinar con Concierge</button>
+
+        <!-- Buscador de Servicios -->
+        <div class="bg-white border border-hestia-border rounded-2xl px-4 py-3 flex items-center shadow-sm">
+          <input 
+            type="text" 
+            id="service-search-input" 
+            placeholder="Buscar un servicio..." 
+            oninput="filterServiceList(this.value)"
+            class="w-full text-xs text-hestia-dark outline-none bg-transparent placeholder-hestia-dark/50"
+          >
         </div>
-        <div class="bg-white border border-hestia-border p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-          <div class="text-3xl mb-2">💆</div>
-          <h4 class="font-bold text-sm mb-1">Spa & Wellness</h4>
-          <p class="text-xs text-hestia-dark/70 mb-4">Reserva de masajes y tratamientos relajantes en suite.</p>
-          <button onclick="switchTab('chat')" class="w-full py-2.5 bg-hestia-cream border border-hestia-border text-xs font-bold rounded-xl hover:bg-hestia-gold transition-all">Consultar Disponibilidad</button>
+
+        <!-- Categoría 1: Alojamiento y Habitación -->
+        <div class="space-y-3">
+          <span class="text-[11px] font-bold text-hestia-dark/60 tracking-wider uppercase block">Alojamiento y Habitación</span>
+          
+          <div class="space-y-2.5" id="services-list-hab">
+            
+            <div onclick="switchTab('roomservice')" class="service-item bg-white border border-hestia-border hover:border-hestia-gold p-3.5 rounded-2xl shadow-sm cursor-pointer transition-all flex items-center justify-between">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-hestia-cream flex items-center justify-center text-lg">🍽️</div>
+                <span class="text-xs font-bold text-hestia-dark">Room Service</span>
+              </div>
+              <span class="text-xs text-hestia-dark/40 font-bold">➔</span>
+            </div>
+
+            <div onclick="switchTab('amenidades')" class="service-item bg-white border border-hestia-border hover:border-hestia-gold p-3.5 rounded-2xl shadow-sm cursor-pointer transition-all flex items-center justify-between">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-hestia-cream flex items-center justify-center text-lg">🧺</div>
+                <span class="text-xs font-bold text-hestia-dark">Housekeeping</span>
+              </div>
+              <span class="text-xs text-hestia-dark/40 font-bold">➔</span>
+            </div>
+
+            <div onclick="switchTab('amenidades')" class="service-item bg-white border border-hestia-border hover:border-hestia-gold p-3.5 rounded-2xl shadow-sm cursor-pointer transition-all flex items-center justify-between">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-hestia-cream flex items-center justify-center text-lg">🧴</div>
+                <span class="text-xs font-bold text-hestia-dark">Amenities adicionales</span>
+              </div>
+              <span class="text-xs text-hestia-dark/40 font-bold">➔</span>
+            </div>
+
+            <div onclick="openServiceDetail('Lavandería y planchado')" class="service-item bg-white border border-hestia-border hover:border-hestia-gold p-3.5 rounded-2xl shadow-sm cursor-pointer transition-all flex items-center justify-between">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-hestia-cream flex items-center justify-center text-lg">👔</div>
+                <span class="text-xs font-bold text-hestia-dark">Lavandería y planchado</span>
+              </div>
+              <span class="text-xs text-hestia-dark/40 font-bold">➔</span>
+            </div>
+
+            <div onclick="openServiceDetail('Late check-out / Early check-in')" class="service-item bg-white border border-hestia-border hover:border-hestia-gold p-3.5 rounded-2xl shadow-sm cursor-pointer transition-all flex items-center justify-between">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-hestia-cream flex items-center justify-center text-lg">🕒</div>
+                <span class="text-xs font-bold text-hestia-dark">Late check-out / early check-in</span>
+              </div>
+              <span class="text-xs text-hestia-dark/40 font-bold">➔</span>
+            </div>
+
+            <div onclick="openServiceDetail('Reposición de Minibar')" class="service-item bg-white border border-hestia-border hover:border-hestia-gold p-3.5 rounded-2xl shadow-sm cursor-pointer transition-all flex items-center justify-between">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-hestia-cream flex items-center justify-center text-lg">🥤</div>
+                <span class="text-xs font-bold text-hestia-dark">Minibar</span>
+              </div>
+              <span class="text-xs text-hestia-dark/40 font-bold">➔</span>
+            </div>
+
+            <div onclick="openServiceDetail('Soporte de Mantenimiento')" class="service-item bg-white border border-hestia-border hover:border-hestia-gold p-3.5 rounded-2xl shadow-sm cursor-pointer transition-all flex items-center justify-between">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-hestia-cream flex items-center justify-center text-lg">🔧</div>
+                <span class="text-xs font-bold text-hestia-dark">Mantenimiento</span>
+              </div>
+              <span class="text-xs text-hestia-dark/40 font-bold">➔</span>
+            </div>
+
+          </div>
         </div>
+
+        <!-- Categoría 2: Alimentos y Bebidas -->
+        <div class="space-y-3 pt-2">
+          <span class="text-[11px] font-bold text-hestia-dark/60 tracking-wider uppercase block">Alimentos y Bebidas</span>
+          
+          <div class="space-y-2.5">
+            <div onclick="switchTab('roomservice')" class="service-item bg-white border border-hestia-border hover:border-hestia-gold p-3.5 rounded-2xl shadow-sm cursor-pointer transition-all flex items-center justify-between">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-hestia-cream flex items-center justify-center text-lg">🍷</div>
+                <span class="text-xs font-bold text-hestia-dark">Restaurante & Carta de Vinos</span>
+              </div>
+              <span class="text-xs text-hestia-dark/40 font-bold">➔</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 

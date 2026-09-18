@@ -353,3 +353,20 @@ function sharePassWhatsApp() {
   const message = encodeURIComponent(`Hola ${name}, aquí tienes tu pase de acceso digital con código QR para la Suite 405 en Hestia Concierge.`);
   window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
 }
+// Manejador para solicitudes directas de servicios generales
+function openServiceDetail(serviceName) {
+  const confirmReq = confirm(`¿Desea solicitar o consultar disponibilidad para "${serviceName}" en la Suite 405?`);
+  if (confirmReq) {
+    alert(`Solicitud recibida: El equipo de Concierge se comunicará con su Suite en breve.`);
+  }
+}
+
+// Filtro en tiempo real para el buscador de servicios
+function filterServiceList(query) {
+  const cleanQuery = query.toLowerCase().trim();
+  const items = document.querySelectorAll('.service-item');
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    item.style.display = text.includes(cleanQuery) ? 'flex' : 'none';
+  });
+}
